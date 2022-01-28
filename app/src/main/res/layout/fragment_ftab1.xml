@@ -24,7 +24,7 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/ipAddress1"
+            android:id="@+id/ipAddressEdit1"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
@@ -37,16 +37,16 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/cidr"
+            android:id="@+id/cidr1"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:onClick="cidr11"
             android:inputType="textPersonName"
+            android:onClick="cidr11"
             android:text="CIDR"
-            app:layout_constraintStart_toEndOf="@+id/ipAddress1"
+            app:layout_constraintStart_toEndOf="@+id/ipAddressEdit1"
             app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
         <TextView
@@ -59,11 +59,11 @@
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ipAddress1"
+            app:layout_constraintTop_toBottomOf="@+id/ipAddressEdit1"
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/netmask"
+            android:id="@+id/netmaskEdit1"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -75,24 +75,24 @@
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/calcButton1"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:text="Calc"
-            app:layout_constraintStart_toEndOf="@+id/netmask"
+            app:layout_constraintStart_toEndOf="@+id/netmaskEdit1"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/clearButton1"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:onClick="button2"
             android:text="Clear"
-            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintStart_toEndOf="@+id/calcButton1"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
@@ -104,7 +104,7 @@
             android:text="Decimal number system"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/netmask" />
+            app:layout_constraintTop_toBottomOf="@+id/netmaskEdit1" />
 
         <TextView
             android:id="@+id/textView4"
@@ -118,7 +118,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/decNetworkIPText1"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -129,7 +129,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textView5"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -140,7 +140,29 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/decBroadcastText1"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="255.255.255.255"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/decNetworkIPText1" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:text="Netmask:"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/decNetmaskText1"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -148,7 +170,29 @@
             android:text="255.255.255.255"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/decBroadcastText1" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:text="First Address:"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/decFirstAddressText1"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="255.255.255.255"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/decNetmaskText1" />
 
         <TextView
             android:id="@+id/textView8"
@@ -156,21 +200,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="8dp"
-            android:text="Netmask:"
+            android:text="Last Address:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
-            android:id="@+id/textView12"
-            android:layout_width="130dp"
+            android:id="@+id/decLastAddressText1"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:text="255.255.255.255"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/decFirstAddressText1" />
 
         <TextView
             android:id="@+id/textView9"
@@ -178,79 +222,35 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="8dp"
-            android:text="First Address:"
+            android:text="# Usable IPs:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <TextView
-            android:id="@+id/textView13"
-            android:layout_width="130dp"
+            android:id="@+id/decUsableText1"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:text="255.255.255.255"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/decLastAddressText1" />
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="8dp"
-            android:text="Last Address:"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="131dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:text="255.255.255.255"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="8dp"
-            android:text="# Usable IPs:"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="131dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:text="255.255.255.255"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-        <TextView
-            android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="14dp"
-            android:text="Decimal number system"
+            android:text="Binary number system"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/textView11"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -258,20 +258,20 @@
             android:text="Network"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/binNetworkText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="00001111  00001111  00001111  00001111"
             android:textSize="14dp"
-            app:layout_constraintStart_toEndOf="@+id/textView18"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/textView12"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -279,20 +279,20 @@
             android:text="Broadcast:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/binBroadcastText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="00001111  00001111  00001111  00001111"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView19"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/binNetworkText1" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/textView13"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -300,20 +300,20 @@
             android:text="Netmask:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/binNetmaskText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="00001111  00001111  00001111  00001111"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView20"
-            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/binBroadcastText1" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/textView14"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -321,20 +321,20 @@
             android:text="First Address:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/binFirstAddressText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="00001111  00001111  00001111  00001111"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView21"
-            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/binNetmaskText1" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/textView15"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -342,20 +342,20 @@
             android:text="Last Address:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/binLastAddressText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="00001111  00001111  00001111  00001111"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/binFirstAddressText1" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/textView16"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -363,17 +363,17 @@
             android:text="# Usable IPs:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/binUsableText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="00001111  00001111  00001111  00001111"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView23"
-            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/binLastAddressText1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
