@@ -1,4 +1,4 @@
-package com.anbn.mytabdemoapp;
+package com.anbn.ipcalculatorforandroid;
 
 import android.os.Bundle;
 

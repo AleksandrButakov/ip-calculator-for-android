@@ -1,10 +1,5 @@
 package com.anbn.ipcalculatorforandroid;
 
-import com.anbn.ipcalculatorforandroid.ftab4;
-import com.anbn.mytabdemoapp.ftab1;
-import com.anbn.mytabdemoapp.ftab2;
-import com.anbn.mytabdemoapp.ftab3;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
