@@ -21,6 +21,6 @@ public class CalculationAddresses {
     String binLastAddress;
     String binUsable;
 
-    //public
+
 
 }
