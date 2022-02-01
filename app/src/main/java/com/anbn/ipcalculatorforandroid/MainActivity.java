@@ -1,9 +1,15 @@
 package com.anbn.ipcalculatorforandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.utils.ViewState;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,9 +20,14 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.w3c.dom.Text;
 
+import java.sql.SQLOutput;
+
 public class MainActivity extends AppCompatActivity {
 
     com.anbn.ipcalculatorforandroid.PageAdapter pageAdapter;
+
+    public TextView textView;
+    public EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         TabItem tabItem3 = (TabItem) findViewById(R.id.tab3);
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpager);
 
-
-
         pageAdapter = new com.anbn.ipcalculatorforandroid.PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
@@ -38,29 +47,62 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
                 if(tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2)
                     pageAdapter.notifyDataSetChanged();
-
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
-        });
 
+        });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        // listen for scroll or page change
 
     }
 
+
+
+
+
     // TAB_01
+    // изменение значения в поле EditText CIDR
+
+
+//android:onClick="onClickIPAddress1"
+
+
+
+    public void onClickIPAddress1 (View v) {
+        System.out.println("11111111");
+
+        EditText ed = (EditText) findViewById(R.id.ipAddressEdit1);
+        ed.setText("111");
+
+
+        ed.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String s2;
+                EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
+                TextView textViewIP = (TextView) findViewById(R.id.textView1);
+                s2 = String.valueOf(ipAddress1.getText());
+                textViewIP.setText(s2);
+            }
+        });
+
+    }
+
+
+
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButton1 (View v) {
         clearingFragment1Fields();
@@ -138,6 +180,9 @@ public class MainActivity extends AppCompatActivity {
         EditText cidr2 = (EditText) findViewById(R.id.editText21);
         cidr2.setText("It's a working!!!");
     }
+
+
+
 
 
 
