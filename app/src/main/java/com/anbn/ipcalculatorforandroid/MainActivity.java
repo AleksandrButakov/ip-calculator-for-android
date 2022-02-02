@@ -1,17 +1,23 @@
 package com.anbn.ipcalculatorforandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.motion.utils.ViewState;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +28,15 @@ import org.w3c.dom.Text;
 
 import java.sql.SQLOutput;
 
+import static android.content.ContentValues.TAG;
+
 public class MainActivity extends AppCompatActivity {
 
     com.anbn.ipcalculatorforandroid.PageAdapter pageAdapter;
 
     public TextView textView;
     public EditText editText;
+    public EditText ipAddressEdit1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+
+
+
+
     }
 
 
@@ -76,25 +89,46 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void onClickIPAddress1 (View v) {
-        System.out.println("11111111");
-
-        EditText ed = (EditText) findViewById(R.id.ipAddressEdit1);
-        ed.setText("111");
 
 
-        ed.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
+    public void listenerEditText() {
 
-            }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+        System.out.println("Listener IP address...");
+        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+        TextView textViewIP = (TextView) findViewById(R.id.textView1);
+        ipAddressEdit1.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String s2;
                 EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
-                TextView textViewIP = (TextView) findViewById(R.id.textView1);
                 s2 = String.valueOf(ipAddress1.getText());
+                textViewIP.setText(s2);
+            }
+        });
+
+        System.out.println("Listener CIDR");
+        EditText cIDR1 = (EditText) findViewById(R.id.cidr1);
+        cIDR1.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String s2;
+                EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
+                s2 = String.valueOf(cIDR1.getText());
+                textViewIP.setText(s2);
+            }
+        });
+
+        System.out.println("Listener netmaskEdit1");
+        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+        netmaskEdit1.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String s2;
+                EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
+                s2 = String.valueOf(netmaskEdit1.getText());
                 textViewIP.setText(s2);
             }
         });
@@ -170,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCalcButton1 (View v) {
         Toast.makeText(this, "Функционал находится в разработке...",
                 Toast.LENGTH_SHORT).show();
+        listenerEditText();
 
     }
 
@@ -181,10 +216,15 @@ public class MainActivity extends AppCompatActivity {
         cidr2.setText("It's a working!!!");
     }
 
+    public void onSw (View v) {
+        System.out.println("3333");
 
+        EditText cidr2 = (EditText) findViewById(R.id.editText21);
+        Switch sw = (Switch) findViewById(R.id.switch1);
+        //sw.setClickable(false);
+        listenerEditText();
 
-
-
+    }
 
 
 
