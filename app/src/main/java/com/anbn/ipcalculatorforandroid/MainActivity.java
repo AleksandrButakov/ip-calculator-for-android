@@ -88,9 +88,6 @@ public class MainActivity extends AppCompatActivity {
 //android:onClick="onClickIPAddress1"
 
 
-
-
-
     public void listenerEditText() {
 
         System.out.println("Listener IP address...");
@@ -134,8 +131,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButton1 (View v) {
@@ -208,8 +203,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     //TAB_02
     public void onClickCalcButton2 (View v) {
         EditText cidr2 = (EditText) findViewById(R.id.editText21);
@@ -219,9 +212,9 @@ public class MainActivity extends AppCompatActivity {
     public void onSw (View v) {
         System.out.println("3333");
 
-        EditText cidr2 = (EditText) findViewById(R.id.editText21);
+        //EditText cidr2 = (EditText) findViewById(R.id.editText21);
         Switch sw = (Switch) findViewById(R.id.switch1);
-        //sw.setClickable(false);
+        sw.setClickable(false);
         listenerEditText();
 
     }
