@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2)
+                if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2)
                     pageAdapter.notifyDataSetChanged();
             }
 
@@ -72,30 +72,21 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
 
-
-
-
     }
 
 
-
-
-
-    // TAB_01
-    // изменение значения в поле EditText CIDR
-
-
-//android:onClick="onClickIPAddress1"
-
-
+    // задаем listener для полей ввода данных
     public void listenerEditText() {
-
         System.out.println("Listener IP address...");
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         TextView textViewIP = (TextView) findViewById(R.id.textView1);
         ipAddressEdit1.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {}
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String s2;
                 EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
@@ -107,8 +98,12 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Listener CIDR");
         EditText cIDR1 = (EditText) findViewById(R.id.cidr1);
         cIDR1.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {}
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String s2;
                 EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
@@ -120,8 +115,12 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Listener netmaskEdit1");
         EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
         netmaskEdit1.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {}
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String s2;
                 EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
-    public void onClickClearButton1 (View v) {
+    public void onClickClearButton1(View v) {
         clearingFragment1Fields();
         clearingFragment1Data();
     }
@@ -158,6 +157,44 @@ public class MainActivity extends AppCompatActivity {
         ftab1.binFirstAddress = "";
         ftab1.binLastAddress = "";
         ftab1.binUsable = "";
+
+        CalculationAddresses ftab2 = new CalculationAddresses();
+        ftab2.ipAddress = "";
+        ftab2.sIDR = "";
+        ftab2.networkMask = "";
+
+        ftab2.decNetwork = "";
+        ftab2.decBroadcast = "";
+        ftab2.decNetMask = "";
+        ftab2.decFirstAddress = "";
+        ftab2.decLastAddress = "";
+        ftab2.decUsable = "";
+
+        ftab2.binNetwork = "";
+        ftab2.binBroadcast = "";
+        ftab2.binNetmask = "";
+        ftab2.binFirstAddress = "";
+        ftab2.binLastAddress = "";
+        ftab2.binUsable = "";
+
+        CalculationAddresses ftab3 = new CalculationAddresses();
+        ftab3.ipAddress = "";
+        ftab3.sIDR = "";
+        ftab3.networkMask = "";
+
+        ftab3.decNetwork = "";
+        ftab3.decBroadcast = "";
+        ftab3.decNetMask = "";
+        ftab3.decFirstAddress = "";
+        ftab3.decLastAddress = "";
+        ftab3.decUsable = "";
+
+        ftab3.binNetwork = "";
+        ftab3.binBroadcast = "";
+        ftab3.binNetmask = "";
+        ftab3.binFirstAddress = "";
+        ftab3.binLastAddress = "";
+        ftab3.binUsable = "";
     }
 
     // обозначим поля ввода и вывода информации
@@ -196,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // нажатие кнопки CALC, проверяем корректность введенных данных и выводим результат
-    public void onClickCalcButton1 (View v) {
+    public void onClickCalcButton1(View v) {
         Toast.makeText(this, "Функционал находится в разработке...",
                 Toast.LENGTH_SHORT).show();
         listenerEditText();
@@ -204,21 +241,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //TAB_02
-    public void onClickCalcButton2 (View v) {
+    public void onClickCalcButton2(View v) {
         EditText cidr2 = (EditText) findViewById(R.id.editText21);
         cidr2.setText("It's a working!!!");
     }
 
-    public void onSw (View v) {
-        System.out.println("3333");
-
-        //EditText cidr2 = (EditText) findViewById(R.id.editText21);
+    public void onSw(View v) {
         Switch sw = (Switch) findViewById(R.id.switch1);
         sw.setClickable(false);
         listenerEditText();
 
     }
-
 
 
 }

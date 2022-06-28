@@ -1,8 +1,5 @@
 package com.anbn.ipcalculatorforandroid;
 
-
-
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,13 +19,15 @@ public class PageAdapter extends FragmentPagerAdapter {
     @Override
 
     public Fragment getItem(int position) {
-        switch (position)
-
-        {
-            case 0: return new ftab1();
-            case 1: return new ftab2();
-            case 2: return new ftab3();
-            default: return null;
+        switch (position) {
+            case 0:
+                return new ftab1();
+            case 1:
+                return new ftab2();
+            case 2:
+                return new ftab3();
+            default:
+                return null;
         }
     }
 
