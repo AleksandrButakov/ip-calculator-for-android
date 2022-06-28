@@ -7,12 +7,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -37,6 +39,18 @@ public class MainActivity extends AppCompatActivity {
     public TextView textView;
     public EditText editText;
     public EditText ipAddressEdit1;
+
+    public static String sIPCorrectly = "";
+    public static String sIPIncorrectly = "";
+
+    public static String sCIDRCorrectly = "";
+    public static String sCIDRIncorrectly = "";
+
+    public static String sNetmaskCorrectly = "";
+    public static String sNetmaskIncorrectly = "";
+
+    public static int sPos = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-
     }
 
 
@@ -88,10 +101,22 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String s2;
+                String sIP;
                 EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
-                s2 = String.valueOf(ipAddress1.getText());
-                textViewIP.setText(s2);
+                sIP = String.valueOf(ipAddress1.getText());
+                // if IP address is entered incorrectly
+                if (CheckingCorrectnessIPAddress.CheckingCorrectnessIPAddress(sIP)) {
+                    // the correct address is entered
+                    sIPCorrectly = sIP;
+                    textViewIP.setText(sIPCorrectly);
+                    sPos = ipAddress1.getSelectionStart();
+                } else {
+                    // invalid address entered
+                    textViewIP.setText(sIPCorrectly);
+                    ipAddress1.setText(sIPCorrectly);
+                    ipAddress1.setSelection(sPos);
+                    information();
+                }
             }
         });
 
@@ -130,6 +155,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void information() {
+        Toast toast = Toast.makeText(MainActivity.this,
+                "Invalid IP address entered...",
+                Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
+
 
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButton1(View v) {
