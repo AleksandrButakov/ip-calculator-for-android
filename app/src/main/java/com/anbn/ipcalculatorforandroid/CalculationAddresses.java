@@ -21,6 +21,7 @@ public class CalculationAddresses {
     String binLastAddress;
     String binUsable;
 
-
+    // вспомогательные переменные
+    int positionCursorIPAddress;
 
 }

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     public TextView textView;
     public EditText editText;
-    public EditText ipAddressEdit1;
+
 
     public static String sIPCorrectly = "";
     public static String sIPIncorrectly = "";
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     public static String sNetmaskCorrectly = "";
     public static String sNetmaskIncorrectly = "";
 
-    public static int sPos = 1;
-
+    public static int iPos;
+    public static boolean valueFieldChangedByUser = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,41 +84,58 @@ public class MainActivity extends AppCompatActivity {
 
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
     }
 
 
     // задаем listener для полей ввода данных
     public void listenerEditText() {
         System.out.println("Listener IP address...");
+
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         TextView textViewIP = (TextView) findViewById(R.id.textView1);
+
         ipAddressEdit1.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
+
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (valueFieldChangedByUser == true) {
+                    if (!ipAddressEdit1.getText().equals("")) {
+                        iPos = ipAddressEdit1.getSelectionStart() + 1;
+                    }
+                }
+
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String sIP;
-                EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
-                sIP = String.valueOf(ipAddress1.getText());
-                // if IP address is entered incorrectly
-                if (CheckingCorrectnessIPAddress.CheckingCorrectnessIPAddress(sIP)) {
-                    // the correct address is entered
-                    sIPCorrectly = sIP;
-                    textViewIP.setText(sIPCorrectly);
-                    sPos = ipAddress1.getSelectionStart();
-                } else {
-                    // invalid address entered
-                    textViewIP.setText(sIPCorrectly);
-                    ipAddress1.setText(sIPCorrectly);
-                    ipAddress1.setSelection(sPos);
-                    information();
+                if (valueFieldChangedByUser == true) {
+
+                    String sIP;
+                    sIP = String.valueOf(ipAddressEdit1.getText());
+                    //ipAddressEdit1.setSelection(iPos);
+
+                    // если введен некорректный IP адрес
+                    if (CheckingCorrectnessIPAddress.CheckingCorrectnessIPAddress(sIP)) {
+                        // введен корректный IP адрес
+                        sIPCorrectly = sIP;
+                        iPos = ipAddressEdit1.getSelectionStart();
+                        textViewIP.setText(String.valueOf(iPos));
+
+                    } else {
+                        // введен неверный IP адрес
+                        valueFieldChangedByUser = false;
+                        textViewIP.setText(String.valueOf(iPos));
+                        ipAddressEdit1.setText(sIPCorrectly);
+                        ipAddressEdit1.setSelection(iPos - 1);
+                        //information();
+                    }
                 }
+                valueFieldChangedByUser = true;
             }
         });
+
+
 
         System.out.println("Listener CIDR");
         EditText cIDR1 = (EditText) findViewById(R.id.cidr1);
@@ -136,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 textViewIP.setText(s2);
             }
         });
+
+
 
         System.out.println("Listener netmaskEdit1");
         EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
@@ -167,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButton1(View v) {
+        valueFieldChangedByUser = false;
         clearingFragment1Fields();
         clearingFragment1Data();
     }
@@ -264,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
         binFirstAddressText1.setText("");
         binLastAddressText1.setText("");
         binUsableText1.setText("");
+
+        valueFieldChangedByUser = true;
     }
 
     // нажатие кнопки CALC, проверяем корректность введенных данных и выводим результат
