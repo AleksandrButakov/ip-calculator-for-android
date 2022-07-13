@@ -2,7 +2,7 @@ package com.anbn.ipcalculatorforandroid;
 
 public class CheckingCorrectnessIPAddress {
 
-    public static boolean CheckingCorrectnessIPAddress(String sIP) {
+    public static boolean checkingCorrectnessIPAddress(String sIP) {
         boolean result;
 
         String[] sByte = {"", "", "", ""};
