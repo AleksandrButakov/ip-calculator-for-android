@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
-    tools:context=".ftab1" >
+    tools:context=".ftab1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView1"
@@ -30,12 +29,15 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:contextClickable="false"
             android:digits=".0123456789"
             android:ems="10"
             android:hint="Enter IP address"
             android:inputType="numberSigned"
             android:maxLength="15"
             android:selectAllOnFocus="false"
+            android:enabled="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
@@ -46,9 +48,10 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:ems="10"
+            android:hint="CIDR"
             android:inputType="number"
             android:maxLength="2"
-            android:hint="CIDR"
+            android:enabled="false"
             app:layout_constraintStart_toEndOf="@+id/ipAddressEdit1"
             app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
@@ -71,11 +74,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
+            android:digits=".0123456789"
             android:ems="10"
             android:hint="Enter netmask"
-            android:digits=".0123456789"
             android:inputType="numberSigned"
             android:maxLength="15"
+            android:enabled="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             tools:ignore="MissingConstraints" />
@@ -86,8 +90,8 @@
             android:layout_height="45dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
-            android:text="Calc"
             android:onClick="onClickCalcButton1"
+            android:text="Calc"
             app:layout_constraintStart_toEndOf="@+id/netmaskEdit1"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -97,8 +101,8 @@
             android:layout_height="45dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
-            android:text="Clear"
             android:onClick="onClickClearButton1"
+            android:text="Clear"
             app:layout_constraintStart_toEndOf="@+id/calcButton1"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -390,7 +394,6 @@
             android:layout_marginEnd="14dp"
             android:checked="false"
             android:onClick="onSw"
-
             android:text="Activate"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"

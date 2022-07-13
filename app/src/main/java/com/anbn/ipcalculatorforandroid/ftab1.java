@@ -1,15 +1,21 @@
 package com.anbn.ipcalculatorforandroid;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 /**
@@ -65,4 +71,31 @@ public class ftab1 extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ftab1, container, false);
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.d(TAG, "onStop");
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d(TAG, "onPause");
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
 }

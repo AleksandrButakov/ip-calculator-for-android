@@ -1,23 +1,13 @@
 package com.anbn.ipcalculatorforandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.constraintlayout.motion.utils.ViewState;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,11 +16,11 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-import org.w3c.dom.Text;
-
-import java.sql.SQLOutput;
-
 import static android.content.ContentValues.TAG;
+
+
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static int iPos;
     public static boolean valueFieldChangedByUser = true;
+    public static boolean firstLaunch = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         pageAdapter = new com.anbn.ipcalculatorforandroid.PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
-
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -83,20 +74,57 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.d(TAG, "onStop");
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.d(TAG, "onPause");
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.d(TAG, "onRestart");
+    }
+
+
 
 
     // задаем listener для полей ввода данных
     public void listenerEditText() {
         System.out.println("Listener IP address...");
 
-        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         TextView textViewIP = (TextView) findViewById(R.id.textView1);
+        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
 
         ipAddressEdit1.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
 
+            public void afterTextChanged(Editable s) {
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         System.out.println("Listener CIDR");
         EditText cIDR1 = (EditText) findViewById(R.id.cidr1);
         cIDR1.addTextChangedListener(new TextWatcher() {
@@ -148,16 +175,15 @@ public class MainActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String s2;
-                EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
                 s2 = String.valueOf(cIDR1.getText());
                 textViewIP.setText(s2);
             }
         });
 
 
-
         System.out.println("Listener netmaskEdit1");
-        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+
+
         netmaskEdit1.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
             }
@@ -167,12 +193,10 @@ public class MainActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String s2;
-                EditText ipAddress1 = (EditText) findViewById(R.id.ipAddressEdit1);
                 s2 = String.valueOf(netmaskEdit1.getText());
                 textViewIP.setText(s2);
             }
         });
-
     }
 
     public void information() {
@@ -253,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
 
     // обозначим поля ввода и вывода информации
     public void clearingFragment1Data() {
+        TextView textViewIP = (TextView) findViewById(R.id.textView1);
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         EditText cidr1 = (EditText) findViewById(R.id.cidr1);
         EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
@@ -304,10 +329,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSw(View v) {
         Switch sw = (Switch) findViewById(R.id.switch1);
-        sw.setClickable(false);
-        listenerEditText();
+        sw.setEnabled(false);
+        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
+        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
 
+        ipAddressEdit1.setEnabled(true);
+        cidr1.setEnabled(true);
+        netmaskEdit1.setEnabled(true);
+
+        listenerEditText();
     }
+
+
 
 
 }
