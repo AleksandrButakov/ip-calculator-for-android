@@ -22,14 +22,18 @@ public class MainActivity extends AppCompatActivity {
     com.anbn.ipcalculatorforandroid.PageAdapter pageAdapter;
 
     public static String sIPCorrectly = "";
-
     public static String sIPCorrectlyB3 = "";
     public static String sIPCorrectlyB2 = "";
     public static String sIPCorrectlyB1 = "";
     public static String sIPCorrectlyB0 = "";
 
     public static String sCIDRCorrectly = "";
+
     public static String sNetmaskCorrectly = "";
+    public static String sNetmaskCorrectlyB3 = "";
+    public static String sNetmaskCorrectlyB2 = "";
+    public static String sNetmaskCorrectlyB1 = "";
+    public static String sNetmaskCorrectlyB0 = "";
 
     public static int iPos;
     public static boolean valueFieldChangedByUser = true;
@@ -128,6 +132,12 @@ public class MainActivity extends AppCompatActivity {
                         ipAddressEdit1.setText(sIPCorrectly);
                         ipAddressEdit1.setSelection(iPos - 1);
 
+                        CalculationAddresses ipAddressTab1 = new CalculationAddresses();
+                        ipAddressTab1.ipAddressB3 = "";
+                        ipAddressTab1.ipAddressB2 = "";
+                        ipAddressTab1.ipAddressB1 = "";
+                        ipAddressTab1.ipAddressB0 = "";
+
                     }
                 }
                 valueFieldChangedByUser = true;
@@ -163,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         sCIDRCorrectly = sCIDR;
                         iPos = cIDR1.getSelectionStart();
                         textViewIP.setText(String.valueOf(iPos));
+
                         CalculationAddresses cidrTab1 = new CalculationAddresses();
                         cidrTab1.cidr = sCIDRCorrectly;
                     } else {
@@ -171,6 +182,9 @@ public class MainActivity extends AppCompatActivity {
                         textViewIP.setText(String.valueOf(iPos));
                         cIDR1.setText(sCIDRCorrectly);
                         cIDR1.setSelection(iPos - 1);
+
+                        CalculationAddresses cidrTab1 = new CalculationAddresses();
+                        cidrTab1.cidr = "";
                         //information();
                     }
                 }
@@ -211,13 +225,25 @@ public class MainActivity extends AppCompatActivity {
                         iPos = netmaskEdit1.getSelectionStart();
                         textViewIP.setText(String.valueOf(iPos));
 
+                        CalculationAddresses netmaskTab1 = new CalculationAddresses();
+                        netmaskTab1.netmaskB3 = sNetmaskCorrectlyB3;
+                        netmaskTab1.netmaskB2 = sNetmaskCorrectlyB2;
+                        netmaskTab1.netmaskB1 = sNetmaskCorrectlyB1;
+                        netmaskTab1.netmaskB0 = sNetmaskCorrectlyB0;
+
                     } else {
                         // введен неверный IP адрес
                         valueFieldChangedByUser = false;
                         textViewIP.setText(String.valueOf(iPos));
                         netmaskEdit1.setText(sNetmaskCorrectly);
                         netmaskEdit1.setSelection(iPos - 1);
-                        //information();
+
+                        CalculationAddresses netmaskTab1 = new CalculationAddresses();
+                        netmaskTab1.netmaskB3 = "";
+                        netmaskTab1.netmaskB2 = "";
+                        netmaskTab1.netmaskB1 = "";
+                        netmaskTab1.netmaskB0 = "";
+
                     }
                 }
                 valueFieldChangedByUser = true;

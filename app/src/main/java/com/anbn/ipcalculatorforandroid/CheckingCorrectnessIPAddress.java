@@ -6,6 +6,12 @@ public class CheckingCorrectnessIPAddress {
 
     public static boolean checkingCorrectnessIPAddress(String sIP) {
         String[] sByte = {"", "", "", ""};
+
+        sIPCorrectlyB3 = "";
+        sIPCorrectlyB2 = "";
+        sIPCorrectlyB1 = "";
+        sIPCorrectlyB0 = "";
+
         int iByte;
 
         int numberByte = 3;
