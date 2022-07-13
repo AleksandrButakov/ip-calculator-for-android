@@ -16,24 +16,20 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-import static android.content.ContentValues.TAG;
-
 
 public class MainActivity extends AppCompatActivity {
 
     com.anbn.ipcalculatorforandroid.PageAdapter pageAdapter;
 
-    public TextView textView;
-    public EditText editText;
-
     public static String sIPCorrectly = "";
-    public static String sIPIncorrectly = "";
+
+    public static String sIPCorrectlyB3 = "";
+    public static String sIPCorrectlyB2 = "";
+    public static String sIPCorrectlyB1 = "";
+    public static String sIPCorrectlyB0 = "";
 
     public static String sCIDRCorrectly = "";
-    public static String sCIDRIncorrectly = "";
-
     public static String sNetmaskCorrectly = "";
-    public static String sNetmaskIncorrectly = "";
 
     public static int iPos;
     public static boolean valueFieldChangedByUser = true;
@@ -80,43 +76,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart");
-    }
-
-
 
     // задаем listener для поля ввода IP адреса
     public void listenerEditText() {
@@ -143,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
                     String sIP;
                     sIP = String.valueOf(ipAddressEdit1.getText());
-                    //ipAddressEdit1.setSelection(iPos);
 
                     // если введен некорректный IP адрес
                     if (CheckingCorrectnessIPAddress.checkingCorrectnessIPAddress(sIP)) {
@@ -152,13 +110,24 @@ public class MainActivity extends AppCompatActivity {
                         iPos = ipAddressEdit1.getSelectionStart();
                         textViewIP.setText(String.valueOf(iPos));
 
+                        // проверим что все байты адреса заполнены
+                        if (!sIPCorrectlyB3.equals("") && !sIPCorrectlyB2.equals("") &&
+                        !sIPCorrectlyB1.equals("") && !sIPCorrectlyB0.equals("")) {
+                            CalculationAddresses ipAddressTab1 = new CalculationAddresses();
+                            ipAddressTab1.ipAddressB3 = sIPCorrectlyB3;
+                            ipAddressTab1.ipAddressB2 = sIPCorrectlyB2;
+                            ipAddressTab1.ipAddressB1 = sIPCorrectlyB1;
+                            ipAddressTab1.ipAddressB0 = sIPCorrectlyB0;
+                        }
+
+
                     } else {
                         // введен неверный IP адрес
                         valueFieldChangedByUser = false;
                         textViewIP.setText(String.valueOf(iPos));
                         ipAddressEdit1.setText(sIPCorrectly);
                         ipAddressEdit1.setSelection(iPos - 1);
-                        //information();
+
                     }
                 }
                 valueFieldChangedByUser = true;
@@ -194,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
                         sCIDRCorrectly = sCIDR;
                         iPos = cIDR1.getSelectionStart();
                         textViewIP.setText(String.valueOf(iPos));
-
+                        CalculationAddresses cidrTab1 = new CalculationAddresses();
+                        cidrTab1.cidr = sCIDRCorrectly;
                     } else {
                         // введен неверный IP адрес
                         valueFieldChangedByUser = false;
@@ -278,9 +248,20 @@ public class MainActivity extends AppCompatActivity {
 
     // нажатие кнопки CALC, проверяем корректность введенных данных и выводим результат
     public void onClickCalcButton1(View v) {
-        Toast.makeText(this, "Функционал находится в разработке...",
-                Toast.LENGTH_SHORT).show();
-        listenerEditText();
+        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
+        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+
+        String s1 = String.valueOf(cidr1.getText());
+        String s2 = String.valueOf(netmaskEdit1.getText());
+
+        if (!s1.equals("") && !s2.equals("")) {
+            Toast.makeText(this, "Clear the CIDR or netmask field...",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
 
     }
 

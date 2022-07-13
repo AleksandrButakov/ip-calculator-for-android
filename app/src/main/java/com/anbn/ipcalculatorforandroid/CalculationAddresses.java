@@ -4,7 +4,7 @@ public class CalculationAddresses {
 
     // переменные назначины и именованы в соответствии с расположением полей в layout
     String ipAddress;
-    String sIDR;
+    String cIDR;
     String networkMask;
 
     String decNetwork;
@@ -21,7 +21,18 @@ public class CalculationAddresses {
     String binLastAddress;
     String binUsable;
 
-    // вспомогательные переменные
-    int positionCursorIPAddress;
+    // переменные для хранения байтов IP адреса
+    String ipAddressB3;
+    String ipAddressB2;
+    String ipAddressB1;
+    String ipAddressB0;
 
+    // переменная для хранения количества бит маски подсети
+    String cidr;
+
+    // переменные для хранения байтов маски подсети
+    String netmaskB3;
+    String netmaskB2;
+    String netmaskB1;
+    String netmaskB0;
 }

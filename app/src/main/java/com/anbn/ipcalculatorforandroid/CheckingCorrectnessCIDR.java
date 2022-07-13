@@ -10,6 +10,7 @@ public class CheckingCorrectnessCIDR {
             if (iCIDR == 0 || iCIDR >= 32) result = false;
             if (iCIDR > 0 && iCIDR < 32) result = true;
         }
+
         return result;
     }
 

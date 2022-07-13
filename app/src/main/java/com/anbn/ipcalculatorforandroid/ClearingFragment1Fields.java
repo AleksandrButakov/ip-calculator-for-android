@@ -6,7 +6,7 @@ public class ClearingFragment1Fields {
     public static void clearingFragment1Fields() {
         CalculationAddresses ftab1 = new CalculationAddresses();
         ftab1.ipAddress = "";
-        ftab1.sIDR = "";
+        ftab1.cIDR = "";
         ftab1.networkMask = "";
 
         ftab1.decNetwork = "";
@@ -25,7 +25,7 @@ public class ClearingFragment1Fields {
 
         CalculationAddresses ftab2 = new CalculationAddresses();
         ftab2.ipAddress = "";
-        ftab2.sIDR = "";
+        ftab2.cIDR = "";
         ftab2.networkMask = "";
 
         ftab2.decNetwork = "";
@@ -44,7 +44,7 @@ public class ClearingFragment1Fields {
 
         CalculationAddresses ftab3 = new CalculationAddresses();
         ftab3.ipAddress = "";
-        ftab3.sIDR = "";
+        ftab3.cIDR = "";
         ftab3.networkMask = "";
 
         ftab3.decNetwork = "";

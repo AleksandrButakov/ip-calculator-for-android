@@ -1,10 +1,10 @@
 package com.anbn.ipcalculatorforandroid;
 
+import static com.anbn.ipcalculatorforandroid.MainActivity.*;
+
 public class CheckingCorrectnessIPAddress {
 
     public static boolean checkingCorrectnessIPAddress(String sIP) {
-        boolean result;
-
         String[] sByte = {"", "", "", ""};
         int iByte;
 
@@ -27,6 +27,7 @@ public class CheckingCorrectnessIPAddress {
                 switch (numberByte) {
                     case (3):
                         if (iByte < 1 || iByte > 255) return false;
+
                         break;
                     case (2):
                     case (1):
@@ -34,6 +35,10 @@ public class CheckingCorrectnessIPAddress {
                         break;
                     case (0):
                         if (iByte < 1 || iByte > 254) return false;
+                        sIPCorrectlyB3 = sByte[3];
+                        sIPCorrectlyB2 = sByte[2];
+                        sIPCorrectlyB1 = sByte[1];
+                        sIPCorrectlyB0 = sByte[0];
                         break;
                 }
 
@@ -59,7 +64,6 @@ public class CheckingCorrectnessIPAddress {
                 }
             }
         }
-
 
         return true;
     }
