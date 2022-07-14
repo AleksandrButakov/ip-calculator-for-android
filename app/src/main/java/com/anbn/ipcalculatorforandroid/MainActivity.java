@@ -267,8 +267,10 @@ public class MainActivity extends AppCompatActivity {
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButton1(View v) {
         valueFieldChangedByUser = false;
+        /*
         ClearingFragment1Fields.clearingFragment1Fields();
         clearingFragment1Data();
+         */
     }
 
 

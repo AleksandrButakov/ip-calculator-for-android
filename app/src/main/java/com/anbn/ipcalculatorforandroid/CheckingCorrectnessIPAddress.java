@@ -28,6 +28,13 @@ public class CheckingCorrectnessIPAddress {
             if (Character.isDigit(ch)) {
                 sByte[numberByte] += Character.toString(ch);
 
+
+                // проверим что символ не является вторым подряд нулем
+                if (i >= 2) {
+                    if (sIP.charAt(i) == '0' && sIP.charAt(i - 1) == '0' &&
+                            sIP.charAt(i - 2) == '.') return false;
+                }
+
                 // проверим что значения байт IP адреса лежат в требуемых диапазонах
                 iByte = Integer.valueOf(sByte[numberByte]);
                 switch (numberByte) {

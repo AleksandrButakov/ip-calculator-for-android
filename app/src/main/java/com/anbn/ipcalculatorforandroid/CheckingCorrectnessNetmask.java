@@ -131,26 +131,36 @@ public class CheckingCorrectnessNetmask {
                         if (sNetmask.charAt(i - 1) == ch) return false;
                     }
 
-                    numberByte--;
-                    numberDot++;
-                    if (numberDot > 3) {
+                    // проверим что байт перед точкой соответствует допустимому значению
+                    if (sByte[numberByte].equals("255") || sByte[numberByte].equals("254") ||
+                            sByte[numberByte].equals("252") || sByte[numberByte].equals("248") ||
+                            sByte[numberByte].equals("240") || sByte[numberByte].equals("224") ||
+                            sByte[numberByte].equals("192") || sByte[numberByte].equals("128") ||
+                            sByte[numberByte].equals("0")) {
+                    } else {
                         return false;
                     }
-                } else {
-                    return false;
+
+                        numberByte--;
+                        numberDot++;
+                        if (numberDot > 3) {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
                 }
             }
+            return true;
         }
-        return true;
-    }
 
-    // заполним значениями байтов маски подсети переменные
-    public static void savingNetmaskToVariables(String sByte3, String sByte2,
-                                                String sByte1, String sByte0) {
-        sNetmaskCorrectlyB3 = sByte3;
-        sNetmaskCorrectlyB2 = sByte2;
-        sNetmaskCorrectlyB1 = sByte1;
-        sNetmaskCorrectlyB0 = sByte0;
-    }
+        // заполним значениями байтов маски подсети переменные
+        public static void savingNetmaskToVariables (String sByte3, String sByte2,
+                String sByte1, String sByte0){
+            sNetmaskCorrectlyB3 = sByte3;
+            sNetmaskCorrectlyB2 = sByte2;
+            sNetmaskCorrectlyB1 = sByte1;
+            sNetmaskCorrectlyB0 = sByte0;
+        }
 
-}
+    }
