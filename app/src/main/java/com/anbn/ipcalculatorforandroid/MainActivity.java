@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static String auxiliaryVariables = "";
 
+    CalculationAddresses ipAddressTab1 = new CalculationAddresses();
+    CalculationAddresses cidrTab1 = new CalculationAddresses();
+    CalculationAddresses netmaskTab1 = new CalculationAddresses();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,11 +132,15 @@ public class MainActivity extends AppCompatActivity {
                         // проверим что все байты адреса заполнены
                         if (!sIPCorrectlyB3.equals("") && !sIPCorrectlyB2.equals("") &&
                                 !sIPCorrectlyB1.equals("") && !sIPCorrectlyB0.equals("")) {
-                            CalculationAddresses ipAddressTab1 = new CalculationAddresses();
                             ipAddressTab1.ipAddressB3 = sIPCorrectlyB3;
                             ipAddressTab1.ipAddressB2 = sIPCorrectlyB2;
                             ipAddressTab1.ipAddressB1 = sIPCorrectlyB1;
                             ipAddressTab1.ipAddressB0 = sIPCorrectlyB0;
+                        } else {
+                            ipAddressTab1.ipAddressB3 = "";
+                            ipAddressTab1.ipAddressB2 = "";
+                            ipAddressTab1.ipAddressB1 = "";
+                            ipAddressTab1.ipAddressB0 = "";
                         }
 
                     } else {
@@ -142,11 +150,12 @@ public class MainActivity extends AppCompatActivity {
                         ipAddressEdit1.setText(sIPCorrectly);
                         ipAddressEdit1.setSelection(iPos - 1);
 
-                        CalculationAddresses ipAddressTab1 = new CalculationAddresses();
+                        /*
                         ipAddressTab1.ipAddressB3 = "";
                         ipAddressTab1.ipAddressB2 = "";
                         ipAddressTab1.ipAddressB1 = "";
                         ipAddressTab1.ipAddressB0 = "";
+                         */
                     }
                 }
                 valueIPAddressFieldChangedByUser = true;
@@ -182,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         textViewIP.setText(String.valueOf(iPos));
 
                         // присвоим корректное значение маски переменной
-                        CalculationAddresses cidrTab1 = new CalculationAddresses();
+                        // CalculationAddresses cidrTab1 = new CalculationAddresses();
                         cidrTab1.cidr = sCIDRCorrectly;
                         // заполним поле netmask корректным значением
                         valueNetmaskFieldChangedByUser = false;
@@ -193,6 +202,10 @@ public class MainActivity extends AppCompatActivity {
                         sNetmaskCorrectly = auxiliaryVariables;
                         // заполним значения байт маски для дальнейших вычислений
                         CheckingCorrectnessNetmask.checkingCorrectnessNetmask(auxiliaryVariables);
+                        netmaskTab1.netmaskB3 = sNetmaskCorrectlyB3;
+                        netmaskTab1.netmaskB2 = sNetmaskCorrectlyB2;
+                        netmaskTab1.netmaskB1 = sNetmaskCorrectlyB1;
+                        netmaskTab1.netmaskB0 = sNetmaskCorrectlyB0;
 
                     } else {
                         // введен неверный IP адрес
@@ -201,8 +214,12 @@ public class MainActivity extends AppCompatActivity {
                         cIDR1.setText(sCIDRCorrectly);
                         cIDR1.setSelection(iPos - 1);
 
-                        CalculationAddresses cidrTab1 = new CalculationAddresses();
+                        // CalculationAddresses cidrTab1 = new CalculationAddresses();
                         cidrTab1.cidr = "";
+                        netmaskTab1.netmaskB3 = "";
+                        netmaskTab1.netmaskB2 = "";
+                        netmaskTab1.netmaskB1 = "";
+                        netmaskTab1.netmaskB0 = "";
                     }
                 }
                 valueCIDRFieldChangedByUser = true;
@@ -238,12 +255,6 @@ public class MainActivity extends AppCompatActivity {
                         iPos = netmaskEdit1.getSelectionStart();
                         textViewIP.setText(String.valueOf(iPos));
 
-                        CalculationAddresses netmaskTab1 = new CalculationAddresses();
-                        netmaskTab1.netmaskB3 = sNetmaskCorrectlyB3;
-                        netmaskTab1.netmaskB2 = sNetmaskCorrectlyB2;
-                        netmaskTab1.netmaskB1 = sNetmaskCorrectlyB1;
-                        netmaskTab1.netmaskB0 = sNetmaskCorrectlyB0;
-
                         // проверим что в поле netmask введено полное корректное значение по
                         // которому можно определить маску CIDR и в таком случае заполним поле
                         // CIDR соответствующим значением
@@ -252,23 +263,41 @@ public class MainActivity extends AppCompatActivity {
                         if (!auxiliaryVariables.equals("")) {
                             valueCIDRFieldChangedByUser = false;
                             cIDR1.setText(auxiliaryVariables);
+
+                            // заполним значения байт netmask and CIDR для дальнейших вычислений
+                            cidrTab1.cidr = auxiliaryVariables;
+                            netmaskTab1.netmaskB3 = sNetmaskCorrectlyB3;
+                            netmaskTab1.netmaskB2 = sNetmaskCorrectlyB2;
+                            netmaskTab1.netmaskB1 = sNetmaskCorrectlyB1;
+                            netmaskTab1.netmaskB0 = sNetmaskCorrectlyB0;
+
                         } else {
                             valueCIDRFieldChangedByUser = false;
                             cIDR1.setText("");
+
+                            // очистим значения байт netmask and CIDR, т.к. текущие
+                            // значения некорректны
+                            cidrTab1.cidr = auxiliaryVariables;
+                            netmaskTab1.netmaskB3 = sNetmaskCorrectlyB3;
+                            netmaskTab1.netmaskB2 = sNetmaskCorrectlyB2;
+                            netmaskTab1.netmaskB1 = sNetmaskCorrectlyB1;
+                            netmaskTab1.netmaskB0 = sNetmaskCorrectlyB0;
+
                         }
 
                     } else {
-                        // введен неверный IP адрес
+                        // введена неверная маска IP адрес
                         valueNetmaskFieldChangedByUser = false;
                         textViewIP.setText(String.valueOf(iPos));
                         netmaskEdit1.setText(sNetmaskCorrectly);
                         netmaskEdit1.setSelection(iPos - 1);
 
-                        CalculationAddresses netmaskTab1 = new CalculationAddresses();
+                        /*
                         netmaskTab1.netmaskB3 = "";
                         netmaskTab1.netmaskB2 = "";
                         netmaskTab1.netmaskB1 = "";
                         netmaskTab1.netmaskB0 = "";
+                         */
                     }
                 }
                 valueNetmaskFieldChangedByUser = true;
@@ -301,6 +330,39 @@ public class MainActivity extends AppCompatActivity {
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         EditText cidr1 = (EditText) findViewById(R.id.cidr1);
         EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+
+        String s;
+        s = sIPCorrectly;
+        s = sIPCorrectlyB3;
+        s = sIPCorrectlyB2;
+        s = sIPCorrectlyB1;
+        s = sIPCorrectlyB0;
+
+        s = sCIDRCorrectly;
+
+        s = sNetmaskCorrectly;
+        s = sNetmaskCorrectlyB3;
+        s = sNetmaskCorrectlyB2;
+        s = sNetmaskCorrectlyB1;
+        s = sNetmaskCorrectlyB0;
+
+        // переменные для хранения байтов IP адреса
+        //CalculationAddresses ipAddressTab1 = new CalculationAddresses();
+        s = ipAddressTab1.ipAddressB3;
+        s = ipAddressTab1.ipAddressB2;
+        s = ipAddressTab1.ipAddressB1;
+        s = ipAddressTab1.ipAddressB0;
+
+        // переменная для хранения количества бит маски подсети
+        s = cidrTab1.cidr;
+
+        // переменные для хранения байтов маски подсети
+        //CalculationAddresses netmaskTab1 = new CalculationAddresses();
+        s = netmaskTab1.netmaskB3;
+        s = netmaskTab1.netmaskB2;
+        s = netmaskTab1.netmaskB1;
+        s = netmaskTab1.netmaskB0;
+
     }
 
     //TAB_02
