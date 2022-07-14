@@ -1,7 +1,6 @@
 package com.anbn.ipcalculatorforandroid;
 
 public class CalculationAddresses {
-
     // переменные назначины и именованы в соответствии с расположением полей в layout
     String ipAddress;
     String cIDR;

@@ -77,7 +77,6 @@ public class CheckingCorrectnessIPAddress {
                 }
             }
         }
-
         return true;
     }
 

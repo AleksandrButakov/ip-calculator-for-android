@@ -42,7 +42,6 @@ public class CheckingCorrectnessNetmask {
                                 iByte3 == 240 || iByte3 == 22 || iByte3 == 224 ||
                                 iByte3 == 1 || iByte3 == 19 || iByte3 == 192 ||
                                 iByte3 == 12 || iByte3 == 128) {
-                            //return true;
                         } else {
                             return false;
                         }
@@ -69,6 +68,7 @@ public class CheckingCorrectnessNetmask {
                             }
                         }
                         break;
+
                     case (1):
                         if (sByte[1].equals("00")) return false;
                         iByte2 = Integer.valueOf(sByte[2]);
@@ -90,6 +90,7 @@ public class CheckingCorrectnessNetmask {
                             }
                         }
                         break;
+
                     case (0):
                         if (sByte[0].equals("00")) return false;
                         iByte1 = Integer.valueOf(sByte[1]);
@@ -101,7 +102,6 @@ public class CheckingCorrectnessNetmask {
                                     iByte0 == 240 || iByte0 == 22 || iByte0 == 224 ||
                                     iByte0 == 1 || iByte0 == 19 || iByte0 == 192 ||
                                     iByte0 == 12 || iByte0 == 128 || iByte0 == 0) {
-                                //
                                 savingNetmaskToVariables(sByte[3], sByte[2], sByte[1], sByte[0]);
 
                             } else {
