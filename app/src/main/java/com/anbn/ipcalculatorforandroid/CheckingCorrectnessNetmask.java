@@ -141,26 +141,136 @@ public class CheckingCorrectnessNetmask {
                         return false;
                     }
 
-                        numberByte--;
-                        numberDot++;
-                        if (numberDot > 3) {
-                            return false;
-                        }
-                    } else {
+                    numberByte--;
+                    numberDot++;
+                    if (numberDot > 3) {
                         return false;
                     }
+                } else {
+                    return false;
                 }
             }
-            return true;
         }
-
-        // заполним значениями байтов маски подсети переменные
-        public static void savingNetmaskToVariables (String sByte3, String sByte2,
-                String sByte1, String sByte0){
-            sNetmaskCorrectlyB3 = sByte3;
-            sNetmaskCorrectlyB2 = sByte2;
-            sNetmaskCorrectlyB1 = sByte1;
-            sNetmaskCorrectlyB0 = sByte0;
-        }
-
+        return true;
     }
+
+    // заполним значениями байтов маски подсети переменные
+    public static void savingNetmaskToVariables(String sByte3, String sByte2,
+                                                String sByte1, String sByte0) {
+        sNetmaskCorrectlyB3 = sByte3;
+        sNetmaskCorrectlyB2 = sByte2;
+        sNetmaskCorrectlyB1 = sByte1;
+        sNetmaskCorrectlyB0 = sByte0;
+    }
+
+    // при изменении поля netmask корректными значениями заполним поле CIDR
+    public static String searchForCIDRByNetmask(String netmask) {
+        String cIDR = "";
+        switch (netmask) {
+            case ("0.0.0.0"):
+                cIDR = "0";
+                break;
+            case ("128.0.0.0"):
+                cIDR = "1";
+                break;
+            case ("192.0.0.0"):
+                cIDR = "2";
+                break;
+            case ("224.0.0.0"):
+                cIDR = "3";
+                break;
+            case ("240.0.0.0"):
+                cIDR = "4";
+                break;
+            case ("248.0.0.0"):
+                cIDR = "5";
+                break;
+            case ("252.0.0.0"):
+                cIDR = "6";
+                break;
+            case ("254.0.0.0"):
+                cIDR = "7";
+                break;
+            case ("255.0.0.0"):
+                cIDR = "8";
+                break;
+
+            case ("255.128.0.0"):
+                cIDR = "9";
+                break;
+            case ("255.192.0.0"):
+                cIDR = "10";
+                break;
+            case ("255.224.0.0"):
+                cIDR = "11";
+                break;
+            case ("255.240.0.0"):
+                cIDR = "12";
+                break;
+            case ("255.248.0.0"):
+                cIDR = "13";
+                break;
+            case ("255.252.0.0"):
+                cIDR = "14";
+                break;
+            case ("255.254.0.0"):
+                cIDR = "15";
+                break;
+            case ("255.255.0.0"):
+                cIDR = "16";
+                break;
+
+            case ("255.255.128.0"):
+                cIDR = "17";
+                break;
+            case ("255.255.192.0"):
+                cIDR = "18";
+                break;
+            case ("255.255.224.0"):
+                cIDR = "19";
+                break;
+            case ("255.255.240.0"):
+                cIDR = "20";
+                break;
+            case ("255.255.248.0"):
+                cIDR = "21";
+                break;
+            case ("255.255.252.0"):
+                cIDR = "22";
+                break;
+            case ("255.255.254.0"):
+                cIDR = "23";
+                break;
+            case ("255.255.255.0"):
+                cIDR = "24";
+                break;
+
+            case ("255.255.255.128"):
+                cIDR = "25";
+                break;
+            case ("255.255.255.192"):
+                cIDR = "26";
+                break;
+            case ("255.255.255.224"):
+                cIDR = "27";
+                break;
+            case ("255.255.255.240"):
+                cIDR = "28";
+                break;
+            case ("255.255.255.248"):
+                cIDR = "29";
+                break;
+            case ("255.255.255.252"):
+                cIDR = "30";
+                break;
+            case ("255.255.255.254"):
+                cIDR = "31";
+                break;
+            case ("255.255.255.255m"):
+                cIDR = "32";
+                break;
+        }
+        return cIDR;
+    }
+
+}

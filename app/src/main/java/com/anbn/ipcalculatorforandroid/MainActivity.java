@@ -1,8 +1,14 @@
 package com.anbn.ipcalculatorforandroid;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
     public static String sNetmaskCorrectlyB0 = "";
 
     public static int iPos;
-    public static boolean valueFieldChangedByUser = true;
+    public static boolean valueIPAddressFieldChangedByUser = true;
+    public static boolean valueCIDRFieldChangedByUser = true;
+    public static boolean valueNetmaskFieldChangedByUser = true;
 
     // переменные для определения активности вкладок
     public static boolean tab1IsActive = false;
@@ -87,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textViewIP = (TextView) findViewById(R.id.textView1);
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+        EditText cIDR1 = (EditText) findViewById(R.id.cidr1);
+        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
 
         ipAddressEdit1.addTextChangedListener(new TextWatcher() {
 
@@ -94,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (valueFieldChangedByUser == true) {
+                if (valueIPAddressFieldChangedByUser == true) {
                     if (!ipAddressEdit1.getText().equals("")) {
                         iPos = ipAddressEdit1.getSelectionStart() + 1;
                     }
@@ -102,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (valueFieldChangedByUser == true) {
+                if (valueIPAddressFieldChangedByUser == true) {
 
                     String sIP;
                     sIP = String.valueOf(ipAddressEdit1.getText());
@@ -116,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // проверим что все байты адреса заполнены
                         if (!sIPCorrectlyB3.equals("") && !sIPCorrectlyB2.equals("") &&
-                        !sIPCorrectlyB1.equals("") && !sIPCorrectlyB0.equals("")) {
+                                !sIPCorrectlyB1.equals("") && !sIPCorrectlyB0.equals("")) {
                             CalculationAddresses ipAddressTab1 = new CalculationAddresses();
                             ipAddressTab1.ipAddressB3 = sIPCorrectlyB3;
                             ipAddressTab1.ipAddressB2 = sIPCorrectlyB2;
@@ -127,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
                     } else {
                         // введен неверный IP адрес
-                        valueFieldChangedByUser = false;
+                        valueIPAddressFieldChangedByUser = false;
                         textViewIP.setText(String.valueOf(iPos));
                         ipAddressEdit1.setText(sIPCorrectly);
                         ipAddressEdit1.setSelection(iPos - 1);
@@ -140,20 +150,20 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
-                valueFieldChangedByUser = true;
+                valueIPAddressFieldChangedByUser = true;
             }
         });
 
 
         // задаем listener для поля ввода CIDR
         System.out.println("Listener CIDR");
-        EditText cIDR1 = (EditText) findViewById(R.id.cidr1);
+
         cIDR1.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (valueFieldChangedByUser == true) {
+                if (valueCIDRFieldChangedByUser == true) {
                     if (!cIDR1.getText().equals("")) {
                         iPos = cIDR1.getSelectionStart() + 1;
                     }
@@ -161,13 +171,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (valueFieldChangedByUser == true) {
+                if (valueCIDRFieldChangedByUser == true) {
 
                     String sCIDR;
                     sCIDR = String.valueOf(cIDR1.getText());
-                    //ipAddressEdit1.setSelection(iPos);
 
-                    // если введен некорректный IP адрес
+                    // если введен корректный или некорректный IP адрес
                     if (CheckingCorrectnessCIDR.checkingCorrectnessCIDR(sCIDR)) {
                         // введен корректный IP адрес
                         sCIDRCorrectly = sCIDR;
@@ -176,9 +185,13 @@ public class MainActivity extends AppCompatActivity {
 
                         CalculationAddresses cidrTab1 = new CalculationAddresses();
                         cidrTab1.cidr = sCIDRCorrectly;
+
+                        valueCIDRFieldChangedByUser = false;
+                        netmaskEdit1.setText(CheckingCorrectnessCIDR.
+                                searchForNetmaskByCIDR(sCIDRCorrectly));
                     } else {
                         // введен неверный IP адрес
-                        valueFieldChangedByUser = false;
+                        valueCIDRFieldChangedByUser = false;
                         textViewIP.setText(String.valueOf(iPos));
                         cIDR1.setText(sCIDRCorrectly);
                         cIDR1.setSelection(iPos - 1);
@@ -188,23 +201,19 @@ public class MainActivity extends AppCompatActivity {
                         //information();
                     }
                 }
-                valueFieldChangedByUser = true;
+                valueCIDRFieldChangedByUser = true;
             }
         });
 
 
-
-
-
         // задаем listener для поля ввода netmaskEdit1
         System.out.println("Listener netmaskEdit1");
-        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
         netmaskEdit1.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (valueFieldChangedByUser == true) {
+                if (valueNetmaskFieldChangedByUser == true) {
                     if (!netmaskEdit1.getText().equals("")) {
                         iPos = netmaskEdit1.getSelectionStart() + 1;
                     }
@@ -212,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (valueFieldChangedByUser == true) {
+                if (valueNetmaskFieldChangedByUser == true) {
 
                     String sNetmask;
                     sNetmask = String.valueOf(netmaskEdit1.getText());
@@ -233,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
                     } else {
                         // введен неверный IP адрес
-                        valueFieldChangedByUser = false;
+                        valueNetmaskFieldChangedByUser = false;
                         textViewIP.setText(String.valueOf(iPos));
                         netmaskEdit1.setText(sNetmaskCorrectly);
                         netmaskEdit1.setSelection(iPos - 1);
@@ -246,13 +255,11 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
-                valueFieldChangedByUser = true;
+                valueNetmaskFieldChangedByUser = true;
 
             }
         });
     }
-
-
 
 
     public void information() {
@@ -266,11 +273,13 @@ public class MainActivity extends AppCompatActivity {
 
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButton1(View v) {
-        valueFieldChangedByUser = false;
-        /*
+        valueIPAddressFieldChangedByUser = false;
+        valueCIDRFieldChangedByUser = false;
+        valueNetmaskFieldChangedByUser = false;
+
         ClearingFragment1Fields.clearingFragment1Fields();
         clearingFragment1Data();
-         */
+
     }
 
 
@@ -279,15 +288,6 @@ public class MainActivity extends AppCompatActivity {
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         EditText cidr1 = (EditText) findViewById(R.id.cidr1);
         EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
-
-        String s1 = String.valueOf(cidr1.getText());
-        String s2 = String.valueOf(netmaskEdit1.getText());
-
-        if (!s1.equals("") && !s2.equals("")) {
-            Toast.makeText(this, "Clear the CIDR or netmask field...",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
 
 
 
@@ -371,7 +371,9 @@ public class MainActivity extends AppCompatActivity {
         binLastAddressText1.setText("");
         binUsableText1.setText("");
 
-        valueFieldChangedByUser = true;
+        valueIPAddressFieldChangedByUser = true;
+        valueCIDRFieldChangedByUser = true;
+        valueNetmaskFieldChangedByUser = true;
     }
 
 
