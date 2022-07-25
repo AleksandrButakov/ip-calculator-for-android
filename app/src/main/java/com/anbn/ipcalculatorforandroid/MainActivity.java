@@ -1,18 +1,11 @@
 package com.anbn.ipcalculatorforandroid;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.Activity;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -61,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     CalculationAddresses cidrTab1 = new CalculationAddresses();
     CalculationAddresses netmaskTab1 = new CalculationAddresses();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +85,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        /* очистим переменные вкладки Tab1 при запуске программы. Необходимо для исключения
+        равенства переменной значению null
+        */
+        ClearingFragment1Fields.clearingVariablesIPAddressTab1(ipAddressTab1);
+        ClearingFragment1Fields.clearingVariablesCidrTab1(cidrTab1);
+        ClearingFragment1Fields.clearingVariablesNetmaskTab1(netmaskTab1);
+    }
+
+
+    // переключатель Switch Tab1, активирует и деактивирует EditText-ы на странице
+    // предварительно проверив делается ли это впервые
+    public void onSw(View v) {
+        Switch sw = (Switch) findViewById(R.id.switch1);
+        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
+        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+
+        // в случае если вкладка была активная, делаем поля EditText setEnabled(false)
+        // в случае если вкладка была не активная, делаем поля EditText setEnabled(true)
+        if (tab1IsActive) {
+            ipAddressEdit1.setEnabled(false);
+            cidr1.setEnabled(false);
+            netmaskEdit1.setEnabled(false);
+            tab1IsActive = false;
+
+            Toast.makeText(this, "111",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            ipAddressEdit1.setEnabled(true);
+            cidr1.setEnabled(true);
+            netmaskEdit1.setEnabled(true);
+            tab1IsActive = true;
+
+            Toast.makeText(this, "222",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        // при первом запуске вкладки активируем Listener
+        if (firstLaunchTab1) {
+            listenerEditText();
+            firstLaunchTab1 = false;
+            Toast.makeText(this, "333",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -314,98 +353,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // нажатие кнопки CALC Tab1, проверяем корректность введенных данных и выводим результат
+    public void onClickCalcButtonTab1(View v) {
+        // проверим что переменные для хранения байтов IP адреса не равны null
+        if (ipAddressTab1.ipAddressB3.equals("") ||
+                ipAddressTab1.ipAddressB2.equals("") ||
+                ipAddressTab1.ipAddressB1.equals("") ||
+                ipAddressTab1.ipAddressB0.equals("") ||
+                // проверим что переменная для хранения количества бит маски подсети не равна null
+                cidrTab1.cidr.equals("") ||
+                // проверим что переменные для хранения байтов маски подсети не равны null
+                netmaskTab1.netmaskB3.equals("") ||
+                netmaskTab1.netmaskB2.equals("") ||
+                netmaskTab1.netmaskB1.equals("") ||
+                netmaskTab1.netmaskB0.equals("")) {
+            // введены некорректные данные
+            Toast.makeText(this, "Incorrect data entered...",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // введены корректные данные. Рассчитываем все параметры и выводим на экран
+
+        }
+    }
+
+
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
-    public void onClickClearButton1(View v) {
+    public void onClickClearButtonTab1(View v) {
         valueIPAddressFieldChangedByUser = false;
         valueCIDRFieldChangedByUser = false;
         valueNetmaskFieldChangedByUser = false;
 
-        ClearingFragment1Fields.clearingFragment1Fields();
+        //ClearingFragment1Fields.clearingFragment1Fields();
+
+        ClearingFragment1Fields.clearingVariablesIPAddressTab1(ipAddressTab1);
+        ClearingFragment1Fields.clearingVariablesCidrTab1(cidrTab1);
+        ClearingFragment1Fields.clearingVariablesNetmaskTab1(netmaskTab1);
+
         clearingFragment1Data();
     }
 
-
-    // нажатие кнопки CALC Tab1, проверяем корректность введенных данных и выводим результат
-    public void onClickCalcButton1(View v) {
-        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
-        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
-        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
-
-        String s;
-        s = sIPCorrectly;
-        s = sIPCorrectlyB3;
-        s = sIPCorrectlyB2;
-        s = sIPCorrectlyB1;
-        s = sIPCorrectlyB0;
-
-        s = sCIDRCorrectly;
-
-        s = sNetmaskCorrectly;
-        s = sNetmaskCorrectlyB3;
-        s = sNetmaskCorrectlyB2;
-        s = sNetmaskCorrectlyB1;
-        s = sNetmaskCorrectlyB0;
-
-        // переменные для хранения байтов IP адреса
-        //CalculationAddresses ipAddressTab1 = new CalculationAddresses();
-        s = ipAddressTab1.ipAddressB3;
-        s = ipAddressTab1.ipAddressB2;
-        s = ipAddressTab1.ipAddressB1;
-        s = ipAddressTab1.ipAddressB0;
-
-        // переменная для хранения количества бит маски подсети
-        s = cidrTab1.cidr;
-
-        // переменные для хранения байтов маски подсети
-        //CalculationAddresses netmaskTab1 = new CalculationAddresses();
-        s = netmaskTab1.netmaskB3;
-        s = netmaskTab1.netmaskB2;
-        s = netmaskTab1.netmaskB1;
-        s = netmaskTab1.netmaskB0;
-
-    }
 
     //TAB_02
     public void onClickCalcButton2(View v) {
         EditText cidr2 = (EditText) findViewById(R.id.editText21);
         cidr2.setText("It's a working!!!");
-    }
-
-    // переключатель Switch Tab1, активирует и деактивирует EditText-ы на странице
-    // предварительно проверив делается ли это впервые
-    public void onSw(View v) {
-        Switch sw = (Switch) findViewById(R.id.switch1);
-        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
-        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
-        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
-
-        // в случае если вкладка была активная, делаем поля EditText setEnabled(false)
-        // в случае если вкладка была не активная, делаем поля EditText setEnabled(true)
-        if (tab1IsActive) {
-            ipAddressEdit1.setEnabled(false);
-            cidr1.setEnabled(false);
-            netmaskEdit1.setEnabled(false);
-            tab1IsActive = false;
-
-            Toast.makeText(this, "111",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            ipAddressEdit1.setEnabled(true);
-            cidr1.setEnabled(true);
-            netmaskEdit1.setEnabled(true);
-            tab1IsActive = true;
-
-            Toast.makeText(this, "222",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        // при первом запуске вкладки активируем Listener
-        if (firstLaunchTab1) {
-            listenerEditText();
-            firstLaunchTab1 = false;
-            Toast.makeText(this, "333",
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 
 
