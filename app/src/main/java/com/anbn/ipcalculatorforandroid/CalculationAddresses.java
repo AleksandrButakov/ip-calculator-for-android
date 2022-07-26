@@ -3,9 +3,9 @@ package com.anbn.ipcalculatorforandroid;
 public class CalculationAddresses {
 
     // переменные назначины и именованы в соответствии с расположением полей в layout
-    String ipAddress;
-    String cIDR;
-    String networkMask;
+    // String ipAddress;
+    // String cIDR;
+    // String networkMask;
 
     String decNetwork;
     String decBroadcast;
@@ -14,11 +14,20 @@ public class CalculationAddresses {
     String decLastAddress;
     String decNumberHosts;
 
-    String binNetwork;
-    String binBroadcast;
-    String binNetmask;
-    String binFirstAddress;
-    String binLastAddress;
+//    String sNetworkBin;
+//    String sBroadcastBin;
+    String sNetmaskBin;
+//    String sFirstAddressBin;
+//    String sLastAddressBin;
+
+    boolean[] binIPAddressArray = new boolean[32];
+    boolean[] binNetmaskArray = new boolean[32];
+    boolean[] binNetworkArray = new boolean[32];
+    boolean[] binBroadcast = new boolean[32];
+    boolean[] binNetmask = new boolean[32];
+    boolean[] binFirstAddress = new boolean[32];
+    boolean[] binLastAddress = new boolean[32];
+
 
     // переменные для хранения байтов IP адреса
     String ipAddressB3;
@@ -35,9 +44,8 @@ public class CalculationAddresses {
     String netmaskB1;
     String netmaskB0;
 
-    public static void calculationNumberHosts(CalculationAddresses cidrTab1,
-                                              CalculationAddresses tab1) {
-        switch (cidrTab1.cidr) {
+    public static void calculationNumberHosts(CalculationAddresses tab1) {
+        switch (tab1.cidr) {
             case ("31"):
                 tab1.decNumberHosts = "0";
                 break;
@@ -137,10 +145,34 @@ public class CalculationAddresses {
         }
     }
 
+    // заполним массив boolean[] binNetmaskArray
+    public static void fillingTheArrayBinNetmaskArray(CalculationAddresses tab1) {
+        tab1.sNetmaskBin = "";
+        for (int i = 31; i >= 0; i--) {
+            if (i <= 31 - Integer.parseInt(tab1.cidr)) {
+                tab1.binNetmaskArray[i] = true;
+                tab1.sNetmaskBin += "1";
+            } else {
+                tab1.binNetmaskArray[i] = false;
+                tab1.sNetmaskBin += "0";
+            }
+            if (i == 24 || i == 16 || i == 8) tab1.sNetmaskBin += " ";
+        }
+    }
+
+    /*
+    boolean[] binIPAddressArray = new boolean[32];
+    boolean[] binNetmaskArray = new boolean[32];
+    boolean[] binNetworkArray = new boolean[32];
+    boolean[] binBroadcast = new boolean[32];
+    boolean[] binNetmask = new boolean[32];
+    boolean[] binFirstAddress = new boolean[32];
+    boolean[] binLastAddress = new boolean[32];
+     */
 
     // получим двоичный массив BitOrder IP адреса
     public void DecToBin(int iByte0) {
-
+        //
         boolean[] BitOrder = new boolean[32];
         int[] Degree = new int[32];
         // заполним массив промежуточными данными для дальнейших вычислений
