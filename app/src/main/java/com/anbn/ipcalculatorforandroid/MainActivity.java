@@ -391,10 +391,17 @@ public class MainActivity extends AppCompatActivity {
             TextView binFirstAddressText1 = (TextView) findViewById(R.id.binFirstAddressText1);
             TextView binLastAddressText1 = (TextView) findViewById(R.id.binLastAddressText1);
 
+            // заполним массив boolean[] binIPAddressArray
+            CalculationAddresses.fillingTheBinIPAddressArray(tab1);
+
             // заполним массив boolean[] binNetmaskArray
-            CalculationAddresses.fillingTheArrayBinNetmaskArray(tab1);
+            CalculationAddresses.fillingTheBinNetmaskArray(tab1);
             binNetmaskText1.setText(tab1.sNetmaskBin);
 
+            // рассчитываем значение binNetwork[32] and decNetwork и выводим на экран
+            CalculationAddresses.fillingTheBinNetworkArray(tab1);
+            decNetworkIPText1.setText(tab1.decNetwork);
+            binNetworkText1.setText(tab1.sNetworkBin);
 
             // выводим параметр netmask на экран
             decNetmaskText1.setText(netmaskEdit1.getText());

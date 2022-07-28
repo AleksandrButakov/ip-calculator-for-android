@@ -1,5 +1,7 @@
 package com.anbn.ipcalculatorforandroid;
 
+import java.util.Arrays;
+
 public class CalculationAddresses {
 
     // переменные назначины и именованы в соответствии с расположением полей в layout
@@ -14,8 +16,8 @@ public class CalculationAddresses {
     String decLastAddress;
     String decNumberHosts;
 
-//    String sNetworkBin;
-//    String sBroadcastBin;
+    String sNetworkBin;
+    //    String sBroadcastBin;
     String sNetmaskBin;
 //    String sFirstAddressBin;
 //    String sLastAddressBin;
@@ -28,6 +30,8 @@ public class CalculationAddresses {
     boolean[] binFirstAddress = new boolean[32];
     boolean[] binLastAddress = new boolean[32];
 
+    // вспомогательная переменная для перевода данных Dec to Bin
+    public static boolean[] bitOrder = new boolean[8];
 
     // переменные для хранения байтов IP адреса
     String ipAddressB3;
@@ -145,20 +149,46 @@ public class CalculationAddresses {
         }
     }
 
-    // заполним массив boolean[] binNetmaskArray
-    public static void fillingTheArrayBinNetmaskArray(CalculationAddresses tab1) {
-        tab1.sNetmaskBin = "";
-        for (int i = 31; i >= 0; i--) {
-            if (i <= 31 - Integer.parseInt(tab1.cidr)) {
-                tab1.binNetmaskArray[i] = true;
-                tab1.sNetmaskBin += "1";
-            } else {
-                tab1.binNetmaskArray[i] = false;
-                tab1.sNetmaskBin += "0";
-            }
-            if (i == 24 || i == 16 || i == 8) tab1.sNetmaskBin += " ";
+    // заполним массив boolean[] binIPAddressArray
+    public static void fillingTheBinIPAddressArray(CalculationAddresses tab) {
+        decToBin(Integer.parseInt(tab.ipAddressB3));
+        for (int i = 31; i >= 24; i--) {
+            tab.binIPAddressArray[i] = bitOrder[i - 24];
+        }
+        decToBin(Integer.parseInt(tab.ipAddressB2));
+        for (int i = 23; i >= 16; i--) {
+            tab.binIPAddressArray[i] = bitOrder[i - 16];
+        }
+        decToBin(Integer.parseInt(tab.ipAddressB1));
+        for (int i = 15; i >= 8; i--) {
+            tab.binIPAddressArray[i] = bitOrder[i - 8];
+        }
+        decToBin(Integer.parseInt(tab.ipAddressB0));
+        for (int i = 7; i >= 0; i--) {
+            tab.binIPAddressArray[i] = bitOrder[i];
         }
     }
+
+    // заполним массив boolean[] binNetmaskArray
+    public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
+        tab.sNetmaskBin = "";
+        for (int i = 31; i >= 0; i--) {
+            if (i <= 31 - Integer.parseInt(tab.cidr)) {
+                tab.binNetmaskArray[i] = true;
+                tab.sNetmaskBin += "1";
+            } else {
+                tab.binNetmaskArray[i] = false;
+                tab.sNetmaskBin += "0";
+            }
+            if (i == 24 || i == 16 || i == 8) tab.sNetmaskBin += " ";
+        }
+    }
+
+    // рассчитываем значение binNetwork[32] and decNetwork
+    public static void fillingTheBinNetworkArray(CalculationAddresses tab) {
+
+    }
+
 
     /*
     boolean[] binIPAddressArray = new boolean[32];
@@ -171,12 +201,12 @@ public class CalculationAddresses {
      */
 
     // получим двоичный массив BitOrder IP адреса
-    public void DecToBin(int iByte0) {
+    public static void decToBin(int iByte0) {
         //
-        boolean[] BitOrder = new boolean[32];
-        int[] Degree = new int[32];
+        //boolean[] BitOrder = new boolean[8];
+        int[] Degree = new int[8];
         // заполним массив промежуточными данными для дальнейших вычислений
-        for (int i = 31; i >= 0; i--) {
+        for (int i = 7; i >= 0; i--) {
             Degree[i] = (int) Math.pow(2, i);
         }
 
@@ -184,17 +214,17 @@ public class CalculationAddresses {
         for (int i = 7; i >= 0; i--) {
             Residue = (float) (iByte0 / Degree[i]);
             if (Residue >= 1) {
-                BitOrder[i] = true;
+                bitOrder[i] = true;
                 iByte0 -= Degree[i];
             } else {
-                BitOrder[i] = false;
+                bitOrder[i] = false;
             }
         }
     }
 
 
     // полученный двумерный массив переведем в десятичный вид
-    public void BinToDec(boolean[] Arr) {
+    public void binToDec(boolean[] Arr) {
         int AuxiliaryDecByte0 = 0;
         //boolean[] BitOrder = new boolean[8];
         int[] Degree = new int[32];
