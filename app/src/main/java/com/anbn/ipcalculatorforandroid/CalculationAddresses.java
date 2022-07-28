@@ -173,7 +173,7 @@ public class CalculationAddresses {
     public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
         tab.sNetmaskBin = "";
         for (int i = 31; i >= 0; i--) {
-            if (i <= 31 - Integer.parseInt(tab.cidr)) {
+            if (i >= 31 - Integer.parseInt(tab.cidr)) {
                 tab.binNetmaskArray[i] = true;
                 tab.sNetmaskBin += "1";
             } else {
@@ -186,6 +186,21 @@ public class CalculationAddresses {
 
     // рассчитываем значение binNetwork[32] and decNetwork
     public static void fillingTheBinNetworkArray(CalculationAddresses tab) {
+        tab.sNetworkBin = "";
+        for (int i = 31; i >= 0; i--) {
+            if (tab.binNetmaskArray[i] == true) {
+                tab.binNetworkArray[i] = tab.binIPAddressArray[i];
+                if (tab.binIPAddressArray[i] == true) {
+                    tab.sNetworkBin += "1";
+                } else {
+                    tab.sNetworkBin += "0";
+                }
+            } else {
+                tab.binNetworkArray[i] = false;
+                tab.sNetworkBin += "0";
+            }
+            if (i == 24 || i == 16 || i == 8) tab.sNetworkBin += " ";
+        }
 
     }
 
@@ -224,16 +239,16 @@ public class CalculationAddresses {
 
 
     // полученный двумерный массив переведем в десятичный вид
-    public void binToDec(boolean[] Arr) {
+    public static void binToDec(boolean[] Arr) {
         int AuxiliaryDecByte0 = 0;
         //boolean[] BitOrder = new boolean[8];
-        int[] Degree = new int[32];
+        int[] Degree = new int[8];
         // заполним массив промежуточными данными для дальнейших вычислений
-        for (int i = 31; i >= 0; i--) {
+        for (int i = 7; i >= 0; i--) {
             Degree[i] = (int) Math.pow(2, i);
         }
 
-        for (int i = 31; i >= 0; i--) {
+        for (int i = 7; i >= 0; i--) {
             if (Arr[i] == true) {
                 AuxiliaryDecByte0 += Degree[i];
             }
