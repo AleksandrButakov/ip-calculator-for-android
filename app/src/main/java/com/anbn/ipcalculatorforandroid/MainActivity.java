@@ -385,6 +385,8 @@ public class MainActivity extends AppCompatActivity {
             TextView decFirstAddressText1 = (TextView) findViewById(R.id.decFirstAddressText1);
             TextView decLastAddressText1 = (TextView) findViewById(R.id.decLastAddressText1);
             TextView decNumberHostsText1 = (TextView) findViewById(R.id.decNumberHostsText1);
+
+            TextView binIPAddressText1 = (TextView) findViewById(R.id.binIPAddressText1);
             TextView binNetworkText1 = (TextView) findViewById(R.id.binNetworkText1);
             TextView binBroadcastText1 = (TextView) findViewById(R.id.binBroadcastText1);
             TextView binNetmaskText1 = (TextView) findViewById(R.id.binNetmaskText1);
@@ -393,6 +395,7 @@ public class MainActivity extends AppCompatActivity {
 
             // заполним массив boolean[] binIPAddressArray
             CalculationAddresses.fillingTheBinIPAddressArray(tab1);
+            binIPAddressText1.setText(tab1.sIPAddressBin);
 
             // заполним массив boolean[] binNetmaskArray
             CalculationAddresses.fillingTheBinNetmaskArray(tab1);
@@ -402,6 +405,8 @@ public class MainActivity extends AppCompatActivity {
             CalculationAddresses.fillingTheBinNetworkArray(tab1);
             decNetworkIPText1.setText(tab1.decNetwork);
             binNetworkText1.setText(tab1.sNetworkBin);
+            decNetworkIPText1.setText(CalculationAddresses.binToDec(tab1.binNetworkArray));
+
 
             // выводим параметр netmask на экран
             decNetmaskText1.setText(netmaskEdit1.getText());
@@ -450,12 +455,15 @@ public class MainActivity extends AppCompatActivity {
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         EditText cidr1 = (EditText) findViewById(R.id.cidr1);
         EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+
         TextView decNetworkIPText1 = (TextView) findViewById(R.id.decNetworkIPText1);
         TextView decBroadcastText1 = (TextView) findViewById(R.id.decBroadcastText1);
         TextView decNetmaskText1 = (TextView) findViewById(R.id.decNetmaskText1);
         TextView decFirstAddressText1 = (TextView) findViewById(R.id.decFirstAddressText1);
         TextView decLastAddressText1 = (TextView) findViewById(R.id.decLastAddressText1);
         TextView decNumberText1 = (TextView) findViewById(R.id.decNumberHostsText1);
+
+        TextView binIPAddressText1 = (TextView) findViewById(R.id.binIPAddressText1);
         TextView binNetworkText1 = (TextView) findViewById(R.id.binNetworkText1);
         TextView binBroadcastText1 = (TextView) findViewById(R.id.binBroadcastText1);
         TextView binNetmaskText1 = (TextView) findViewById(R.id.binNetmaskText1);
@@ -465,12 +473,15 @@ public class MainActivity extends AppCompatActivity {
         ipAddressEdit1.setText("");
         cidr1.setText("");
         netmaskEdit1.setText("");
+
         decNetworkIPText1.setText("");
         decBroadcastText1.setText("");
         decNetmaskText1.setText("");
         decFirstAddressText1.setText("");
         decLastAddressText1.setText("");
         decNumberText1.setText("");
+
+        binIPAddressText1.setText("");
         binNetworkText1.setText("");
         binBroadcastText1.setText("");
         binNetmaskText1.setText("");

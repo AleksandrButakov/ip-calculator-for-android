@@ -16,6 +16,7 @@ public class CalculationAddresses {
     String decLastAddress;
     String decNumberHosts;
 
+    String sIPAddressBin;
     String sNetworkBin;
     //    String sBroadcastBin;
     String sNetmaskBin;
@@ -151,21 +152,40 @@ public class CalculationAddresses {
 
     // заполним массив boolean[] binIPAddressArray
     public static void fillingTheBinIPAddressArray(CalculationAddresses tab) {
+        tab.sIPAddressBin = "";
         decToBin(Integer.parseInt(tab.ipAddressB3));
         for (int i = 31; i >= 24; i--) {
             tab.binIPAddressArray[i] = bitOrder[i - 24];
+            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
         }
+        tab.sIPAddressBin += " ";
+
         decToBin(Integer.parseInt(tab.ipAddressB2));
         for (int i = 23; i >= 16; i--) {
             tab.binIPAddressArray[i] = bitOrder[i - 16];
+            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 16]);
         }
+        tab.sIPAddressBin += " ";
+
         decToBin(Integer.parseInt(tab.ipAddressB1));
         for (int i = 15; i >= 8; i--) {
             tab.binIPAddressArray[i] = bitOrder[i - 8];
+            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 8]);
         }
+        tab.sIPAddressBin += " ";
+
         decToBin(Integer.parseInt(tab.ipAddressB0));
         for (int i = 7; i >= 0; i--) {
             tab.binIPAddressArray[i] = bitOrder[i];
+            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i]);
+        }
+    }
+
+    public String fillingValuesIPAddressBits(boolean bit) {
+        if (bit == true) {
+            return "1";
+        } else {
+            return "0";
         }
     }
 
@@ -173,7 +193,7 @@ public class CalculationAddresses {
     public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
         tab.sNetmaskBin = "";
         for (int i = 31; i >= 0; i--) {
-            if (i >= 31 - Integer.parseInt(tab.cidr)) {
+            if (i >= 32 - Integer.parseInt(tab.cidr)) {
                 tab.binNetmaskArray[i] = true;
                 tab.sNetmaskBin += "1";
             } else {
@@ -239,20 +259,47 @@ public class CalculationAddresses {
 
 
     // полученный двумерный массив переведем в десятичный вид
-    public static void binToDec(boolean[] Arr) {
+    public static String binToDec(boolean[] Arr) {
         int AuxiliaryDecByte0 = 0;
-        //boolean[] BitOrder = new boolean[8];
+        String sTemp = "";
         int[] Degree = new int[8];
         // заполним массив промежуточными данными для дальнейших вычислений
         for (int i = 7; i >= 0; i--) {
             Degree[i] = (int) Math.pow(2, i);
         }
 
+        for (int i = 31; i >= 24; i--) {
+            if (Arr[i] == true) {
+                AuxiliaryDecByte0 += Degree[i - 24];
+            }
+        }
+        sTemp = String.valueOf(AuxiliaryDecByte0) + ".";
+        AuxiliaryDecByte0 = 0;
+
+        for (int i = 23; i >= 16; i--) {
+            if (Arr[i] == true) {
+                AuxiliaryDecByte0 += Degree[i - 16];
+            }
+        }
+        sTemp += String.valueOf(AuxiliaryDecByte0) + ".";
+        AuxiliaryDecByte0 = 0;
+
+        for (int i = 15; i >= 8; i--) {
+            if (Arr[i] == true) {
+                AuxiliaryDecByte0 += Degree[i - 8];
+            }
+        }
+        sTemp += String.valueOf(AuxiliaryDecByte0) + ".";
+        AuxiliaryDecByte0 = 0;
+
         for (int i = 7; i >= 0; i--) {
             if (Arr[i] == true) {
                 AuxiliaryDecByte0 += Degree[i];
             }
         }
+        sTemp += String.valueOf(AuxiliaryDecByte0);
+
+        return sTemp;
     }
 
 
