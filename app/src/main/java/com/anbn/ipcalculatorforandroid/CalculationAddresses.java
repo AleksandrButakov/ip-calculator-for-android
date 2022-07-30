@@ -18,10 +18,10 @@ public class CalculationAddresses {
 
     String sIPAddressBin;
     String sNetworkBin;
-    //    String sBroadcastBin;
     String sNetmaskBin;
-//    String sFirstAddressBin;
-//    String sLastAddressBin;
+    String sFirstAddressBin;
+    String sLastAddressBin;
+    String sBroadcastBin;
 
     boolean[] binIPAddressArray = new boolean[32];
     boolean[] binNetmaskArray = new boolean[32];
@@ -207,19 +207,57 @@ public class CalculationAddresses {
     // рассчитываем значение binNetwork[32] and decNetwork
     public static void fillingTheBinNetworkArray(CalculationAddresses tab) {
         tab.sNetworkBin = "";
+        tab.sFirstAddressBin = "";
+        tab.sLastAddressBin = "";
+        tab.sBroadcastBin = "";
         for (int i = 31; i >= 0; i--) {
             if (tab.binNetmaskArray[i] == true) {
                 tab.binNetworkArray[i] = tab.binIPAddressArray[i];
                 if (tab.binIPAddressArray[i] == true) {
                     tab.sNetworkBin += "1";
+                    tab.binFirstAddress[i] = true;
+                    tab.sFirstAddressBin += "1";
+                    tab.binLastAddress[i] = true;
+                    tab.sLastAddressBin += "1";
+                    tab.binBroadcast[i] = true;
+                    tab.sBroadcastBin += "1";
                 } else {
                     tab.sNetworkBin += "0";
+                    tab.binFirstAddress[i] = false;
+                    tab.sFirstAddressBin += "0";
+                    tab.binLastAddress[i] = false;
+                    tab.sLastAddressBin += "0";
+                    tab.binBroadcast[i] = false;
+                    tab.sBroadcastBin += "0";
                 }
             } else {
                 tab.binNetworkArray[i] = false;
                 tab.sNetworkBin += "0";
+
+                // заполним массив tab.binFirstAddress[] and tab.binLastAddress[] данными
+                if (i == 0) {
+                    tab.binFirstAddress[i] = true;
+                    tab.sFirstAddressBin += "1";
+                    tab.binLastAddress[i] = false;
+                    tab.sLastAddressBin += "0";
+                } else {
+                    tab.binFirstAddress[i] = false;
+                    tab.sFirstAddressBin += "0";
+                    tab.binLastAddress[i] = true;
+                    tab.sLastAddressBin += "1";
+                }
+
+                tab.binBroadcast[i] = true;
+                tab.sBroadcastBin += "1";
+
             }
-            if (i == 24 || i == 16 || i == 8) tab.sNetworkBin += " ";
+
+            if (i == 24 || i == 16 || i == 8) {
+                tab.sNetworkBin += " ";
+                tab.sFirstAddressBin += " ";
+                tab.sLastAddressBin += " ";
+                tab.sBroadcastBin += " ";
+            }
         }
 
     }

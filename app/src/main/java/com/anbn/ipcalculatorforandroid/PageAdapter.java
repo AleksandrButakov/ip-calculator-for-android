@@ -24,8 +24,6 @@ public class PageAdapter extends FragmentPagerAdapter {
                 return new ftab1();
             case 1:
                 return new ftab2();
-            case 2:
-                return new ftab3();
             default:
                 return null;
         }

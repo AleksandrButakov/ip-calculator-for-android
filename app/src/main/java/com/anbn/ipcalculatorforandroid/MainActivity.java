@@ -65,25 +65,28 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout1);
         TabItem tabItem1 = (TabItem) findViewById(R.id.tab1);
         TabItem tabItem2 = (TabItem) findViewById(R.id.tab2);
-        TabItem tabItem3 = (TabItem) findViewById(R.id.tab3);
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpager);
 
-        pageAdapter = new com.anbn.ipcalculatorforandroid.PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        pageAdapter = new com.anbn.ipcalculatorforandroid.PageAdapter(getSupportFragmentManager(),
+                tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2)
+                if (tab.getPosition() == 0 || tab.getPosition() == 1)
                     pageAdapter.notifyDataSetChanged();
+                //listenerEditText();
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                //listenerEditText();
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                //listenerEditText();
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         равенства переменной значению null
         */
         ClearingFragment1Fields.clearingVariablesTab1(tab1);
+        //listenerEditText();
 
     }
 
@@ -401,27 +405,25 @@ public class MainActivity extends AppCompatActivity {
             CalculationAddresses.fillingTheBinNetmaskArray(tab1);
             binNetmaskText1.setText(tab1.sNetmaskBin);
 
-            // рассчитываем значение binNetwork[32] and decNetwork и выводим на экран
+            // рассчитываем значение binNetwork[32], decNetwork
+            // binFirstAddress[32], binLastAddress[32], binBroadcast[32] и выводим на экран
             CalculationAddresses.fillingTheBinNetworkArray(tab1);
             decNetworkIPText1.setText(tab1.decNetwork);
             binNetworkText1.setText(tab1.sNetworkBin);
             decNetworkIPText1.setText(CalculationAddresses.binToDec(tab1.binNetworkArray));
-
+            binFirstAddressText1.setText(tab1.sFirstAddressBin);
+            decFirstAddressText1.setText(CalculationAddresses.binToDec(tab1.binFirstAddress));
+            binLastAddressText1.setText(tab1.sLastAddressBin);
+            decLastAddressText1.setText(CalculationAddresses.binToDec(tab1.binLastAddress));
+            binBroadcastText1.setText(tab1.sBroadcastBin);
+            decBroadcastText1.setText(CalculationAddresses.binToDec(tab1.binBroadcast));
 
             // выводим параметр netmask на экран
             decNetmaskText1.setText(netmaskEdit1.getText());
 
-
             // рассчитываем параметр tab1.decNumberHosts и выводим на экран
             CalculationAddresses.calculationNumberHosts(tab1);
             decNumberHostsText1.setText(tab1.decNumberHosts);
-
-            /*
-            убираем фокус
-            ipAddressEdit1.clearFocus();
-            cidr1.clearFocus();
-            netmaskEdit1.clearFocus();
-             */
 
             // сворачиваем клавиатуру при нажатии на кнопку
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -474,6 +476,7 @@ public class MainActivity extends AppCompatActivity {
         cidr1.setText("");
         netmaskEdit1.setText("");
 
+
         decNetworkIPText1.setText("");
         decBroadcastText1.setText("");
         decNetmaskText1.setText("");
@@ -500,6 +503,8 @@ public class MainActivity extends AppCompatActivity {
         TextView decFirstAddressText1 = (TextView) findViewById(R.id.decFirstAddressText1);
         TextView decLastAddressText1 = (TextView) findViewById(R.id.decLastAddressText1);
         TextView decNumberText1 = (TextView) findViewById(R.id.decNumberHostsText1);
+
+        TextView binIPAddressText1 = (TextView) findViewById(R.id.binIPAddressText1);
         TextView binNetworkText1 = (TextView) findViewById(R.id.binNetworkText1);
         TextView binBroadcastText1 = (TextView) findViewById(R.id.binBroadcastText1);
         TextView binNetmaskText1 = (TextView) findViewById(R.id.binNetmaskText1);
@@ -512,6 +517,7 @@ public class MainActivity extends AppCompatActivity {
         decFirstAddressText1.setText("");
         decLastAddressText1.setText("");
         decNumberText1.setText("");
+        binIPAddressText1.setText("");
         binNetworkText1.setText("");
         binBroadcastText1.setText("");
         binNetmaskText1.setText("");
