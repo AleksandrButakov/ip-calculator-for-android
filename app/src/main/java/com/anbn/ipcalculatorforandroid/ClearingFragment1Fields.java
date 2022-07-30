@@ -5,21 +5,21 @@ public class ClearingFragment1Fields {
     /* Присвоили пустые значения переменным при запуске приложения.
     Необходимо для исключения дальнейшей проверки на соответствия null
      */
-    public static void clearingVariablesTab1(CalculationAddresses tab1) {
+    public static void clearingVariablesTab(CalculationAddresses tab) {
         // переменные для хранения байтов IP адреса
-        tab1.ipAddressB3 = "";
-        tab1.ipAddressB2 = "";
-        tab1.ipAddressB1 = "";
-        tab1.ipAddressB0 = "";
+        tab.ipAddressB3 = "";
+        tab.ipAddressB2 = "";
+        tab.ipAddressB1 = "";
+        tab.ipAddressB0 = "";
 
         // переменная для хранения количества бит маски подсети
-        tab1.cidr = "";
+        tab.cidr = "";
 
         // переменные для хранения байтов маски подсети
-        tab1.netmaskB3 = "";
-        tab1.netmaskB2 = "";
-        tab1.netmaskB1 = "";
-        tab1.netmaskB0 = "";
+        tab.netmaskB3 = "";
+        tab.netmaskB2 = "";
+        tab.netmaskB1 = "";
+        tab.netmaskB0 = "";
     }
 
 }

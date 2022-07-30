@@ -46,12 +46,10 @@ public class MainActivity extends AppCompatActivity {
     // переменные для определения активности вкладок
     public static boolean tab1IsActive = false;
     public static boolean tab2IsActive = false;
-    public static boolean tab3IsActive = false;
 
     // переменные для определения впервые ли включена вкладка
     public static boolean firstLaunchTab1 = true;
     public static boolean firstLaunchTab2 = true;
-    public static boolean firstLaunchTab3 = true;
 
     public static String auxiliaryVariables = "";
 
@@ -95,15 +93,14 @@ public class MainActivity extends AppCompatActivity {
         /* очистим переменные вкладки Tab1 при запуске программы. Необходимо для исключения
         равенства переменной значению null
         */
-        ClearingFragment1Fields.clearingVariablesTab1(tab1);
-        ClearingFragment1Fields.clearingVariablesTab1(tab2);
-
+        ClearingFragment1Fields.clearingVariablesTab(tab1);
+        ClearingFragment1Fields.clearingVariablesTab(tab2);
     }
 
 
     // переключатель Switch Tab1, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
-    public void onSwitch1 (View v) {
+    public void onSwitch1(View v) {
         //Switch sw1 = (Switch) findViewById(R.id.switch1);
 
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
@@ -134,12 +131,12 @@ public class MainActivity extends AppCompatActivity {
 
     // переключатель Switch Tab2, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
-    public void onSwitch2 (View v) {
+    public void onSwitch2(View v) {
         //Switch sw2 = (Switch) findViewById(R.id.switch2);
 
-        EditText ipAddressEdit2 = (EditText) findViewById(R.id.ipAddressEdit2);
-        EditText cidr2 = (EditText) findViewById(R.id.cidr2);
-        EditText netmaskEdit2 = (EditText) findViewById(R.id.netmaskEdit2);
+        EditText ipAddressEdit2 = findViewById(R.id.ipAddressEdit2);
+        EditText cidr2 = findViewById(R.id.cidr2);
+        EditText netmaskEdit2 = findViewById(R.id.netmaskEdit2);
 
         // в случае если вкладка была активная, делаем поля EditText setEnabled(false)
         // в случае если вкладка была не активная, делаем поля EditText setEnabled(true)
@@ -148,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
             cidr2.setEnabled(false);
             netmaskEdit2.setEnabled(false);
             tab2IsActive = false;
-
-            // Toast.makeText(this, "111", Toast.LENGTH_SHORT).show();
         } else {
             ipAddressEdit2.setEnabled(true);
             cidr2.setEnabled(true);
@@ -215,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         // введен неверный IP адрес
                         valueIPAddressFieldChangedByUser = false;
-                        // textViewIP.setText(String.valueOf(iPos));
                         ipAddressEdit1.setText(sIPCorrectly);
                         ipAddressEdit1.setSelection(iPos - 1);
                     }
@@ -249,10 +243,8 @@ public class MainActivity extends AppCompatActivity {
                         clearOutputFields1();
                         sCIDRCorrectly = sCIDR;
                         iPos = cIDR1.getSelectionStart();
-                        // textViewIP.setText(String.valueOf(iPos));
 
                         // присвоим корректное значение маски переменной
-                        // CalculationAddresses tab1 = new CalculationAddresses();
                         tab1.cidr = sCIDRCorrectly;
                         // заполним поле netmask корректным значением
                         valueNetmaskFieldChangedByUser = false;
@@ -271,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         // введен неверный IP адрес
                         valueCIDRFieldChangedByUser = false;
-                        // textViewIP.setText(String.valueOf(iPos));
                         cIDR1.setText(sCIDRCorrectly);
                         cIDR1.setSelection(iPos - 1);
 
@@ -313,7 +304,6 @@ public class MainActivity extends AppCompatActivity {
                         clearOutputFields1();
                         sNetmaskCorrectly = sNetmask;
                         iPos = netmaskEdit1.getSelectionStart();
-                        // textViewIP.setText(String.valueOf(iPos));
 
                         // проверим что в поле netmask введено полное корректное значение по
                         // которому можно определить маску CIDR и в таком случае заполним поле
@@ -342,13 +332,11 @@ public class MainActivity extends AppCompatActivity {
                             tab1.netmaskB2 = sNetmaskCorrectlyB2;
                             tab1.netmaskB1 = sNetmaskCorrectlyB1;
                             tab1.netmaskB0 = sNetmaskCorrectlyB0;
-
                         }
 
                     } else {
                         // введена неверная маска IP адрес
                         valueNetmaskFieldChangedByUser = false;
-                        // textViewIP.setText(String.valueOf(iPos));
                         netmaskEdit1.setText(sNetmaskCorrectly);
                         netmaskEdit1.setSelection(iPos - 1);
                     }
@@ -357,11 +345,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
 
 
     // задаем listener для поля ввода IP адреса вкладки Tab2
@@ -396,7 +379,6 @@ public class MainActivity extends AppCompatActivity {
                         clearOutputFields2();
                         sIPCorrectly = sIP;
                         iPos = ipAddressEdit2.getSelectionStart();
-                        // textViewIP.setText(String.valueOf(iPos));
 
                         // проверим что все байты адреса заполнены
                         if (!sIPCorrectlyB3.equals("") && !sIPCorrectlyB2.equals("") &&
@@ -415,7 +397,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         // введен неверный IP адрес
                         valueIPAddressFieldChangedByUser = false;
-                        // textViewIP.setText(String.valueOf(iPos));
                         ipAddressEdit2.setText(sIPCorrectly);
                         ipAddressEdit2.setSelection(iPos - 1);
                     }
@@ -470,11 +451,9 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         // введен неверный IP адрес
                         valueCIDRFieldChangedByUser = false;
-                        // textViewIP.setText(String.valueOf(iPos));
                         cIDR2.setText(sCIDRCorrectly);
                         cIDR2.setSelection(iPos - 1);
 
-                        // CalculationAddresses tab1 = new CalculationAddresses();
                         tab2.cidr = "";
                         tab2.netmaskB3 = "";
                         tab2.netmaskB2 = "";
@@ -487,7 +466,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // задаем listener для поля ввода netmaskEdit1 Tab1
+        // задаем listener для поля ввода netmaskEdit1 Tab2
         netmaskEdit2.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
             }
@@ -505,7 +484,6 @@ public class MainActivity extends AppCompatActivity {
 
                     String sNetmask;
                     sNetmask = String.valueOf(netmaskEdit2.getText());
-                    //ipAddressEdit1.setSelection(iPos);
 
                     // если введен корректный или некорректный IP адрес
                     if (CheckingCorrectnessNetmask.checkingCorrectnessNetmask(sNetmask)) {
@@ -513,7 +491,6 @@ public class MainActivity extends AppCompatActivity {
                         clearOutputFields2();
                         sNetmaskCorrectly = sNetmask;
                         iPos = netmaskEdit2.getSelectionStart();
-                        // textViewIP.setText(String.valueOf(iPos));
 
                         // проверим что в поле netmask введено полное корректное значение по
                         // которому можно определить маску CIDR и в таком случае заполним поле
@@ -548,7 +525,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         // введена неверная маска IP адрес
                         valueNetmaskFieldChangedByUser = false;
-                        // textViewIP.setText(String.valueOf(iPos));
                         netmaskEdit2.setText(sNetmaskCorrectly);
                         netmaskEdit2.setSelection(iPos - 1);
                     }
@@ -557,8 +533,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
     public void information() {
@@ -642,19 +616,101 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // нажатие кнопки CALC Tab2, проверяем корректность введенных данных и выводим результат
+    public void onClickCalcButtonTab2(View v) {
+        // проверим что переменные для хранения байтов IP адреса не равны null
+        if (tab2.ipAddressB3.equals("") ||
+                tab2.ipAddressB2.equals("") ||
+                tab2.ipAddressB1.equals("") ||
+                tab2.ipAddressB0.equals("") ||
+                // проверим что переменная для хранения количества бит маски подсети не равна null
+                tab2.cidr.equals("") ||
+                // проверим что переменные для хранения байтов маски подсети не равны null
+                tab2.netmaskB3.equals("") ||
+                tab2.netmaskB2.equals("") ||
+                tab2.netmaskB1.equals("") ||
+                tab2.netmaskB0.equals("")) {
+            // введены некорректные данные
+            Toast.makeText(this, "Incorrect data entered...",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // введены корректные данные. Рассчитываем все параметры и выводим на экран
+            EditText ipAddressEdit2 = (EditText) findViewById(R.id.ipAddressEdit2);
+            EditText cidr2 = (EditText) findViewById(R.id.cidr2);
+            EditText netmaskEdit2 = (EditText) findViewById(R.id.netmaskEdit2);
+
+            TextView decNetworkIPText2 = (TextView) findViewById(R.id.decNetworkIPText2);
+            TextView decBroadcastText2 = (TextView) findViewById(R.id.decBroadcastText2);
+            TextView decNetmaskText2 = (TextView) findViewById(R.id.decNetmaskText2);
+            TextView decFirstAddressText2 = (TextView) findViewById(R.id.decFirstAddressText2);
+            TextView decLastAddressText2 = (TextView) findViewById(R.id.decLastAddressText2);
+            TextView decNumberHostsText2 = (TextView) findViewById(R.id.decNumberHostsText2);
+
+            TextView binIPAddressText2 = (TextView) findViewById(R.id.binIPAddressText2);
+            TextView binNetworkText2 = (TextView) findViewById(R.id.binNetworkText2);
+            TextView binBroadcastText2 = (TextView) findViewById(R.id.binBroadcastText2);
+            TextView binNetmaskText2 = (TextView) findViewById(R.id.binNetmaskText2);
+            TextView binFirstAddressText2 = (TextView) findViewById(R.id.binFirstAddressText2);
+            TextView binLastAddressText2 = (TextView) findViewById(R.id.binLastAddressText2);
+
+            // заполним массив boolean[] binIPAddressArray
+            CalculationAddresses.fillingTheBinIPAddressArray(tab2);
+            binIPAddressText2.setText(tab2.sIPAddressBin);
+
+            // заполним массив boolean[] binNetmaskArray
+            CalculationAddresses.fillingTheBinNetmaskArray(tab2);
+            binNetmaskText2.setText(tab2.sNetmaskBin);
+
+            // рассчитываем значение binNetwork[32], decNetwork
+            // binFirstAddress[32], binLastAddress[32], binBroadcast[32] и выводим на экран
+            CalculationAddresses.fillingTheBinNetworkArray(tab2);
+            decNetworkIPText2.setText(tab2.decNetwork);
+            binNetworkText2.setText(tab2.sNetworkBin);
+            decNetworkIPText2.setText(CalculationAddresses.binToDec(tab2.binNetworkArray));
+            binFirstAddressText2.setText(tab2.sFirstAddressBin);
+            decFirstAddressText2.setText(CalculationAddresses.binToDec(tab2.binFirstAddress));
+            binLastAddressText2.setText(tab2.sLastAddressBin);
+            decLastAddressText2.setText(CalculationAddresses.binToDec(tab2.binLastAddress));
+            binBroadcastText2.setText(tab2.sBroadcastBin);
+            decBroadcastText2.setText(CalculationAddresses.binToDec(tab2.binBroadcast));
+
+            // выводим параметр netmask на экран
+            decNetmaskText2.setText(netmaskEdit2.getText());
+
+            // рассчитываем параметр tab1.decNumberHosts и выводим на экран
+            CalculationAddresses.calculationNumberHosts(tab2);
+            decNumberHostsText2.setText(tab2.decNumberHosts);
+
+            // сворачиваем клавиатуру при нажатии на кнопку
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(ipAddressEdit2.getWindowToken(), 0);
+
+        }
+    }
+
+
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButtonTab1(View v) {
         valueIPAddressFieldChangedByUser = false;
         valueCIDRFieldChangedByUser = false;
         valueNetmaskFieldChangedByUser = false;
-
-        ClearingFragment1Fields.clearingVariablesTab1(tab1);
-
-        clearingFragment1Data();
+        ClearingFragment1Fields.clearingVariablesTab(tab1);
+        clearingFragment1DataTab1();
     }
 
+
+    // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
+    public void onClickClearButtonTab2(View v) {
+        valueIPAddressFieldChangedByUser = false;
+        valueCIDRFieldChangedByUser = false;
+        valueNetmaskFieldChangedByUser = false;
+        ClearingFragment1Fields.clearingVariablesTab(tab2);
+        clearingFragment1DataTab2();
+    }
+
+
     // очищаем все поля экрана Tab1
-    public void clearingFragment1Data() {
+    public void clearingFragment1DataTab1() {
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         EditText cidr1 = (EditText) findViewById(R.id.cidr1);
         EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
@@ -677,7 +733,6 @@ public class MainActivity extends AppCompatActivity {
         cidr1.setText("");
         netmaskEdit1.setText("");
 
-
         decNetworkIPText1.setText("");
         decBroadcastText1.setText("");
         decNetmaskText1.setText("");
@@ -691,6 +746,50 @@ public class MainActivity extends AppCompatActivity {
         binNetmaskText1.setText("");
         binFirstAddressText1.setText("");
         binLastAddressText1.setText("");
+
+        valueIPAddressFieldChangedByUser = true;
+        valueCIDRFieldChangedByUser = true;
+        valueNetmaskFieldChangedByUser = true;
+    }
+
+
+    // очищаем все поля экрана Tab2
+    public void clearingFragment1DataTab2() {
+        EditText ipAddressEdit2 = (EditText) findViewById(R.id.ipAddressEdit2);
+        EditText cidr2 = (EditText) findViewById(R.id.cidr2);
+        EditText netmaskEdit2 = (EditText) findViewById(R.id.netmaskEdit2);
+
+        TextView decNetworkIPText2 = (TextView) findViewById(R.id.decNetworkIPText2);
+        TextView decBroadcastText2 = (TextView) findViewById(R.id.decBroadcastText2);
+        TextView decNetmaskText2 = (TextView) findViewById(R.id.decNetmaskText2);
+        TextView decFirstAddressText2 = (TextView) findViewById(R.id.decFirstAddressText2);
+        TextView decLastAddressText2 = (TextView) findViewById(R.id.decLastAddressText2);
+        TextView decNumberText2 = (TextView) findViewById(R.id.decNumberHostsText2);
+
+        TextView binIPAddressText2 = (TextView) findViewById(R.id.binIPAddressText2);
+        TextView binNetworkText2 = (TextView) findViewById(R.id.binNetworkText2);
+        TextView binBroadcastText2 = (TextView) findViewById(R.id.binBroadcastText2);
+        TextView binNetmaskText2 = (TextView) findViewById(R.id.binNetmaskText2);
+        TextView binFirstAddressText2 = (TextView) findViewById(R.id.binFirstAddressText2);
+        TextView binLastAddressText2 = (TextView) findViewById(R.id.binLastAddressText2);
+
+        ipAddressEdit2.setText("");
+        cidr2.setText("");
+        netmaskEdit2.setText("");
+
+        decNetworkIPText2.setText("");
+        decBroadcastText2.setText("");
+        decNetmaskText2.setText("");
+        decFirstAddressText2.setText("");
+        decLastAddressText2.setText("");
+        decNumberText2.setText("");
+
+        binIPAddressText2.setText("");
+        binNetworkText2.setText("");
+        binBroadcastText2.setText("");
+        binNetmaskText2.setText("");
+        binFirstAddressText2.setText("");
+        binLastAddressText2.setText("");
 
         valueIPAddressFieldChangedByUser = true;
         valueCIDRFieldChangedByUser = true;
@@ -756,7 +855,6 @@ public class MainActivity extends AppCompatActivity {
         binFirstAddressText2.setText("");
         binLastAddressText2.setText("");
     }
-
 
 
 }

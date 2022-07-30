@@ -296,7 +296,7 @@
             android:layout_height="45dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
-            android:onClick="onClickClearButtonTab1"
+            android:onClick="onClickClearButtonTab2"
             android:text="Clear"
             app:layout_constraintStart_toEndOf="@+id/calcButton2"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -307,7 +307,7 @@
             android:layout_height="45dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
-            android:onClick="onClickCalcButtonTab1"
+            android:onClick="onClickCalcButtonTab2"
             android:text="Calc"
             app:layout_constraintStart_toEndOf="@+id/netmaskEdit2"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
