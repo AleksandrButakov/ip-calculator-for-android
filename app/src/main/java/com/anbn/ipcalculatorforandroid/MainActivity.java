@@ -4,21 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout1);
-        TabItem tabItem1 = (TabItem) findViewById(R.id.tab1);
-        TabItem tabItem2 = (TabItem) findViewById(R.id.tab2);
+        //TabItem tabItem1 = (TabItem) findViewById(R.id.tab1);
+        //TabItem tabItem2 = (TabItem) findViewById(R.id.tab2);
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpager);
 
         pageAdapter = new com.anbn.ipcalculatorforandroid.PageAdapter(getSupportFragmentManager(),
@@ -75,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0 || tab.getPosition() == 1)
                     pageAdapter.notifyDataSetChanged();
-                //listenerEditText();
             }
 
             @Override
@@ -95,6 +92,34 @@ public class MainActivity extends AppCompatActivity {
         */
         ClearingFragment1Fields.clearingVariablesTab(tab1);
         ClearingFragment1Fields.clearingVariablesTab(tab2);
+    }
+
+    // рисуем меню
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+
+    // обработка нажатий пунктов меню
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id){
+            case R.id.results:
+                // делаем активным layout Results
+                // Intent intentResult = new Intent(this, ResultActivity.class);
+                // startActivity(intentResult);
+                return true;
+            case R.id.about:
+                // делаем активным layout About
+                Intent intentAbout = new Intent(this, AboutActivity.class);
+                startActivity(intentAbout);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
