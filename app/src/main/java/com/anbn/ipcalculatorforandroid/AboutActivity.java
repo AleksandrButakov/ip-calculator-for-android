@@ -6,7 +6,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class AboutActivity extends AppCompatActivity {
 
     // нарисуем экран
@@ -21,6 +20,5 @@ public class AboutActivity extends AppCompatActivity {
         // возврат на предыдущий activity
         onBackPressed();
     }
-
 
 }

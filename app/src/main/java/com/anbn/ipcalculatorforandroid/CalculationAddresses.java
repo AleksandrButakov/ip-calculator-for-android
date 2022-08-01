@@ -5,15 +5,14 @@ import java.util.Arrays;
 public class CalculationAddresses {
 
     // переменные назначины и именованы в соответствии с расположением полей в layout
-    // String ipAddress;
-    // String cIDR;
-    // String networkMask;
+    String decIPAddress;
+    String decCIDR;
+    String decNetMask;
 
     String decNetwork;
-    String decBroadcast;
-    String decNetMask;
     String decFirstAddress;
     String decLastAddress;
+    String decBroadcast;
     String decNumberHosts;
 
     String sIPAddressBin;

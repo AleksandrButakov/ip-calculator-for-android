@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="horizontal"
-    tools:context=".AboutActivity">
+    tools:context=".ResultsActivity">
 
     <Button
         android:id="@+id/backButton"
@@ -21,32 +21,34 @@
 
     <TextView
         android:id="@+id/textView41"
-        android:layout_width="297dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
         android:ellipsize="none"
         android:gravity="center"
-        android:text="ABOUT THE PROGRAM"
+        android:text="Log of calculation results:"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewResults"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="monospace"
         android:foregroundTint="#FFFFFF"
-        android:gravity="center_horizontal"
         android:hapticFeedbackEnabled="false"
-        android:text="The program is intended for network engineers involved in the configuration and administration of IP networks. The functionality provides the ability to calculate parameters such as network, first address, list address, broadcast in binary and decimal form."
-        android:textAlignment="center"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:text="Attention!\nThe results of calculations are not saved after the application is closed.\n"
+        android:textAlignment="viewStart"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView41" />

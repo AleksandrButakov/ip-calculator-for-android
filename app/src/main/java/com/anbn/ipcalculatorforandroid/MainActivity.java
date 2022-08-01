@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         switch(id){
             case R.id.results:
                 // делаем активным layout Results
-                // Intent intentResult = new Intent(this, ResultActivity.class);
-                // startActivity(intentResult);
+                Intent intentResult = new Intent(this, ResultsActivity.class);
+                startActivity(intentResult);
                 return true;
             case R.id.about:
                 // делаем активным layout About
@@ -637,6 +637,19 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(ipAddressEdit1.getWindowToken(), 0);
 
+            // заполним переменные для дальнейшего использования в layout Results
+            tab1.decIPAddress = ipAddressEdit1.getText().toString();
+            tab1.decCIDR = cidr1.getText().toString();
+            tab1.decNetMask = netmaskEdit1.getText().toString();
+
+            tab1.decNetwork = decNetworkIPText1.getText().toString();
+            tab1.decFirstAddress = decFirstAddressText1.getText().toString();
+            tab1.decLastAddress = decLastAddressText1.getText().toString();
+            tab1.decBroadcast = decBroadcastText1.getText().toString();
+
+            // выводим результаты в поле Results
+            ResultsActivity resultsActivity = new ResultsActivity();
+            resultsActivity.outputResults(tab1);
         }
     }
 
@@ -710,6 +723,19 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(ipAddressEdit2.getWindowToken(), 0);
 
+            // заполним переменные для дальнейшего использования в layout Results
+            tab2.decIPAddress = ipAddressEdit2.getText().toString();
+            tab2.decCIDR = cidr2.getText().toString();
+            tab2.decNetMask = netmaskEdit2.getText().toString();
+
+            tab2.decNetwork = decNetworkIPText2.getText().toString();
+            tab2.decFirstAddress = decFirstAddressText2.getText().toString();
+            tab2.decLastAddress = decLastAddressText2.getText().toString();
+            tab2.decBroadcast = decBroadcastText2.getText().toString();
+
+            // выводим результаты в поле Results
+            ResultsActivity resultsActivity = new ResultsActivity();
+            resultsActivity.outputResults(tab2);
         }
     }
 

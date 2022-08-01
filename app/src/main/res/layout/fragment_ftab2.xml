@@ -17,11 +17,11 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView32"
+            app:layout_constraintStart_toEndOf="@+id/textViewResults"
             app:layout_constraintTop_toBottomOf="@+id/binLastAddressText2" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/textViewResults"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -29,7 +29,7 @@
             android:text="Broadcast:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+            app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
         <TextView
             android:id="@+id/binLastAddressText2"
@@ -38,11 +38,11 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView31"
+            app:layout_constraintStart_toEndOf="@+id/textView41"
             app:layout_constraintTop_toBottomOf="@+id/binFirstAddressText2" />
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/textView41"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
