@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch(id){
+        switch (id) {
             case R.id.results:
                 // делаем активным layout Results
                 Intent intentResult = new Intent(this, ResultsActivity.class);
@@ -291,12 +291,14 @@ public class MainActivity extends AppCompatActivity {
                         cIDR1.setText(sCIDRCorrectly);
                         cIDR1.setSelection(iPos - 1);
 
-                        // CalculationAddresses tab1 = new CalculationAddresses();
-                        tab1.cidr = "";
-                        tab1.netmaskB3 = "";
-                        tab1.netmaskB2 = "";
-                        tab1.netmaskB1 = "";
-                        tab1.netmaskB0 = "";
+                        if (sCIDRCorrectly.equals("")) {
+                            // отсутствует корректное значение CIDR, очистим переменные
+                            tab1.cidr = "";
+                            tab1.netmaskB3 = "";
+                            tab1.netmaskB2 = "";
+                            tab1.netmaskB1 = "";
+                            tab1.netmaskB0 = "";
+                        }
                     }
                 }
                 valueCIDRFieldChangedByUser = true;
@@ -479,11 +481,14 @@ public class MainActivity extends AppCompatActivity {
                         cIDR2.setText(sCIDRCorrectly);
                         cIDR2.setSelection(iPos - 1);
 
-                        tab2.cidr = "";
-                        tab2.netmaskB3 = "";
-                        tab2.netmaskB2 = "";
-                        tab2.netmaskB1 = "";
-                        tab2.netmaskB0 = "";
+                        if (sCIDRCorrectly.equals("")) {
+                            // отсутствует корректное значение CIDR, очистим переменные
+                            tab2.cidr = "";
+                            tab2.netmaskB3 = "";
+                            tab2.netmaskB2 = "";
+                            tab2.netmaskB1 = "";
+                            tab2.netmaskB0 = "";
+                        }
                     }
                 }
                 valueCIDRFieldChangedByUser = true;

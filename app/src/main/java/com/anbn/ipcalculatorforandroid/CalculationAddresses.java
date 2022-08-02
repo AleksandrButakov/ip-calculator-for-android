@@ -48,6 +48,7 @@ public class CalculationAddresses {
     String netmaskB1;
     String netmaskB0;
 
+
     public static void calculationNumberHosts(CalculationAddresses tab1) {
         switch (tab1.cidr) {
             case ("31"):
@@ -149,6 +150,7 @@ public class CalculationAddresses {
         }
     }
 
+
     // заполним массив boolean[] binIPAddressArray
     public static void fillingTheBinIPAddressArray(CalculationAddresses tab) {
         tab.sIPAddressBin = "";
@@ -180,6 +182,7 @@ public class CalculationAddresses {
         }
     }
 
+
     public String fillingValuesIPAddressBits(boolean bit) {
         if (bit == true) {
             return "1";
@@ -187,6 +190,7 @@ public class CalculationAddresses {
             return "0";
         }
     }
+
 
     // заполним массив boolean[] binNetmaskArray
     public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
@@ -202,6 +206,7 @@ public class CalculationAddresses {
             if (i == 24 || i == 16 || i == 8) tab.sNetmaskBin += " ";
         }
     }
+
 
     // рассчитываем значение binNetwork[32] and decNetwork
     public static void fillingTheBinNetworkArray(CalculationAddresses tab) {
@@ -261,16 +266,6 @@ public class CalculationAddresses {
 
     }
 
-
-    /*
-    boolean[] binIPAddressArray = new boolean[32];
-    boolean[] binNetmaskArray = new boolean[32];
-    boolean[] binNetworkArray = new boolean[32];
-    boolean[] binBroadcast = new boolean[32];
-    boolean[] binNetmask = new boolean[32];
-    boolean[] binFirstAddress = new boolean[32];
-    boolean[] binLastAddress = new boolean[32];
-     */
 
     // получим двоичный массив BitOrder IP адреса
     public static void decToBin(int iByte0) {

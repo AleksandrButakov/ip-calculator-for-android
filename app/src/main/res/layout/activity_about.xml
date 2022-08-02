@@ -45,7 +45,7 @@
         android:gravity="center_horizontal"
         android:hapticFeedbackEnabled="false"
         android:text="The program is intended for network engineers involved in the configuration and administration of IP networks. The functionality provides the ability to calculate parameters such as network, first address, list address, broadcast in binary and decimal form."
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
