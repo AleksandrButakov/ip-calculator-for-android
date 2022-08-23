@@ -112,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentResult = new Intent(this, ResultsActivity.class);
                 startActivity(intentResult);
                 return true;
+            case R.id.privacy:
+                // делаем активным layout Privacy policy
+                Intent intentPrivacy = new Intent(this, PrivacyPolicyActivity.class);
+                startActivity(intentPrivacy);
+                return true;
             case R.id.about:
                 // делаем активным layout About
                 Intent intentAbout = new Intent(this, AboutActivity.class);
