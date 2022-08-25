@@ -1,20 +1,13 @@
 package com.anbn.ipcalculatorforandroid;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.os.Bundle;
-import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import javax.security.auth.callback.Callback;
 
 public class PrivacyPolicyActivity extends AppCompatActivity {
 
@@ -26,6 +19,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy);
 
+        // добавим webView для отображения политики конфиденциальности
         web = findViewById(R.id.webView);
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -33,6 +27,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         web.loadUrl("https://aleksandrbutakov.github.io/IPCalculatorForAndroid/");
     }
 
+    // класс, необходимый для работы элемента webView
     private class Callback extends WebViewClient {
         @Override
         public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
