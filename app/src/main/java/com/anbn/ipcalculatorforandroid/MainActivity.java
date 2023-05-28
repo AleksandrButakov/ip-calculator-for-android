@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -130,54 +131,61 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.privacy:
-                // зададим url для перехода в зависимости от темы системы
-                switch (currentNightMode) {
-                    case Configuration.UI_MODE_NIGHT_NO:
-                        // Night mode is not active, we're in day time
-                        url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
-                                "PolicyPrivacy/dayTheme/";
-                        break;
-                    case Configuration.UI_MODE_NIGHT_YES:
-                        // Night mode is active, we're at night!
-                        url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
-                                "PolicyPrivacy/nightTheme/";
-                        break;
-                    case Configuration.UI_MODE_NIGHT_UNDEFINED:
-                        // We don't know what mode we're in, assume notnight
-                        break;
+                // проверим что есть подключение к сети интернет
+                if (isOnline()) {
+                    // зададим url для перехода в зависимости от темы системы
+                    switch (currentNightMode) {
+                        case Configuration.UI_MODE_NIGHT_NO:
+                            // Night mode is not active, we're in day time
+                            url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
+                                    "PolicyPrivacy/dayTheme/";
+                            break;
+                        case Configuration.UI_MODE_NIGHT_YES:
+                            // Night mode is active, we're at night!
+                            url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
+                                    "PolicyPrivacy/nightTheme/";
+                            break;
+                        case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                            // We don't know what mode we're in, assume notnight
+                            break;
+                    }
+                    // делаем активным activity_webview
+                    intentPrivacy = new Intent(this, WebViewActivity.class);
+                    startActivity(intentPrivacy);
+                } else {
+                    displayToast("Нет подключения к Интернету...");
                 }
-                // делаем активным activity_webview
-                intentPrivacy = new Intent(this, WebViewActivity.class);
-                startActivity(intentPrivacy);
                 return true;
 
             case R.id.about:
-                // зададим url для перехода в зависимости от темы системы
-                switch (currentNightMode) {
-                    case Configuration.UI_MODE_NIGHT_NO:
-                        // Night mode is not active, we're in day time
-                        url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
-                                "About/dayTheme/";
-                        break;
-                    case Configuration.UI_MODE_NIGHT_YES:
-                        // Night mode is active, we're at night!
-                        url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
-                                "About/nightTheme/";
-                        break;
-                    case Configuration.UI_MODE_NIGHT_UNDEFINED:
-                        // We don't know what mode we're in, assume notnight
-                        break;
+                // проверим что есть подключение к сети интернет
+                if (isOnline()) {
+                    // зададим url для перехода в зависимости от темы системы
+                    switch (currentNightMode) {
+                        case Configuration.UI_MODE_NIGHT_NO:
+                            // Night mode is not active, we're in day time
+                            url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
+                                    "About/dayTheme/";
+                            break;
+                        case Configuration.UI_MODE_NIGHT_YES:
+                            // Night mode is active, we're at night!
+                            url = "https://aleksandrbutakov.github.io/IPCalculatorForAndroid/" +
+                                    "About/nightTheme/";
+                            break;
+                        case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                            // We don't know what mode we're in, assume notnight
+                            break;
+                    }
+                    // делаем активным activity_webView
+                    intentPrivacy = new Intent(this, WebViewActivity.class);
+                    startActivity(intentPrivacy);
+                } else {
+                    displayToast("Нет подключения к Интернету...");
                 }
-                // делаем активным activity_webView
-                intentPrivacy = new Intent(this, WebViewActivity.class);
-                startActivity(intentPrivacy);
                 return true;
-
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 
     // переключатель Switch Tab1, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
@@ -209,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     // переключатель Switch Tab2, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
     public void onSwitch2(View v) {
@@ -239,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
             firstLaunchTab2 = false;
         }
     }
-
 
     // задаем listener для поля ввода IP адреса вкладки Tab1
     public void listenerEditText1() {
@@ -298,7 +304,6 @@ public class MainActivity extends AppCompatActivity {
                 valueIPAddressFieldChangedByUser = true;
             }
         });
-
 
         // задаем listener для поля ввода CIDR Tab1
         cIDR1.addTextChangedListener(new TextWatcher() {
@@ -360,7 +365,6 @@ public class MainActivity extends AppCompatActivity {
                 valueCIDRFieldChangedByUser = true;
             }
         });
-
 
         // задаем listener для поля ввода netmaskEdit1 Tab1
         netmaskEdit1.addTextChangedListener(new TextWatcher() {
@@ -429,7 +433,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     // задаем listener для поля ввода IP адреса вкладки Tab2
     public void listenerEditText2() {
         EditText ipAddressEdit2 = (EditText) findViewById(R.id.ipAddressEdit2);
@@ -487,7 +490,6 @@ public class MainActivity extends AppCompatActivity {
                 valueIPAddressFieldChangedByUser = true;
             }
         });
-
 
         // задаем listener для поля ввода CIDR Tab2
         cIDR2.addTextChangedListener(new TextWatcher() {
@@ -551,7 +553,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // задаем listener для поля ввода netmaskEdit1 Tab2
         netmaskEdit2.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
@@ -605,9 +606,7 @@ public class MainActivity extends AppCompatActivity {
                             tab2.netmaskB2 = sNetmaskCorrectlyB2;
                             tab2.netmaskB1 = sNetmaskCorrectlyB1;
                             tab2.netmaskB0 = sNetmaskCorrectlyB0;
-
                         }
-
                     } else {
                         // введена неверная маска IP адрес
                         valueNetmaskFieldChangedByUser = false;
@@ -620,7 +619,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     public void information() {
         Toast toast = Toast.makeText(MainActivity.this,
                 "Invalid IP address entered...",
@@ -628,6 +626,12 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
+    public void displayToast(String text) {
+        Toast toast = Toast.makeText(MainActivity.this,
+                text,
+                Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     // нажатие кнопки CALC Tab1, проверяем корректность введенных данных и выводим результат
     public void onClickCalcButtonTab1(View v) {
@@ -714,7 +718,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     // нажатие кнопки CALC Tab2, проверяем корректность введенных данных и выводим результат
     public void onClickCalcButtonTab2(View v) {
         // проверим что переменные для хранения байтов IP адреса не равны null
@@ -800,7 +803,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButtonTab1(View v) {
         valueIPAddressFieldChangedByUser = false;
@@ -819,7 +821,6 @@ public class MainActivity extends AppCompatActivity {
         ClearingFragment1Fields.clearingVariablesTab(tab2);
         clearingFragment1DataTab2();
     }
-
 
     // очищаем все поля экрана Tab1
     public void clearingFragment1DataTab1() {
@@ -864,7 +865,6 @@ public class MainActivity extends AppCompatActivity {
         valueNetmaskFieldChangedByUser = true;
     }
 
-
     // очищаем все поля экрана Tab2
     public void clearingFragment1DataTab2() {
         EditText ipAddressEdit2 = (EditText) findViewById(R.id.ipAddressEdit2);
@@ -908,7 +908,6 @@ public class MainActivity extends AppCompatActivity {
         valueNetmaskFieldChangedByUser = true;
     }
 
-
     public void clearOutputFields1() {
         TextView decNetworkIPText1 = (TextView) findViewById(R.id.decNetworkIPText1);
         TextView decBroadcastText1 = (TextView) findViewById(R.id.decBroadcastText1);
@@ -937,7 +936,6 @@ public class MainActivity extends AppCompatActivity {
         binFirstAddressText1.setText("");
         binLastAddressText1.setText("");
     }
-
 
     public void clearOutputFields2() {
         TextView decNetworkIPText2 = (TextView) findViewById(R.id.decNetworkIPText2);
@@ -968,5 +966,16 @@ public class MainActivity extends AppCompatActivity {
         binLastAddressText2.setText("");
     }
 
+    // проверка наличия подключения к интернету
+    protected boolean isOnline() {
+        String cs = Context.CONNECTIVITY_SERVICE;
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(cs);
+        if (cm.getActiveNetworkInfo() == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }
