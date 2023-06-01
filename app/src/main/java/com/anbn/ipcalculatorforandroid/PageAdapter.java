@@ -17,7 +17,6 @@ public class PageAdapter extends FragmentPagerAdapter {
     @NonNull
 
     @Override
-
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
