@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.helper.widget.MotionEffect;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -56,6 +57,48 @@ public class ftab1 extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(MotionEffect.TAG, "onDestroy");
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(MotionEffect.TAG, "onStop");
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(MotionEffect.TAG, "onStart");
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(MotionEffect.TAG, "onPause");
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(MotionEffect.TAG, "onResume");
+
+    }
+
+
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
