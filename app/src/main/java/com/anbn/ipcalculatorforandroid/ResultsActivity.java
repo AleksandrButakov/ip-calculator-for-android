@@ -72,4 +72,12 @@ public class ResultsActivity extends AppCompatActivity {
         s += "Broadcast address:\n" + tab.sBroadcastBin + "\n\n\n";
     }
 
+    public void onClickCleanButtonActivityResults(View v) {
+        s = "";
+        // add scrolling to editText
+        TextView textViewResults = (TextView) findViewById(R.id.textViewResults);
+        textViewResults.setMovementMethod(ScrollingMovementMethod.getInstance());
+        textViewResults.setText(s);
+    }
+
 }
