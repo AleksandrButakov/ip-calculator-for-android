@@ -9,6 +9,18 @@
     android:orientation="horizontal"
     tools:context=".ResultsActivity">
 
+    <Button
+        android:id="@+id/cleanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="onClickCleanButtonActivityResults"
+        android:text="Clean Results"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView41"
         android:layout_width="wrap_content"
@@ -30,7 +42,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="monospace"
         android:foregroundTint="#FFFFFF"
         android:hapticFeedbackEnabled="false"
@@ -38,9 +50,9 @@
         android:scrollbars="vertical"
         android:text="Attention!\nThe results of calculations are not saved after the application is closed.\n"
         android:textAlignment="viewStart"
-        android:theme="@style/ActivityLayoutResults"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:theme="@style/ActivityLayoutResults"
+        app:layout_constraintBottom_toTopOf="@+id/cleanButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView41" />

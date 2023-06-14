@@ -12,8 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ResultsActivity extends AppCompatActivity {
 
-    public static String s = "Attention!\nThe results of calculations are not saved after " +
-            "the application is closed.\n\n\n";
+    public static String s = "Attention!\n" +
+            "The results of calculations are not saved after the application is closed.\n" +
+            "-----------------------------------\n\n";
     public static int calculationNumber = 1;
 
     // нарисуем экран
@@ -69,7 +70,17 @@ public class ResultsActivity extends AppCompatActivity {
         s += "Netmask:\n" + tab.sNetmaskBin + "\n";
         s += "First address:\n" + tab.sFirstAddressBin + "\n";
         s += "Last address:\n" + tab.sLastAddressBin + "\n";
-        s += "Broadcast address:\n" + tab.sBroadcastBin + "\n\n\n";
+        s += "Broadcast address:\n" + tab.sBroadcastBin + "\n";
+        s += "-----------------------------------";
+        s += "\n\n";
+    }
+
+    public void onClickCleanButtonActivityResults(View v) {
+        s = "";
+        // add scrolling to editText
+        TextView textViewResults = (TextView) findViewById(R.id.textViewResults);
+        textViewResults.setMovementMethod(ScrollingMovementMethod.getInstance());
+        textViewResults.setText(s);
     }
 
 }
