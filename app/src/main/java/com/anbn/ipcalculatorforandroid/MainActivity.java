@@ -900,21 +900,6 @@ public class MainActivity extends AppCompatActivity {
         decLastAddressText1.setText("");
         decNumberText1.setText("");
 
-        binIPAddressText1.setTextColor();
-        binNetworkText1.setText("");
-        binBroadcastText1.setText("");
-        binNetmaskText1.setText("");
-        binFirstAddressText1.setText("");
-        binLastAddressText1.setText("");
-
-        // серый цвет текста
-        decNetworkIPText1.setText("");
-        decBroadcastText1.setText("");
-        decNetmaskText1.setText("");
-        decFirstAddressText1.setText("");
-        decLastAddressText1.setText("");
-        decNumberText1.setText("");
-
         binIPAddressText1.setText("");
         binNetworkText1.setText("");
         binBroadcastText1.setText("");
