@@ -18,6 +18,7 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14dp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView11"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -158,6 +159,7 @@
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/decNetmaskText1" />
 
@@ -180,6 +182,7 @@
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/decLastAddressText1" />
 
@@ -202,6 +205,7 @@
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
@@ -224,6 +228,7 @@
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/decNetworkIPText1" />
 
@@ -246,6 +251,7 @@
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textViewResults"
             app:layout_constraintTop_toBottomOf="@+id/decFirstAddressText1" />
 
@@ -268,6 +274,7 @@
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/decBroadcastText1" />
 
@@ -300,6 +307,7 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14dp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView13"
             app:layout_constraintTop_toBottomOf="@+id/binNetmaskText1" />
 
@@ -321,6 +329,7 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toBottomOf="@+id/binLastAddressText1" />
 
@@ -342,6 +351,7 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toBottomOf="@+id/binIPAddressText1" />
 
@@ -363,6 +373,7 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/binNetworkText1" />
 
@@ -384,6 +395,7 @@
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/binFirstAddressText1" />
 
