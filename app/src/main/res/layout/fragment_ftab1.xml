@@ -202,6 +202,7 @@
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
+            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
