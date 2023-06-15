@@ -868,7 +868,7 @@ public class MainActivity extends AppCompatActivity {
         clearingFragment1DataTab2();
     }
 
-    // очищаем все поля экрана Tab1
+    // очищаем все поля экрана Tab1 и устанавливаем им серый цвет текста
     public void clearingFragment1DataTab1() {
         EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
         EditText cidr1 = (EditText) findViewById(R.id.cidr1);
@@ -892,6 +892,22 @@ public class MainActivity extends AppCompatActivity {
         cidr1.setText("");
         netmaskEdit1.setText("");
 
+        // очищаем поля
+        decNetworkIPText1.setText("");
+        decBroadcastText1.setText("");
+        decNetmaskText1.setText("");
+        decFirstAddressText1.setText("");
+        decLastAddressText1.setText("");
+        decNumberText1.setText("");
+
+        binIPAddressText1.setTextColor();
+        binNetworkText1.setText("");
+        binBroadcastText1.setText("");
+        binNetmaskText1.setText("");
+        binFirstAddressText1.setText("");
+        binLastAddressText1.setText("");
+
+        // серый цвет текста
         decNetworkIPText1.setText("");
         decBroadcastText1.setText("");
         decNetmaskText1.setText("");
@@ -911,7 +927,7 @@ public class MainActivity extends AppCompatActivity {
         valueNetmaskFieldChangedByUser = true;
     }
 
-    // очищаем все поля экрана Tab2
+    // очищаем все поля экрана Tab2 и устанавливаем им серый цвет текста
     public void clearingFragment1DataTab2() {
         EditText ipAddressEdit2 = (EditText) findViewById(R.id.ipAddressEdit2);
         EditText cidr2 = (EditText) findViewById(R.id.cidr2);
