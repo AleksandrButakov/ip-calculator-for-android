@@ -76,10 +76,12 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void onClickCleanButtonActivityResults(View v) {
-        s = "";
+        s = "Attention!\n" +
+                "The results of calculations are not saved after the application is closed.\n" +
+                "-----------------------------------\n\n";
         // add scrolling to editText
         TextView textViewResults = (TextView) findViewById(R.id.textViewResults);
-        textViewResults.setMovementMethod(ScrollingMovementMethod.getInstance());
+        //textViewResults.setMovementMethod(ScrollingMovementMethod.getInstance());
         textViewResults.setText(s);
     }
 
