@@ -25,17 +25,13 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
-
     com.anbn.ipcalculatorforandroid.PageAdapter pageAdapter;
-
     public static String sIPCorrectly = "";
     public static String sIPCorrectlyB3 = "";
     public static String sIPCorrectlyB2 = "";
     public static String sIPCorrectlyB1 = "";
     public static String sIPCorrectlyB0 = "";
-
     public static String sCIDRCorrectly = "";
-
     public static String sNetmaskCorrectly = "";
     public static String sNetmaskCorrectlyB3 = "";
     public static String sNetmaskCorrectlyB2 = "";
@@ -56,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     public static boolean firstLaunchTab2 = true;
 
     public static String auxiliaryVariables = "";
-
     public static String url = "";
 
     CalculationAddresses tab1 = new CalculationAddresses();
@@ -66,16 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // установим ночную тему в соответствии с настройками системы
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout1);
-        //TabItem tabItem1 = (TabItem) findViewById(R.id.tab1);
-        //TabItem tabItem2 = (TabItem) findViewById(R.id.tab2);
         ViewPager viewPager = (ViewPager) findViewById(R.id.vpager);
 
         pageAdapter = new com.anbn.ipcalculatorforandroid.PageAdapter(getSupportFragmentManager(),
@@ -91,14 +82,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         /* очистим переменные вкладки Tab1 при запуске программы. Необходимо для исключения
@@ -114,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
 
     // обработка нажатий пунктов меню
     @Override
@@ -223,8 +212,6 @@ public class MainActivity extends AppCompatActivity {
     // переключатель Switch Tab2, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
     public void onSwitch2(View v) {
-        //Switch sw2 = (Switch) findViewById(R.id.switch2);
-
         EditText ipAddressEdit2 = findViewById(R.id.ipAddressEdit2);
         EditText cidr2 = findViewById(R.id.cidr2);
         EditText netmaskEdit2 = findViewById(R.id.netmaskEdit2);
@@ -384,9 +371,9 @@ public class MainActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (valueNetmaskFieldChangedByUser == true) {
-
                     String sNetmask;
                     sNetmask = String.valueOf(netmaskEdit1.getText());
+
 
                     // если введен корректный или некорректный IP адрес
                     if (CheckingCorrectnessNetmask.checkingCorrectnessNetmask(sNetmask)) {
@@ -814,7 +801,6 @@ public class MainActivity extends AppCompatActivity {
         ClearingFragment1Fields.clearingVariablesTab(tab1);
         clearingFragment1DataTab1();
     }
-
 
     // нажатие кнопки CLEAR1, очишаем все поля ввода нулевой вкладки
     public void onClickClearButtonTab2(View v) {
