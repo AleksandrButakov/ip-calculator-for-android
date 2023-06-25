@@ -19,7 +19,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ftab1#newInstance} factory method to
@@ -58,41 +57,6 @@ public class ftab1 extends Fragment {
         return fragment;
     }
 
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        Log.d(MotionEffect.TAG, "onDestroy");
-//
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        Log.d(MotionEffect.TAG, "onStop");
-//
-//    }
-//
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        Log.d(MotionEffect.TAG, "onStart");
-//
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        Log.d(MotionEffect.TAG, "onPause");
-//
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        Log.d(MotionEffect.TAG, "onResume");
-//
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,33 +72,5 @@ public class ftab1 extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ftab1, container, false);
     }
-
-    /*
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-    @Override
-    public void onStop(){
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-    @Override
-    public void onStart(){
-        super.onStart();
-        Log.d(TAG, "onStart");
-    }
-    @Override
-    public void onPause(){
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-    @Override
-    public void onResume(){
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-     */
 
 }
