@@ -1,6 +1,5 @@
 package com.anbn.ipcalculatorforandroid;
 
-import android.content.res.Configuration;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,10 +49,9 @@ public class ResultsActivity extends AppCompatActivity {
         return true;
     }
 
-
     // выводим логи на экран
     public void outputResults(CalculationAddresses tab) {
-        s += "CALCULATION NUMBER #" + calculationNumber + "\n";
+        s = s + "CALCULATION NUMBER #" + calculationNumber + "\n";
         calculationNumber++;
         s += "IP address: " + tab.decIPAddress + "\n";
         s += "CIDR:       " + tab.decCIDR + "\n";
