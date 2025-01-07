@@ -320,4 +320,24 @@ public class CalculationAddresses {
 
         return sTemp;
     }
+
+
+    // temp new
+    public static String calculationNetMask(int cidr) {
+        // Преобразуем CIDR в маску сети
+        // temp origin
+//        int netmask = ~((1 << (32 - cidr)) - 1);
+        int netmask = -(1 << (32 - cidr));
+
+        // Переводим результат в строку вида "255.255.255.0"
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            sb.append(netmask >>> ((3 - i) * 8) & 0xFF);
+            if (i < 3) {
+                sb.append(".");
+            }
+        }
+        return sb.toString();
+    }
+
 }
