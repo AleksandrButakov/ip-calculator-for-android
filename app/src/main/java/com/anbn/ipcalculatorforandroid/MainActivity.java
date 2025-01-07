@@ -176,36 +176,44 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
+
+
+
+
+
     // temp origin
     // переключатель Switch Tab1, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
-//    public void onSwitch1(View v) {
-//        //Switch sw1 = (Switch) findViewById(R.id.switch1);
-//
-//        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
-//        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
-//        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
-//
-//        // в случае если вкладка была активная, делаем поля EditText setEnabled(false)
-//        // в случае если вкладка была не активная, делаем поля EditText setEnabled(true)
-//        if (tab1IsActive) {
-//            ipAddressEdit1.setEnabled(false);
-//            cidr1.setEnabled(false);
-//            netmaskEdit1.setEnabled(false);
-//            tab1IsActive = false;
-//        } else {
-//            ipAddressEdit1.setEnabled(true);
-//            cidr1.setEnabled(true);
-//            netmaskEdit1.setEnabled(true);
-//            tab1IsActive = true;
-//        }
-//
-//        // при первом запуске вкладки активируем Listener
-//        if (firstLaunchTab1) {
-//            listenerEditText1();
-//            firstLaunchTab1 = false;
-//        }
-//    }
+    public void onSwitch1(View v) {
+        //Switch sw1 = (Switch) findViewById(R.id.switch1);
+
+        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
+        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+
+        // в случае если вкладка была активная, делаем поля EditText setEnabled(false)
+        // в случае если вкладка была не активная, делаем поля EditText setEnabled(true)
+        if (tab1IsActive) {
+            ipAddressEdit1.setEnabled(false);
+            cidr1.setEnabled(false);
+            netmaskEdit1.setEnabled(false);
+            tab1IsActive = false;
+        } else {
+            ipAddressEdit1.setEnabled(true);
+            cidr1.setEnabled(true);
+            netmaskEdit1.setEnabled(true);
+            tab1IsActive = true;
+        }
+
+        // при первом запуске вкладки активируем Listener
+        if (firstLaunchTab1) {
+            listenerEditText1();
+            firstLaunchTab1 = false;
+        }
+    }
 
     // переключатель Switch Tab2, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
@@ -296,61 +304,65 @@ public class MainActivity extends AppCompatActivity {
         // задаем listener для поля ввода CIDR Tab1
         cIDR1.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
+                cIDR1.setText("5555555");
+
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (valueCIDRFieldChangedByUser == true) {
-                    if (!cIDR1.getText().equals("")) {
-                        iPos = cIDR1.getSelectionStart() + 1;
-                    }
-                }
+                // temp origin
+//                if (valueCIDRFieldChangedByUser == true) {
+//                    if (!cIDR1.getText().equals("")) {
+//                        iPos = cIDR1.getSelectionStart() + 1;
+//                    }
+//                }
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (valueCIDRFieldChangedByUser == true) {
-                    String sCIDR;
-                    sCIDR = String.valueOf(cIDR1.getText());
-
-                    // если введен корректный или некорректный IP адрес
-                    if (CheckingCorrectnessCIDR.checkingCorrectnessCIDR(sCIDR)) {
-                        // введен корректный IP адрес
-                        clearOutputFields1();
-                        sCIDRCorrectly = sCIDR;
-                        iPos = cIDR1.getSelectionStart();
-
-                        // присвоим корректное значение маски переменной
-                        tab1.cidr = sCIDRCorrectly;
-                        // заполним поле netmask корректным значением
-                        valueNetmaskFieldChangedByUser = false;
-                        auxiliaryVariables = CheckingCorrectnessCIDR.
-                                searchForNetmaskByCIDR(sCIDRCorrectly);
-                        netmaskEdit1.setText(auxiliaryVariables);
-                        // присвоим переменной корректное значение для дальнейших вычислений
-                        sNetmaskCorrectly = auxiliaryVariables;
-                        // заполним значения байт маски для дальнейших вычислений
-                        CheckingCorrectnessNetmask.checkingCorrectnessNetmask(auxiliaryVariables);
-                        tab1.netmaskB3 = sNetmaskCorrectlyB3;
-                        tab1.netmaskB2 = sNetmaskCorrectlyB2;
-                        tab1.netmaskB1 = sNetmaskCorrectlyB1;
-                        tab1.netmaskB0 = sNetmaskCorrectlyB0;
-
-                    } else {
-                        // введен неверный IP адрес
-                        valueCIDRFieldChangedByUser = false;
-                        cIDR1.setText(sCIDRCorrectly);
-                        cIDR1.setSelection(iPos - 1);
-
-                        if (sCIDRCorrectly.equals("")) {
-                            // отсутствует корректное значение CIDR, очистим переменные
-                            tab1.cidr = "";
-                            tab1.netmaskB3 = "";
-                            tab1.netmaskB2 = "";
-                            tab1.netmaskB1 = "";
-                            tab1.netmaskB0 = "";
-                        }
-                    }
-                }
-                valueCIDRFieldChangedByUser = true;
+                // temp origin
+//                if (valueCIDRFieldChangedByUser == true) {
+//                    String sCIDR;
+//                    sCIDR = String.valueOf(cIDR1.getText());
+//
+//                    // если введен корректный или некорректный IP адрес
+//                    if (CheckingCorrectnessCIDR.checkingCorrectnessCIDR(sCIDR)) {
+//                        // введен корректный IP адрес
+//                        clearOutputFields1();
+//                        sCIDRCorrectly = sCIDR;
+//                        iPos = cIDR1.getSelectionStart();
+//
+//                        // присвоим корректное значение маски переменной
+//                        tab1.cidr = sCIDRCorrectly;
+//                        // заполним поле netmask корректным значением
+//                        valueNetmaskFieldChangedByUser = false;
+//                        auxiliaryVariables = CheckingCorrectnessCIDR.
+//                                searchForNetmaskByCIDR(sCIDRCorrectly);
+//                        netmaskEdit1.setText(auxiliaryVariables);
+//                        // присвоим переменной корректное значение для дальнейших вычислений
+//                        sNetmaskCorrectly = auxiliaryVariables;
+//                        // заполним значения байт маски для дальнейших вычислений
+//                        CheckingCorrectnessNetmask.checkingCorrectnessNetmask(auxiliaryVariables);
+//                        tab1.netmaskB3 = sNetmaskCorrectlyB3;
+//                        tab1.netmaskB2 = sNetmaskCorrectlyB2;
+//                        tab1.netmaskB1 = sNetmaskCorrectlyB1;
+//                        tab1.netmaskB0 = sNetmaskCorrectlyB0;
+//
+//                    } else {
+//                        // введен неверный IP адрес
+//                        valueCIDRFieldChangedByUser = false;
+//                        cIDR1.setText(sCIDRCorrectly);
+//                        cIDR1.setSelection(iPos - 1);
+//
+//                        if (sCIDRCorrectly.equals("")) {
+//                            // отсутствует корректное значение CIDR, очистим переменные
+//                            tab1.cidr = "";
+//                            tab1.netmaskB3 = "";
+//                            tab1.netmaskB2 = "";
+//                            tab1.netmaskB1 = "";
+//                            tab1.netmaskB0 = "";
+//                        }
+//                    }
+//                }
+//                valueCIDRFieldChangedByUser = true;
             }
         });
 
