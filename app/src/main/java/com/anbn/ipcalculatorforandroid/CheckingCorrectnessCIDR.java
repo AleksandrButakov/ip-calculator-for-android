@@ -1,7 +1,6 @@
 package com.anbn.ipcalculatorforandroid;
 
 public class CheckingCorrectnessCIDR {
-
     public static boolean checkingCorrectnessCIDR(String sCIDR) {
         boolean result = false;
         if (sCIDR.equals("")) {
@@ -13,7 +12,6 @@ public class CheckingCorrectnessCIDR {
         }
         return result;
     }
-
 
     // при изменении поля CIDR корректными значениями заполним поле Netmask
     public static String searchForNetmaskByCIDR(String cIDR) {
@@ -124,5 +122,4 @@ public class CheckingCorrectnessCIDR {
         }
         return netmask;
     }
-
 }

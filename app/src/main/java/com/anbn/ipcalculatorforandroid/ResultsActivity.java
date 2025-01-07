@@ -1,16 +1,15 @@
 package com.anbn.ipcalculatorforandroid;
 
+import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ResultsActivity extends AppCompatActivity {
-
     public static String s = "Attention!\n" +
             "The results of calculations are not saved after the application is closed.\n" +
             "-----------------------------------\n\n";
@@ -82,5 +81,4 @@ public class ResultsActivity extends AppCompatActivity {
         //textViewResults.setMovementMethod(ScrollingMovementMethod.getInstance());
         textViewResults.setText(s);
     }
-
 }

@@ -1,7 +1,6 @@
 package com.anbn.ipcalculatorforandroid;
 
 public class ClearingFragment1Fields {
-
     /* Присвоили пустые значения переменным при запуске приложения.
     Необходимо для исключения дальнейшей проверки на соответствия null
      */
@@ -21,5 +20,4 @@ public class ClearingFragment1Fields {
         tab.netmaskB1 = "";
         tab.netmaskB0 = "";
     }
-
 }

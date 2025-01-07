@@ -1,23 +1,11 @@
 package com.anbn.ipcalculatorforandroid;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.helper.widget.MotionEffect;
-import androidx.fragment.app.Fragment;
-
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +13,6 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class ftab1 extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,12 +52,11 @@ public class ftab1 extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ftab1, container, false);
     }
-
 }

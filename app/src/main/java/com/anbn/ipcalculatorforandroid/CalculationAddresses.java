@@ -1,9 +1,6 @@
 package com.anbn.ipcalculatorforandroid;
 
-import java.util.Arrays;
-
 public class CalculationAddresses {
-
     // переменные назначины и именованы в соответствии с расположением полей в layout
     String decIPAddress;
     String decCIDR;
@@ -47,7 +44,6 @@ public class CalculationAddresses {
     String netmaskB2;
     String netmaskB1;
     String netmaskB0;
-
 
     public static void calculationNumberHosts(CalculationAddresses tab1) {
         switch (tab1.cidr) {
@@ -150,7 +146,6 @@ public class CalculationAddresses {
         }
     }
 
-
     // заполним массив boolean[] binIPAddressArray
     public static void fillingTheBinIPAddressArray(CalculationAddresses tab) {
         tab.sIPAddressBin = "";
@@ -182,7 +177,6 @@ public class CalculationAddresses {
         }
     }
 
-
     public String fillingValuesIPAddressBits(boolean bit) {
         if (bit == true) {
             return "1";
@@ -190,7 +184,6 @@ public class CalculationAddresses {
             return "0";
         }
     }
-
 
     // заполним массив boolean[] binNetmaskArray
     public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
@@ -207,7 +200,6 @@ public class CalculationAddresses {
         }
     }
 
-
     // рассчитываем значение binNetwork[32] and decNetwork
     public static void fillingTheBinNetworkArray(CalculationAddresses tab) {
         tab.sNetworkBin = "";
@@ -215,9 +207,9 @@ public class CalculationAddresses {
         tab.sLastAddressBin = "";
         tab.sBroadcastBin = "";
         for (int i = 31; i >= 0; i--) {
-            if (tab.binNetmaskArray[i] == true) {
+            if (tab.binNetmaskArray[i]) {
                 tab.binNetworkArray[i] = tab.binIPAddressArray[i];
-                if (tab.binIPAddressArray[i] == true) {
+                if (tab.binIPAddressArray[i]) {
                     tab.sNetworkBin += "1";
                     tab.binFirstAddress[i] = true;
                     tab.sFirstAddressBin += "1";
@@ -250,10 +242,8 @@ public class CalculationAddresses {
                     tab.binLastAddress[i] = true;
                     tab.sLastAddressBin += "1";
                 }
-
                 tab.binBroadcast[i] = true;
                 tab.sBroadcastBin += "1";
-
             }
 
             if (i == 24 || i == 16 || i == 8) {
@@ -263,9 +253,7 @@ public class CalculationAddresses {
                 tab.sBroadcastBin += " ";
             }
         }
-
     }
-
 
     // получим двоичный массив BitOrder IP адреса
     public static void decToBin(int iByte0) {
@@ -289,7 +277,6 @@ public class CalculationAddresses {
         }
     }
 
-
     // полученный двумерный массив переведем в десятичный вид
     public static String binToDec(boolean[] Arr) {
         int AuxiliaryDecByte0 = 0;
@@ -301,7 +288,7 @@ public class CalculationAddresses {
         }
 
         for (int i = 31; i >= 24; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i - 24];
             }
         }
@@ -309,7 +296,7 @@ public class CalculationAddresses {
         AuxiliaryDecByte0 = 0;
 
         for (int i = 23; i >= 16; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i - 16];
             }
         }
@@ -317,7 +304,7 @@ public class CalculationAddresses {
         AuxiliaryDecByte0 = 0;
 
         for (int i = 15; i >= 8; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i - 8];
             }
         }
@@ -325,7 +312,7 @@ public class CalculationAddresses {
         AuxiliaryDecByte0 = 0;
 
         for (int i = 7; i >= 0; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i];
             }
         }
@@ -333,6 +320,4 @@ public class CalculationAddresses {
 
         return sTemp;
     }
-
-
 }

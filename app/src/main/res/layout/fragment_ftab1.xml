@@ -13,12 +13,12 @@
 
         <TextView
             android:id="@+id/binIPAddressText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14dp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView11"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -55,7 +55,7 @@
             android:contextClickable="false"
             android:digits=".0123456789"
             android:ems="10"
-            android:enabled="false"
+            android:enabled="true"
             android:hint="Enter IP address"
             android:inputType="numberSigned"
             android:maxLength="15"
@@ -70,7 +70,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:enabled="false"
+            android:enabled="true"
             android:hint="CIDR"
             android:imeOptions="actionDone"
             android:inputType="number"
@@ -99,7 +99,7 @@
             android:layout_marginTop="10dp"
             android:digits=".0123456789"
             android:ems="10"
-            android:enabled="false"
+            android:enabled="true"
             android:hint="Enter netmask"
             android:inputType="numberSigned"
             android:maxLength="15"
@@ -153,13 +153,13 @@
 
         <TextView
             android:id="@+id/decNetworkIPText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/decNetmaskText1" />
 
@@ -176,13 +176,13 @@
 
         <TextView
             android:id="@+id/decBroadcastText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/decLastAddressText1" />
 
@@ -199,13 +199,13 @@
 
         <TextView
             android:id="@+id/decNetmaskText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
@@ -222,13 +222,13 @@
 
         <TextView
             android:id="@+id/decFirstAddressText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/decNetworkIPText1" />
 
@@ -245,13 +245,13 @@
 
         <TextView
             android:id="@+id/decLastAddressText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textViewResults"
             app:layout_constraintTop_toBottomOf="@+id/decFirstAddressText1" />
 
@@ -268,13 +268,13 @@
 
         <TextView
             android:id="@+id/decNumberHostsText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:hint="255.255.255.255"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/decBroadcastText1" />
 
@@ -302,12 +302,12 @@
 
         <TextView
             android:id="@+id/binNetworkText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14dp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView13"
             app:layout_constraintTop_toBottomOf="@+id/binNetmaskText1" />
 
@@ -324,12 +324,12 @@
 
         <TextView
             android:id="@+id/binBroadcastText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toBottomOf="@+id/binLastAddressText1" />
 
@@ -346,12 +346,12 @@
 
         <TextView
             android:id="@+id/binNetmaskText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toBottomOf="@+id/binIPAddressText1" />
 
@@ -368,12 +368,12 @@
 
         <TextView
             android:id="@+id/binFirstAddressText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/binNetworkText1" />
 
@@ -390,12 +390,12 @@
 
         <TextView
             android:id="@+id/binLastAddressText1"
+            style="@style/MyTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="00000000 00000000 00000000 00000000"
             android:textSize="14sp"
-            style="@style/MyTextViewStyle"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/binFirstAddressText1" />
 
@@ -405,13 +405,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:layout_marginEnd="14dp"
-            android:checked="false"
+            android:checked="true"
             android:onClick="onSwitch1"
             android:text="Make the tab active"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="OnClick" />
+            tools:ignore="OnClick,UseSwitchCompatOrMaterialXml" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

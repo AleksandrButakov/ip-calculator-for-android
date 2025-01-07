@@ -1,10 +1,9 @@
 package com.anbn.ipcalculatorforandroid;
 
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -12,7 +11,6 @@ import android.webkit.WebViewClient;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class WebViewActivity extends AppCompatActivity {
-
     WebView web;
 
     // нарисуем экран
@@ -57,6 +55,4 @@ public class WebViewActivity extends AppCompatActivity {
             return false;
         }
     }
-
-
 }

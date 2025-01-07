@@ -1,11 +1,5 @@
 package com.anbn.ipcalculatorforandroid;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +14,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -179,35 +176,36 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // temp origin
     // переключатель Switch Tab1, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
-    public void onSwitch1(View v) {
-        //Switch sw1 = (Switch) findViewById(R.id.switch1);
-
-        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
-        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
-        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
-
-        // в случае если вкладка была активная, делаем поля EditText setEnabled(false)
-        // в случае если вкладка была не активная, делаем поля EditText setEnabled(true)
-        if (tab1IsActive) {
-            ipAddressEdit1.setEnabled(false);
-            cidr1.setEnabled(false);
-            netmaskEdit1.setEnabled(false);
-            tab1IsActive = false;
-        } else {
-            ipAddressEdit1.setEnabled(true);
-            cidr1.setEnabled(true);
-            netmaskEdit1.setEnabled(true);
-            tab1IsActive = true;
-        }
-
-        // при первом запуске вкладки активируем Listener
-        if (firstLaunchTab1) {
-            listenerEditText1();
-            firstLaunchTab1 = false;
-        }
-    }
+//    public void onSwitch1(View v) {
+//        //Switch sw1 = (Switch) findViewById(R.id.switch1);
+//
+//        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+//        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
+//        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+//
+//        // в случае если вкладка была активная, делаем поля EditText setEnabled(false)
+//        // в случае если вкладка была не активная, делаем поля EditText setEnabled(true)
+//        if (tab1IsActive) {
+//            ipAddressEdit1.setEnabled(false);
+//            cidr1.setEnabled(false);
+//            netmaskEdit1.setEnabled(false);
+//            tab1IsActive = false;
+//        } else {
+//            ipAddressEdit1.setEnabled(true);
+//            cidr1.setEnabled(true);
+//            netmaskEdit1.setEnabled(true);
+//            tab1IsActive = true;
+//        }
+//
+//        // при первом запуске вкладки активируем Listener
+//        if (firstLaunchTab1) {
+//            listenerEditText1();
+//            firstLaunchTab1 = false;
+//        }
+//    }
 
     // переключатель Switch Tab2, активирует и деактивирует EditText-ы на странице
     // предварительно проверив делается ли это впервые
@@ -967,5 +965,4 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }

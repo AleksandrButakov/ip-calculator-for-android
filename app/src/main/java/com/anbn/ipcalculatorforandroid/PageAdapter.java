@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class PageAdapter extends FragmentPagerAdapter {
-
     int tabcount;
 
     public PageAdapter(@NonNull FragmentManager fm, int behavior) {
@@ -32,5 +31,4 @@ public class PageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return tabcount;
     }
-
 }
