@@ -30,7 +30,7 @@ public class CheckingCorrectnessIPAddress {
 
                 // проверим что символ не является вторым подряд нулем
                 if (i >= 2) {
-                    if (sIP.charAt(i) == '0' && sIP.charAt(i - 1) == '0' &&
+                    if (sIP.charAt(i - 1) == '0' &&
                             sIP.charAt(i - 2) == '.') return false;
                 }
 
