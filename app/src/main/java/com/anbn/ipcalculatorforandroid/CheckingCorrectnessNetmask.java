@@ -1,8 +1,29 @@
 package com.anbn.ipcalculatorforandroid;
 
-import static com.anbn.ipcalculatorforandroid.MainActivity.*;
+import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB0;
+import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB1;
+import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB2;
+import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB3;
 
 public class CheckingCorrectnessNetmask {
+    private static boolean netmaskStatus = false;
+    private static boolean cidrStatus = false;
+
+    public static boolean isCidrStatus() {
+        return cidrStatus;
+    }
+
+    public static void setCidrStatus(boolean cidrStatus) {
+        CheckingCorrectnessNetmask.cidrStatus = cidrStatus;
+    }
+
+    public static boolean getNetmaskStatus() {
+        return netmaskStatus;
+    }
+
+    public static void setNetmaskStatus(boolean netmaskStatus) {
+        CheckingCorrectnessNetmask.netmaskStatus = netmaskStatus;
+    }
 
     public static boolean checkingCorrectnessNetmask(String sNetmask) {
         String[] sByte = {"", "", "", ""};
@@ -272,7 +293,6 @@ public class CheckingCorrectnessNetmask {
         }
         return cIDR;
     }
-
 
 
 }

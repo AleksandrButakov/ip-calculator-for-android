@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText ipAddress;
     private EditText cidr;
     private EditText netmaskEdit;
+    private boolean isUpdating = false; // Флаг для предотвращения зацикливания
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,23 +76,38 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void afterTextChanged(Editable s) {
-                String sCidr = cidr.getText().toString();
-                // проверяем что поле cidr содержит значение
-                if (isInteger(sCidr)) {
-                    if (!"".contentEquals(s)) {
-                        int iCidr = Integer.parseInt(sCidr);
-                        if (iCidr >= 1 && iCidr <= 30) {
-                            cidr.setTextColor(AuxiliaryVariables.getTextColorDefault());
-                            IpAddress.setCidr(iCidr);
-                            netmaskEdit.setText(CalculationAddresses.calculationNetMask(iCidr));
-                        } else {
-                            cidr.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
-                            netmaskEdit.setText("");
+                if (!isUpdating) {
+                    // Блокируем обработку netmask listener
+                    isUpdating = true;
+
+                    String sCidr = cidr.getText().toString();
+                    // проверяем что поле cidr содержит значение
+                    if (isInteger(sCidr)) {
+                        if (!"".contentEquals(s)) {
+                            int iCidr = Integer.parseInt(sCidr);
+                            if (iCidr >= 1 && iCidr <= 30) {
+                                // cidr корректен, устанавливаем дефолтный цвет текста
+                                cidr.setTextColor(AuxiliaryVariables.getTextColorDefault());
+                                IpAddress.setCidr(iCidr);
+                                netmaskEdit.setText(CalculationAddresses.calculationNetMask(iCidr));
+                                // Поля сетевой маски и cidr заполнены корректно
+                                CheckingCorrectnessNetmask.setNetmaskStatus(true);
+                                CheckingCorrectnessNetmask.setCidrStatus(true);
+                            } else {
+                                cidr.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
+                                netmaskEdit.setText("");
+                                // Поля сетевой маски и cidr заполнены не корректно
+                                CheckingCorrectnessNetmask.setNetmaskStatus(false);
+                                CheckingCorrectnessNetmask.setCidrStatus(false);
+                            }
                         }
+                    } else {
+                        netmaskEdit.setText("");
                     }
-                } else {
-                    netmaskEdit.setText("");
+                    // Снимаем блокировку netmask listener
+                    isUpdating = false;
                 }
+
             }
         });
 
@@ -107,15 +123,35 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String input = editable.toString();
-                // Проверка на корректность сетевой маски IPv4
-                if (CheckingCorrectnessNetmask.checkingCorrectnessNetmask(input) ) {
-                    // Маска корректна, устанавливаем дефолтный цвет текста
-                    netmaskEdit.setTextColor(AuxiliaryVariables.getTextColorDefault());
-                } else {
-                    // Маска некорректна, устанавливаем красный цвет текста
-                    netmaskEdit.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
+                if (!isUpdating) {
+                    // Блокируем обработку cidr listener
+                    isUpdating = true;
+                    cidr.setText("");
+
+                    String input = editable.toString();
+                    // Проверка на корректность сетевой маски IPv4
+                    if (CheckingCorrectnessNetmask.checkingCorrectnessNetmask(input)) {
+                        // Маска корректна, устанавливаем дефолтный цвет текста
+                        netmaskEdit.setTextColor(AuxiliaryVariables.getTextColorDefault());
+                        // Проверим, введено полное значение маски, если да то заполним поле cidr
+                        String netmask = CheckingCorrectnessNetmask.searchForCIDRByNetmask(input);
+                        if (!netmask.isEmpty()) {
+                            cidr.setText(netmask);
+                            // Поля сетевой маски и cidr заполнены корректно
+                            CheckingCorrectnessNetmask.setNetmaskStatus(true);
+                            CheckingCorrectnessNetmask.setCidrStatus(true);
+                        }
+                    } else {
+                        // Маска некорректна, устанавливаем красный цвет текста
+                        netmaskEdit.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
+                        // Поля сетевой маски и cidr заполнены не корректно
+                        CheckingCorrectnessNetmask.setNetmaskStatus(false);
+                        CheckingCorrectnessNetmask.setCidrStatus(false);
+                    }
+                    // Снимаем блокировку cidr listener
+                    isUpdating = false; // Снимаем блокировку
                 }
+
             }
         });
     }
