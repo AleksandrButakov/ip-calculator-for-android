@@ -3,7 +3,6 @@ package com.anbn.ipcalculatorforandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
@@ -35,22 +34,14 @@ public class MainActivity extends AppCompatActivity {
     public static boolean valueIPAddressFieldChangedByUser = true;
     public static boolean valueCIDRFieldChangedByUser = true;
     public static boolean valueNetmaskFieldChangedByUser = true;
-
-    // переменные для определения активности вкладок
-    public static boolean tab1IsActive = false;
-    public static boolean tab2IsActive = false;
-
-    // переменные для определения впервые ли включена вкладка
-    public static boolean firstLaunchTab1 = true;
-    public static boolean firstLaunchTab2 = true;
-
-    public static String auxiliaryVariables = "";
     public static String url = "";
 
-    CalculationAddresses tab1 = new CalculationAddresses();
-    CalculationAddresses tab2 = new CalculationAddresses();
-
     Intent intentPrivacy;
+
+    // temp new
+    private EditText ipAddress;
+    private EditText cidr;
+    private EditText netmaskEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,19 +52,19 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
         // temp new
-        EditText ipAddress = (EditText) findViewById(R.id.ipAddressEdit1);
-        EditText cidr = (EditText) findViewById(R.id.cidr1);
-        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+        ipAddress = (EditText) findViewById(R.id.ipAddressEdit);
+        cidr = (EditText) findViewById(R.id.cidr);
+        netmaskEdit = (EditText) findViewById(R.id.netmaskEdit);
 
         getWindow().getDecorView().post(new Runnable() {
             @Override
             public void run() {
                 // Здесь активность полностью прорисована и готова к использованию
-                Constants.textColorDefault = cidr.getCurrentTextColor();
+                AuxiliaryVariables.setTextColorDefault(cidr.getCurrentTextColor());
             }
         });
 
-        // задаем listener для поля ввода CIDR Tab1
+        // задаем listener для поля ввода CIDR
         cidr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -90,17 +81,40 @@ public class MainActivity extends AppCompatActivity {
                     if (!"".contentEquals(s)) {
                         int iCidr = Integer.parseInt(sCidr);
                         if (iCidr >= 1 && iCidr <= 30) {
-                            cidr.setTextColor(Constants.textColorDefault);
+                            cidr.setTextColor(AuxiliaryVariables.getTextColorDefault());
                             IpAddress.setCidr(iCidr);
-                            netmaskEdit1.setText(CalculationAddresses.calculationNetMask(iCidr));
-
+                            netmaskEdit.setText(CalculationAddresses.calculationNetMask(iCidr));
                         } else {
                             cidr.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
-                            netmaskEdit1.setText("");
+                            netmaskEdit.setText("");
                         }
                     }
                 } else {
-                    netmaskEdit1.setText("");
+                    netmaskEdit.setText("");
+                }
+            }
+        });
+
+
+        netmaskEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = editable.toString();
+                // Проверка на корректность сетевой маски IPv4
+                if (CheckingCorrectnessNetmask.checkingCorrectnessNetmask(input) ) {
+                    // Маска корректна, устанавливаем дефолтный цвет текста
+                    netmaskEdit.setTextColor(AuxiliaryVariables.getTextColorDefault());
+                } else {
+                    // Маска некорректна, устанавливаем красный цвет текста
+                    netmaskEdit.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
                 }
             }
         });
@@ -120,13 +134,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Метод для извлечения цвета текста по умолчанию из текущей темы
-    private int getThemeTextColor() {
-        TypedArray a = getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-        int defaultColor = a.getColor(0, ContextCompat.getColor(this, android.R.color.black)); // Запасной цвет
-        a.recycle();
-        return defaultColor;
-    }
 
     // рисуем меню
     @Override
@@ -500,10 +507,9 @@ public class MainActivity extends AppCompatActivity {
 
     // нажатие кнопки CLEAR, очищаем все поля ввода нулевой вкладки
     public void onClickClearButton(View v) {
-//        valueIPAddressFieldChangedByUser = false;
-//        valueCIDRFieldChangedByUser = false;
-//        valueNetmaskFieldChangedByUser = false;
-//        clearingFragment1DataTab1();
+        valueIPAddressFieldChangedByUser = false;
+        valueCIDRFieldChangedByUser = false;
+        valueNetmaskFieldChangedByUser = false;
     }
 
 // очищаем все поля экрана Tab1 и устанавливаем им серый цвет текста
