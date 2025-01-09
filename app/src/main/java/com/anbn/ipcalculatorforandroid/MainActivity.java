@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,22 @@ public class MainActivity extends AppCompatActivity {
     private EditText ipAddress;
     private EditText cidr;
     private EditText netmask;
+
+    private TextView decNetworkIPText;
+    private TextView decBroadcastText;
+    private TextView decNetmaskText;
+    private TextView decFirstAddressText;
+    private TextView decLastAddressText;
+    private TextView decNumberText;
+
+    private TextView binIPAddressText;
+    private TextView binNetworkText;
+    private TextView binBroadcastText;
+    private TextView binNetmaskText;
+    private TextView binFirstAddressText;
+    private TextView binLastAddressText;
+
+
     private boolean isUpdating = false; // Флаг для предотвращения зацикливания
 
     @Override
@@ -56,6 +73,20 @@ public class MainActivity extends AppCompatActivity {
         ipAddress = (EditText) findViewById(R.id.ipAddressEdit);
         cidr = (EditText) findViewById(R.id.cidr);
         netmask = (EditText) findViewById(R.id.netmaskEdit);
+
+        decNetworkIPText = (TextView) findViewById(R.id.decNetworkIPText1);
+        decBroadcastText = (TextView) findViewById(R.id.decBroadcastText1);
+        decNetmaskText = (TextView) findViewById(R.id.decNetmaskText1);
+        decFirstAddressText = (TextView) findViewById(R.id.decFirstAddressText1);
+        decLastAddressText = (TextView) findViewById(R.id.decLastAddressText1);
+        decNumberText = (TextView) findViewById(R.id.decNumberHostsText1);
+
+        binIPAddressText = (TextView) findViewById(R.id.binIPAddressText1);
+        binNetworkText = (TextView) findViewById(R.id.binNetworkText1);
+        binBroadcastText = (TextView) findViewById(R.id.binBroadcastText1);
+        binNetmaskText = (TextView) findViewById(R.id.binNetmaskText1);
+        binFirstAddressText = (TextView) findViewById(R.id.binFirstAddressText1);
+        binLastAddressText = (TextView) findViewById(R.id.binLastAddressText1);
 
         getWindow().getDecorView().post(new Runnable() {
             @Override
@@ -112,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                                 // cidr корректен, устанавливаем дефолтный цвет текста
                                 cidr.setTextColor(AuxiliaryVariables.getTextColorDefault());
                                 IpAddress.setCidr(iCidr);
+                                netmask.setTextColor(AuxiliaryVariables.getTextColorDefault());
                                 netmask.setText(CalculationAddresses.calculationNetMask(iCidr));
                                 // Поля сетевой маски и cidr заполнены корректно
                                 CheckingCorrectnessNetmask.setNetmaskStatus(true);
@@ -159,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         // Проверим, введено полное значение маски, если да то заполним поле cidr
                         String netmask = CheckingCorrectnessNetmask.searchForCIDRByNetmask(input);
                         if (!netmask.isEmpty()) {
+                            cidr.setTextColor(AuxiliaryVariables.getTextColorDefault());
                             cidr.setText(netmask);
                             // Поля сетевой маски и cidr заполнены корректно
                             CheckingCorrectnessNetmask.setNetmaskStatus(true);
@@ -481,87 +514,87 @@ public class MainActivity extends AppCompatActivity {
 
     // нажатие кнопки CALC, проверяем корректность введенных данных и выводим результат
     public void onClickCalcButton(View v) {
-//        // проверим что переменные для хранения байтов IP адреса не равны null
-//        if (tab1.ipAddressB3.equals("") ||
-//                tab1.ipAddressB2.equals("") ||
-//                tab1.ipAddressB1.equals("") ||
-//                tab1.ipAddressB0.equals("") ||
-//                // проверим что переменная для хранения количества бит маски подсети не равна null
-//                tab1.cidr.equals("") ||
-//                // проверим что переменные для хранения байтов маски подсети не равны null
-//                tab1.netmaskB3.equals("") ||
-//                tab1.netmaskB2.equals("") ||
-//                tab1.netmaskB1.equals("") ||
-//                tab1.netmaskB0.equals("")) {
-//            // введены некорректные данные
-//            Toast.makeText(this, "Incorrect data entered...",
-//                    Toast.LENGTH_SHORT).show();
-//        } else {
-//            // введены корректные данные. Рассчитываем все параметры и выводим на экран
-//            EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
-//            EditText cidr1 = (EditText) findViewById(R.id.cidr1);
-//            EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
-//
-//            TextView decNetworkIPText1 = (TextView) findViewById(R.id.decNetworkIPText1);
-//            TextView decBroadcastText1 = (TextView) findViewById(R.id.decBroadcastText1);
-//            TextView decNetmaskText1 = (TextView) findViewById(R.id.decNetmaskText1);
-//            TextView decFirstAddressText1 = (TextView) findViewById(R.id.decFirstAddressText1);
-//            TextView decLastAddressText1 = (TextView) findViewById(R.id.decLastAddressText1);
-//            TextView decNumberHostsText1 = (TextView) findViewById(R.id.decNumberHostsText1);
-//
-//            TextView binIPAddressText1 = (TextView) findViewById(R.id.binIPAddressText1);
-//            TextView binNetworkText1 = (TextView) findViewById(R.id.binNetworkText1);
-//            TextView binBroadcastText1 = (TextView) findViewById(R.id.binBroadcastText1);
-//            TextView binNetmaskText1 = (TextView) findViewById(R.id.binNetmaskText1);
-//            TextView binFirstAddressText1 = (TextView) findViewById(R.id.binFirstAddressText1);
-//            TextView binLastAddressText1 = (TextView) findViewById(R.id.binLastAddressText1);
-//
-//            // заполним массив boolean[] binIPAddressArray
-//            CalculationAddresses.fillingTheBinIPAddressArray(tab1);
-//            binIPAddressText1.setText(tab1.sIPAddressBin);
-//
-//            // заполним массив boolean[] binNetmaskArray
-//            CalculationAddresses.fillingTheBinNetmaskArray(tab1);
-//            binNetmaskText1.setText(tab1.sNetmaskBin);
-//
-//            // рассчитываем значение binNetwork[32], decNetwork
-//            // binFirstAddress[32], binLastAddress[32], binBroadcast[32] и выводим на экран
-//            CalculationAddresses.fillingTheBinNetworkArray(tab1);
-//            decNetworkIPText1.setText(tab1.decNetwork);
-//            binNetworkText1.setText(tab1.sNetworkBin);
-//            decNetworkIPText1.setText(CalculationAddresses.binToDec(tab1.binNetworkArray));
-//            binFirstAddressText1.setText(tab1.sFirstAddressBin);
-//            decFirstAddressText1.setText(CalculationAddresses.binToDec(tab1.binFirstAddress));
-//            binLastAddressText1.setText(tab1.sLastAddressBin);
-//            decLastAddressText1.setText(CalculationAddresses.binToDec(tab1.binLastAddress));
-//            binBroadcastText1.setText(tab1.sBroadcastBin);
-//            decBroadcastText1.setText(CalculationAddresses.binToDec(tab1.binBroadcast));
-//
-//            // выводим параметр netmask на экран
-//            decNetmaskText1.setText(netmaskEdit1.getText());
-//
-//            // рассчитываем параметр tab1.decNumberHosts и выводим на экран
-//            CalculationAddresses.calculationNumberHosts(tab1);
-//            decNumberHostsText1.setText(tab1.decNumberHosts);
-//
-//            // сворачиваем клавиатуру при нажатии на кнопку
-//            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(ipAddressEdit1.getWindowToken(), 0);
-//
-//            // заполним переменные для дальнейшего использования в layout Results
-//            tab1.decIPAddress = ipAddressEdit1.getText().toString();
-//            tab1.decCIDR = cidr1.getText().toString();
-//            tab1.decNetMask = netmaskEdit1.getText().toString();
-//
-//            tab1.decNetwork = decNetworkIPText1.getText().toString();
-//            tab1.decFirstAddress = decFirstAddressText1.getText().toString();
-//            tab1.decLastAddress = decLastAddressText1.getText().toString();
-//            tab1.decBroadcast = decBroadcastText1.getText().toString();
-//
-//            // выводим результаты в поле Results
-//            ResultsActivity resultsActivity = new ResultsActivity();
-//            resultsActivity.outputResults(tab1);
-//    }
+        // проверим что переменные для хранения байтов IP адреса не равны null
+        if (CalculationAddresses.ipAddressB3.equals("") ||
+                tab1.ipAddressB2.equals("") ||
+                tab1.ipAddressB1.equals("") ||
+                tab1.ipAddressB0.equals("") ||
+                // проверим что переменная для хранения количества бит маски подсети не равна null
+                tab1.cidr.equals("") ||
+                // проверим что переменные для хранения байтов маски подсети не равны null
+                tab1.netmaskB3.equals("") ||
+                tab1.netmaskB2.equals("") ||
+                tab1.netmaskB1.equals("") ||
+                tab1.netmaskB0.equals("")) {
+            // введены некорректные данные
+            Toast.makeText(this, "Incorrect data entered...",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // введены корректные данные. Рассчитываем все параметры и выводим на экран
+            EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
+            EditText cidr1 = (EditText) findViewById(R.id.cidr1);
+            EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
+
+            TextView decNetworkIPText1 = (TextView) findViewById(R.id.decNetworkIPText1);
+            TextView decBroadcastText1 = (TextView) findViewById(R.id.decBroadcastText1);
+            TextView decNetmaskText1 = (TextView) findViewById(R.id.decNetmaskText1);
+            TextView decFirstAddressText1 = (TextView) findViewById(R.id.decFirstAddressText1);
+            TextView decLastAddressText1 = (TextView) findViewById(R.id.decLastAddressText1);
+            TextView decNumberHostsText1 = (TextView) findViewById(R.id.decNumberHostsText1);
+
+            TextView binIPAddressText1 = (TextView) findViewById(R.id.binIPAddressText1);
+            TextView binNetworkText1 = (TextView) findViewById(R.id.binNetworkText1);
+            TextView binBroadcastText1 = (TextView) findViewById(R.id.binBroadcastText1);
+            TextView binNetmaskText1 = (TextView) findViewById(R.id.binNetmaskText1);
+            TextView binFirstAddressText1 = (TextView) findViewById(R.id.binFirstAddressText1);
+            TextView binLastAddressText1 = (TextView) findViewById(R.id.binLastAddressText1);
+
+            // заполним массив boolean[] binIPAddressArray
+            CalculationAddresses.fillingTheBinIPAddressArray(tab1);
+            binIPAddressText1.setText(tab1.sIPAddressBin);
+
+            // заполним массив boolean[] binNetmaskArray
+            CalculationAddresses.fillingTheBinNetmaskArray(tab1);
+            binNetmaskText1.setText(tab1.sNetmaskBin);
+
+            // рассчитываем значение binNetwork[32], decNetwork
+            // binFirstAddress[32], binLastAddress[32], binBroadcast[32] и выводим на экран
+            CalculationAddresses.fillingTheBinNetworkArray(tab1);
+            decNetworkIPText1.setText(tab1.decNetwork);
+            binNetworkText1.setText(tab1.sNetworkBin);
+            decNetworkIPText1.setText(CalculationAddresses.binToDec(tab1.binNetworkArray));
+            binFirstAddressText1.setText(tab1.sFirstAddressBin);
+            decFirstAddressText1.setText(CalculationAddresses.binToDec(tab1.binFirstAddress));
+            binLastAddressText1.setText(tab1.sLastAddressBin);
+            decLastAddressText1.setText(CalculationAddresses.binToDec(tab1.binLastAddress));
+            binBroadcastText1.setText(tab1.sBroadcastBin);
+            decBroadcastText1.setText(CalculationAddresses.binToDec(tab1.binBroadcast));
+
+            // выводим параметр netmask на экран
+            decNetmaskText1.setText(netmaskEdit1.getText());
+
+            // рассчитываем параметр tab1.decNumberHosts и выводим на экран
+            CalculationAddresses.calculationNumberHosts(tab1);
+            decNumberHostsText1.setText(tab1.decNumberHosts);
+
+            // сворачиваем клавиатуру при нажатии на кнопку
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(ipAddressEdit1.getWindowToken(), 0);
+
+            // заполним переменные для дальнейшего использования в layout Results
+            tab1.decIPAddress = ipAddressEdit1.getText().toString();
+            tab1.decCIDR = cidr1.getText().toString();
+            tab1.decNetMask = netmaskEdit1.getText().toString();
+
+            tab1.decNetwork = decNetworkIPText1.getText().toString();
+            tab1.decFirstAddress = decFirstAddressText1.getText().toString();
+            tab1.decLastAddress = decLastAddressText1.getText().toString();
+            tab1.decBroadcast = decBroadcastText1.getText().toString();
+
+            // выводим результаты в поле Results
+            ResultsActivity resultsActivity = new ResultsActivity();
+            resultsActivity.outputResults(tab1);
+        }
     }
 
     // нажатие кнопки CLEAR, очищаем все поля ввода нулевой вкладки
@@ -569,51 +602,34 @@ public class MainActivity extends AppCompatActivity {
         valueIPAddressFieldChangedByUser = false;
         valueCIDRFieldChangedByUser = false;
         valueNetmaskFieldChangedByUser = false;
+        clearingFragment1DataTab1();
     }
 
-// очищаем все поля экрана Tab1 и устанавливаем им серый цвет текста
-//    public void clearingFragment1DataTab1() {
-//        EditText ipAddressEdit1 = (EditText) findViewById(R.id.ipAddressEdit1);
-//        EditText cidr1 = (EditText) findViewById(R.id.cidr1);
-//        EditText netmaskEdit1 = (EditText) findViewById(R.id.netmaskEdit1);
-//
-//        TextView decNetworkIPText1 = (TextView) findViewById(R.id.decNetworkIPText1);
-//        TextView decBroadcastText1 = (TextView) findViewById(R.id.decBroadcastText1);
-//        TextView decNetmaskText1 = (TextView) findViewById(R.id.decNetmaskText1);
-//        TextView decFirstAddressText1 = (TextView) findViewById(R.id.decFirstAddressText1);
-//        TextView decLastAddressText1 = (TextView) findViewById(R.id.decLastAddressText1);
-//        TextView decNumberText1 = (TextView) findViewById(R.id.decNumberHostsText1);
-//
-//        TextView binIPAddressText1 = (TextView) findViewById(R.id.binIPAddressText1);
-//        TextView binNetworkText1 = (TextView) findViewById(R.id.binNetworkText1);
-//        TextView binBroadcastText1 = (TextView) findViewById(R.id.binBroadcastText1);
-//        TextView binNetmaskText1 = (TextView) findViewById(R.id.binNetmaskText1);
-//        TextView binFirstAddressText1 = (TextView) findViewById(R.id.binFirstAddressText1);
-//        TextView binLastAddressText1 = (TextView) findViewById(R.id.binLastAddressText1);
-//
-//        ipAddressEdit1.setText("");
-//        cidr1.setText("");
-//        netmaskEdit1.setText("");
-//
-//        // очищаем поля
-//        decNetworkIPText1.setText("");
-//        decBroadcastText1.setText("");
-//        decNetmaskText1.setText("");
-//        decFirstAddressText1.setText("");
-//        decLastAddressText1.setText("");
-//        decNumberText1.setText("");
-//
-//        binIPAddressText1.setText("");
-//        binNetworkText1.setText("");
-//        binBroadcastText1.setText("");
-//        binNetmaskText1.setText("");
-//        binFirstAddressText1.setText("");
-//        binLastAddressText1.setText("");
-//
-//        valueIPAddressFieldChangedByUser = true;
-//        valueCIDRFieldChangedByUser = true;
-//        valueNetmaskFieldChangedByUser = true;
-//    }
+    // очищаем все поля экрана Tab1 и устанавливаем им серый цвет текста
+    public void clearingFragment1DataTab1() {
+        ipAddress.setText("");
+        cidr.setText("");
+        netmask.setText("");
+
+        // очищаем поля
+        decNetworkIPText.setText("");
+        decBroadcastText.setText("");
+        decNetmaskText.setText("");
+        decFirstAddressText.setText("");
+        decLastAddressText.setText("");
+        decNumberText.setText("");
+
+        binIPAddressText.setText("");
+        binNetworkText.setText("");
+        binBroadcastText.setText("");
+        binNetmaskText.setText("");
+        binFirstAddressText.setText("");
+        binLastAddressText.setText("");
+
+        valueIPAddressFieldChangedByUser = true;
+        valueCIDRFieldChangedByUser = true;
+        valueNetmaskFieldChangedByUser = true;
+    }
 
 //    public void clearOutputFields1() {
 //        TextView decNetworkIPText1 = (TextView) findViewById(R.id.decNetworkIPText1);

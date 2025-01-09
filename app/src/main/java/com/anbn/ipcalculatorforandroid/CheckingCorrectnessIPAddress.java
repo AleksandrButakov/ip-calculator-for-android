@@ -46,7 +46,7 @@ public class CheckingCorrectnessIPAddress {
                         if (iByte < 0 || iByte > 255) return false;
                         break;
                     case (0):
-                        if (iByte < 1 || iByte > 254) return false;
+                        if (iByte < 0 || iByte > 254) return false;
                         sIPCorrectlyB3 = sByte[3];
                         sIPCorrectlyB2 = sByte[2];
                         sIPCorrectlyB1 = sByte[1];
