@@ -1,184 +1,162 @@
 package com.anbn.ipcalculatorforandroid;
 
 public class CalculationAddresses {
-    // переменные назначены и именованы в соответствии с расположением полей в layout
-    String decIPAddress;
-    String decCIDR;
-    String decNetMask;
-
-    String decNetwork;
-    String decFirstAddress;
-    String decLastAddress;
-    String decBroadcast;
-    String decNumberHosts;
-
-    String sIPAddressBin;
-    String sNetworkBin;
-    String sNetmaskBin;
-    String sFirstAddressBin;
-    String sLastAddressBin;
-    String sBroadcastBin;
-
-    boolean[] binIPAddressArray = new boolean[32];
-    boolean[] binNetmaskArray = new boolean[32];
-    boolean[] binNetworkArray = new boolean[32];
-    boolean[] binBroadcast = new boolean[32];
-    boolean[] binNetmask = new boolean[32];
-    boolean[] binFirstAddress = new boolean[32];
-    boolean[] binLastAddress = new boolean[32];
-
     // вспомогательная переменная для перевода данных Dec to Bin
     public static boolean[] bitOrder = new boolean[8];
 
-    // переменные для хранения байтов IP адреса
-    String ipAddressB3;
-    String ipAddressB2;
-    String ipAddressB1;
-    String ipAddressB0;
-
     // переменная для хранения количества бит маски подсети
-    String cidr;
+    String cidr = "";
 
     // переменные для хранения байтов маски подсети
-    String netmaskB3;
-    String netmaskB2;
-    String netmaskB1;
-    String netmaskB0;
+    String netmaskB3 = "";
+    String netmaskB2 = "";
+    String netmaskB1 = "";
+    String netmaskB0 = "";
 
     public static void calculationNumberHosts(CalculationAddresses tab1) {
-        switch (tab1.cidr) {
+        switch (Data.getStrCidr()) {  // tab1.cidr) {
             case ("31"):
-                tab1.decNumberHosts = "0";
+                Data.setDecNumberHosts("0"); // tab1.decNumberHosts = "0";
                 break;
             case ("30"):
-                tab1.decNumberHosts = "2";
+                Data.setDecNumberHosts("2"); // tab1.decNumberHosts = "2";
                 break;
             case ("29"):
-                tab1.decNumberHosts = "6";
+                Data.setDecNumberHosts("6"); // tab1.decNumberHosts = "6";
                 break;
             case ("28"):
-                tab1.decNumberHosts = "14";
+                Data.setDecNumberHosts("14"); // tab1.decNumberHosts = "14";
                 break;
             case ("27"):
-                tab1.decNumberHosts = "30";
+                Data.setDecNumberHosts("30"); // tab1.decNumberHosts = "30";
                 break;
             case ("26"):
-                tab1.decNumberHosts = "62";
+                Data.setDecNumberHosts("62"); // tab1.decNumberHosts = "62";
                 break;
             case ("25"):
-                tab1.decNumberHosts = "126";
+                Data.setDecNumberHosts("126"); // tab1.decNumberHosts = "126";
                 break;
 
             case ("24"):
-                tab1.decNumberHosts = "254";
+                Data.setDecNumberHosts("254"); // tab1.decNumberHosts = "254";
                 break;
             case ("23"):
-                tab1.decNumberHosts = "510";
+                Data.setDecNumberHosts("510"); // tab1.decNumberHosts = "510";
                 break;
             case ("22"):
-                tab1.decNumberHosts = "1022";
+                Data.setDecNumberHosts("1022"); // tab1.decNumberHosts = "1022";
                 break;
             case ("21"):
-                tab1.decNumberHosts = "2046";
+                Data.setDecNumberHosts("2046"); // tab1.decNumberHosts = "2046";
                 break;
             case ("20"):
-                tab1.decNumberHosts = "4094";
+                Data.setDecNumberHosts("4094"); // tab1.decNumberHosts = "4094";
                 break;
             case ("19"):
-                tab1.decNumberHosts = "8190";
+                Data.setDecNumberHosts("8190"); // tab1.decNumberHosts = "8190";
                 break;
             case ("18"):
-                tab1.decNumberHosts = "16382";
+                Data.setDecNumberHosts("16382"); // tab1.decNumberHosts = "16382";
                 break;
             case ("17"):
-                tab1.decNumberHosts = "32766";
+                Data.setDecNumberHosts("32766"); // tab1.decNumberHosts = "32766";
                 break;
 
             case ("16"):
-                tab1.decNumberHosts = "65534";
+                Data.setDecNumberHosts("65534"); // tab1.decNumberHosts = "65534";
                 break;
             case ("15"):
-                tab1.decNumberHosts = "131070";
+                Data.setDecNumberHosts("131070"); // tab1.decNumberHosts = "131070";
                 break;
             case ("14"):
-                tab1.decNumberHosts = "262142";
+                Data.setDecNumberHosts("262142"); // tab1.decNumberHosts = "262142";
                 break;
             case ("13"):
-                tab1.decNumberHosts = "524286";
+                Data.setDecNumberHosts("524286"); // tab1.decNumberHosts = "524286";
                 break;
             case ("12"):
-                tab1.decNumberHosts = "1048574";
+                Data.setDecNumberHosts("1048574"); // tab1.decNumberHosts = "1048574";
                 break;
             case ("11"):
-                tab1.decNumberHosts = "2097150";
+                Data.setDecNumberHosts("2097150"); // tab1.decNumberHosts = "2097150";
                 break;
             case ("10"):
-                tab1.decNumberHosts = "4194302";
+                Data.setDecNumberHosts("4194302"); // tab1.decNumberHosts = "4194302";
                 break;
             case ("9"):
-                tab1.decNumberHosts = "8388606";
+                Data.setDecNumberHosts("8388606"); // tab1.decNumberHosts = "8388606";
                 break;
 
             case ("8"):
-                tab1.decNumberHosts = "16777214";
+                Data.setDecNumberHosts("16777214"); // tab1.decNumberHosts = "16777214";
                 break;
             case ("7"):
-                tab1.decNumberHosts = "33554430";
+                Data.setDecNumberHosts("33554430"); // tab1.decNumberHosts = "33554430";
                 break;
             case ("6"):
-                tab1.decNumberHosts = "67108862";
+                Data.setDecNumberHosts("67108862"); // tab1.decNumberHosts = "67108862";
                 break;
             case ("5"):
-                tab1.decNumberHosts = "134217726";
+                Data.setDecNumberHosts("134217726"); // tab1.decNumberHosts = "134217726";
                 break;
             case ("4"):
-                tab1.decNumberHosts = "268435454";
+                Data.setDecNumberHosts("268435454"); // tab1.decNumberHosts = "268435454";
                 break;
             case ("3"):
-                tab1.decNumberHosts = "536870910";
+                Data.setDecNumberHosts("536870910"); // tab1.decNumberHosts = "536870910";
                 break;
             case ("2"):
-                tab1.decNumberHosts = "1073741822";
+                Data.setDecNumberHosts("1073741822"); // tab1.decNumberHosts = "1073741822";
                 break;
             case ("1"):
-                tab1.decNumberHosts = "2147483646";
+                Data.setDecNumberHosts("2147483646"); // tab1.decNumberHosts = "2147483646";
                 break;
         }
     }
 
     // заполним массив boolean[] binIPAddressArray
     public static void fillingTheBinIPAddressArray(CalculationAddresses tab) {
-        tab.sIPAddressBin = "";
-        decToBin(Integer.parseInt(tab.ipAddressB3));
+        Data.setsIpAddressBin("");
+        decToBin(Integer.parseInt(Data.getIpByte3()));
         for (int i = 31; i >= 24; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i - 24];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
+            Data.setBinIPAddressArray(i, bitOrder[i - 24]); // tab.binIPAddressArray[i] = bitOrder[i - 24];
+            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24])); // tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
         }
-        tab.sIPAddressBin += " ";
+        Data.setsIpAddressBin(Data.getsIpAddressBin() + " "); //        tab.sIPAddressBin += " ";
 
-        decToBin(Integer.parseInt(tab.ipAddressB2));
+        decToBin(Integer.parseInt(Data.getIpByte2()));
         for (int i = 23; i >= 16; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i - 16];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 16]);
-        }
-        tab.sIPAddressBin += " ";
+            Data.setBinIPAddressArray(i, bitOrder[i - 16]);
+            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 16]));
 
-        decToBin(Integer.parseInt(tab.ipAddressB1));
+//            tab.binIPAddressArray[i] = bitOrder[i - 16];
+//            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 16]);
+        }
+        Data.setsIpAddressBin(Data.getsIpAddressBin() + " ");
+//        tab.sIPAddressBin += " ";
+
+        decToBin(Integer.parseInt(Data.getIpByte1()));
         for (int i = 15; i >= 8; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i - 8];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 8]);
-        }
-        tab.sIPAddressBin += " ";
+            Data.setBinIPAddressArray(i, bitOrder[i - 8]);
+            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 8]));
 
-        decToBin(Integer.parseInt(tab.ipAddressB0));
+//            tab.binIPAddressArray[i] = bitOrder[i - 8];
+//            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 8]);
+        }
+        Data.setsIpAddressBin(Data.getsIpAddressBin() + " ");
+//        tab.sIPAddressBin += " ";
+
+        decToBin(Integer.parseInt(Data.getIpByte0()));
         for (int i = 7; i >= 0; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i]);
+            Data.setBinIPAddressArray(i, bitOrder[i]);
+            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i]));
+//            tab.binIPAddressArray[i] = bitOrder[i];
+//            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i]);
         }
     }
 
-    public String fillingValuesIPAddressBits(boolean bit) {
-        if (bit == true) {
+    public static String fillingValuesIPAddressBits(boolean bit) {
+        if (bit) {
             return "1";
         } else {
             return "0";
@@ -187,29 +165,49 @@ public class CalculationAddresses {
 
     // заполним массив boolean[] binNetmaskArray
     public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
-        tab.sNetmaskBin = "";
+//        tab.sNetmaskBin = "";
+        Data.setFullMask("");
         for (int i = 31; i >= 0; i--) {
             if (i >= 32 - Integer.parseInt(tab.cidr)) {
-                tab.binNetmaskArray[i] = true;
-                tab.sNetmaskBin += "1";
+                Data.setBinNetmaskArray(i, true);
+//                tab.binNetmaskArray[i] = true;
+                Data.setsNetmaskBin(Data.getsNetmaskBin() + "1");
+//                tab.sNetmaskBin += "1";
             } else {
-                tab.binNetmaskArray[i] = false;
-                tab.sNetmaskBin += "0";
+                Data.setBinNetmaskArray(i, false);
+//                tab.binNetmaskArray[i] = false;
+                Data.setsNetmaskBin(Data.getsNetmaskBin() + "0");
+//                tab.sNetmaskBin += "0";
             }
-            if (i == 24 || i == 16 || i == 8) tab.sNetmaskBin += " ";
+            if (i == 24 || i == 16 || i == 8)
+                Data.setsNetmaskBin(Data.getsNetmaskBin() + " "); // tab.sNetmaskBin += " ";
         }
     }
 
     // рассчитываем значение binNetwork[32] and decNetwork
-    public static void fillingTheBinNetworkArray(CalculationAddresses tab) {
-        tab.sNetworkBin = "";
-        tab.sFirstAddressBin = "";
-        tab.sLastAddressBin = "";
-        tab.sBroadcastBin = "";
+    public static void fillingTheBinNetworkArray() {
+//        tab.sNetworkBin = "";
+        Data.setsNetworkBin("");
+
+//        tab.sFirstAddressBin = "";
+        Data.setsFirstAddressBin("");
+
+//        tab.sLastAddressBin = "";
+        Data.setsLastAddressBin("");
+
+//        tab.sBroadcastBin = "";
+        Data.setsBroadcastBin("");
+
         for (int i = 31; i >= 0; i--) {
-            if (tab.binNetmaskArray[i]) {
-                tab.binNetworkArray[i] = tab.binIPAddressArray[i];
-                if (tab.binIPAddressArray[i]) {
+//            if (tab.binNetmaskArray[i]) {
+                if (Data.getBinNetmaskArray()[i]) {
+
+//                tab.binNetworkArray[i] = tab.binIPAddressArray[i];
+                Data.setBinNetworkArray(i, Data.getBinIPAddressArray()[i]);
+
+//                if (tab.binIPAddressArray[i]) {
+                    if (Data.getBinIPAddressArray()[i]) {
+
                     tab.sNetworkBin += "1";
                     tab.binFirstAddress[i] = true;
                     tab.sFirstAddressBin += "1";

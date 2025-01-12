@@ -6,10 +6,10 @@ public class CheckingCorrectnessIPAddress {
     public static boolean checkingCorrectnessIPAddress(String sIP) {
         String[] sByte = {"", "", "", ""};
 
-        sIPCorrectlyB3 = "";
-        sIPCorrectlyB2 = "";
-        sIPCorrectlyB1 = "";
-        sIPCorrectlyB0 = "";
+//        sIPCorrectlyB3 = "";
+//        sIPCorrectlyB2 = "";
+//        sIPCorrectlyB1 = "";
+//        sIPCorrectlyB0 = "";
 
         int iByte;
 
@@ -47,10 +47,10 @@ public class CheckingCorrectnessIPAddress {
                         break;
                     case (0):
                         if (iByte < 0 || iByte > 254) return false;
-                        sIPCorrectlyB3 = sByte[3];
-                        sIPCorrectlyB2 = sByte[2];
-                        sIPCorrectlyB1 = sByte[1];
-                        sIPCorrectlyB0 = sByte[0];
+                        Data.setIpByte3(sByte[3]);
+                        Data.setIpByte2(sByte[2]);
+                        Data.setIpByte1(sByte[1]);
+                        Data.setIpByte0(sByte[0]);
                         break;
                 }
 

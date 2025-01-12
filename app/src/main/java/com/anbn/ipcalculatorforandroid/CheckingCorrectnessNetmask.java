@@ -1,37 +1,13 @@
 package com.anbn.ipcalculatorforandroid;
 
-import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB0;
-import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB1;
-import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB2;
-import static com.anbn.ipcalculatorforandroid.MainActivity.sNetmaskCorrectlyB3;
-
 public class CheckingCorrectnessNetmask {
-    private static boolean netmaskStatus = false;
-    private static boolean cidrStatus = false;
-
-    public static boolean isCidrStatus() {
-        return cidrStatus;
-    }
-
-    public static void setCidrStatus(boolean cidrStatus) {
-        CheckingCorrectnessNetmask.cidrStatus = cidrStatus;
-    }
-
-    public static boolean getNetmaskStatus() {
-        return netmaskStatus;
-    }
-
-    public static void setNetmaskStatus(boolean netmaskStatus) {
-        CheckingCorrectnessNetmask.netmaskStatus = netmaskStatus;
-    }
-
     public static boolean checkingCorrectnessNetmask(String sNetmask) {
         String[] sByte = {"", "", "", ""};
 
-        sNetmaskCorrectlyB3 = "";
-        sNetmaskCorrectlyB2 = "";
-        sNetmaskCorrectlyB1 = "";
-        sNetmaskCorrectlyB0 = "";
+//        sNetmaskCorrectlyB3 = "";
+//        sNetmaskCorrectlyB2 = "";
+//        sNetmaskCorrectlyB1 = "";
+//        sNetmaskCorrectlyB0 = "";
 
         int iByte;
         int iByte3, iByte2, iByte1, iByte0;
@@ -130,7 +106,7 @@ public class CheckingCorrectnessNetmask {
                             }
                         } else {
                             if (iByte0 == 0) {
-                                //
+                                // temp what did I want to write?
                                 savingNetmaskToVariables(sByte[3], sByte[2], sByte[1], sByte[0]);
                             } else {
                                 return false;
@@ -178,10 +154,15 @@ public class CheckingCorrectnessNetmask {
     // заполним значениями байтов маски подсети переменные
     public static void savingNetmaskToVariables(String sByte3, String sByte2,
                                                 String sByte1, String sByte0) {
-        sNetmaskCorrectlyB3 = sByte3;
-        sNetmaskCorrectlyB2 = sByte2;
-        sNetmaskCorrectlyB1 = sByte1;
-        sNetmaskCorrectlyB0 = sByte0;
+        Data.setMaskByte3(sByte3);
+        Data.setMaskByte2(sByte2);
+        Data.setMaskByte1(sByte1);
+        Data.setMaskByte0(sByte0);
+
+//        sNetmaskCorrectlyB3 = sByte3;
+//        sNetmaskCorrectlyB2 = sByte2;
+//        sNetmaskCorrectlyB1 = sByte1;
+//        sNetmaskCorrectlyB0 = sByte0;
     }
 
     // при изменении поля netmask корректными значениями заполним поле CIDR
@@ -293,6 +274,4 @@ public class CheckingCorrectnessNetmask {
         }
         return cIDR;
     }
-
-
 }
