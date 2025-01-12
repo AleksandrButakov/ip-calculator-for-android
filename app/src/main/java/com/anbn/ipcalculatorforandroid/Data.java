@@ -24,12 +24,12 @@ public class Data {
     private static String decBroadcast;
     private static String decNumberHosts;
 
-    private static String sIpAddressBin;
-    private static String sNetworkBin;
-    private static String sNetmaskBin;
-    private static String sFirstAddressBin;
-    private static String sLastAddressBin;
-    private static String sBroadcastBin;
+    private static String strIpAddressBin;
+    private static String strNetworkBin;
+    private static String strNetmaskBin;
+    private static String strFirstAddressBin;
+    private static String strLastAddressBin;
+    private static String strBroadcastBin;
 
     private static boolean[] binIPAddressArray = new boolean[32]; //
     private static boolean[] binNetmaskArray = new boolean[32]; //
@@ -37,7 +37,23 @@ public class Data {
     private static boolean[] binBroadcast = new boolean[32]; //
     private static boolean[] binNetmask = new boolean[32]; //
     private static boolean[] binFirstAddress = new boolean[32];
+    private static boolean[] binLastAddress = new boolean[32];
 
+
+    /**
+     * Устанавливает значение определенного бита.
+     *
+     * @param index Индекс бита (0–31).
+     * @param value Значение, которое нужно установить (true или false).
+     * @throws IndexOutOfBoundsException Если индекс находится вне диапазона массива.
+     */
+    public static void setBinLastAddress(int index, boolean value) {
+        if (index >= 0 && index < binLastAddress.length) {
+            binLastAddress[index] = value;
+        } else {
+            throw new IndexOutOfBoundsException("Индекс вне допустимого диапазона: " + index);
+        }
+    }
 
     /**
      * Устанавливает значение определенного бита.
@@ -204,52 +220,52 @@ public class Data {
         Data.decNumberHosts = decNumberHosts;
     }
 
-    public static String getsIpAddressBin() {
-        return sIpAddressBin;
+    public static String getStrIpAddressBin() {
+        return strIpAddressBin;
     }
 
-    public static void setsIpAddressBin(String sIpAddressBin) {
-        Data.sIpAddressBin = sIpAddressBin;
+    public static void setStrIpAddressBin(String strIpAddressBin) {
+        Data.strIpAddressBin = strIpAddressBin;
     }
 
-    public static String getsNetworkBin() {
-        return sNetworkBin;
+    public static String getStrNetworkBin() {
+        return strNetworkBin;
     }
 
-    public static void setsNetworkBin(String sNetworkBin) {
-        Data.sNetworkBin = sNetworkBin;
+    public static void setStrNetworkBin(String strNetworkBin) {
+        Data.strNetworkBin = strNetworkBin;
     }
 
-    public static String getsNetmaskBin() {
-        return sNetmaskBin;
+    public static String getStrNetmaskBin() {
+        return strNetmaskBin;
     }
 
-    public static void setsNetmaskBin(String sNetmaskBin) {
-        Data.sNetmaskBin = sNetmaskBin;
+    public static void setStrNetmaskBin(String strNetmaskBin) {
+        Data.strNetmaskBin = strNetmaskBin;
     }
 
-    public static String getsFirstAddressBin() {
-        return sFirstAddressBin;
+    public static String getStrFirstAddressBin() {
+        return strFirstAddressBin;
     }
 
-    public static void setsFirstAddressBin(String sFirstAddressBin) {
-        Data.sFirstAddressBin = sFirstAddressBin;
+    public static void setStrFirstAddressBin(String strFirstAddressBin) {
+        Data.strFirstAddressBin = strFirstAddressBin;
     }
 
-    public static String getsLastAddressBin() {
-        return sLastAddressBin;
+    public static String getStrLastAddressBin() {
+        return strLastAddressBin;
     }
 
-    public static void setsLastAddressBin(String sLastAddressBin) {
-        Data.sLastAddressBin = sLastAddressBin;
+    public static void setStrLastAddressBin(String strLastAddressBin) {
+        Data.strLastAddressBin = strLastAddressBin;
     }
 
-    public static String getsBroadcastBin() {
-        return sBroadcastBin;
+    public static String getStrBroadcastBin() {
+        return strBroadcastBin;
     }
 
-    public static void setsBroadcastBin(String sBroadcastBin) {
-        Data.sBroadcastBin = sBroadcastBin;
+    public static void setStrBroadcastBin(String strBroadcastBin) {
+        Data.strBroadcastBin = strBroadcastBin;
     }
 
     public static boolean[] getBinIPAddressArray() {
@@ -300,6 +316,8 @@ public class Data {
         Data.binFirstAddress = binFirstAddress;
     }
 
+
+
     public static boolean[] getBinLastAddress() {
         return binLastAddress;
     }
@@ -308,7 +326,7 @@ public class Data {
         Data.binLastAddress = binLastAddress;
     }
 
-    private static boolean[] binLastAddress = new boolean[32];
+
 
 
     public static String getFullMask() {

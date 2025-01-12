@@ -49,25 +49,25 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     // выводим логи на экран
-    public void outputResults(CalculationAddresses tab) {
+    public void outputResults() {
         s = s + "CALCULATION NUMBER #" + calculationNumber + "\n";
         calculationNumber++;
-        s += "IP address: " + tab.decIPAddress + "\n";
-        s += "CIDR:       " + tab.decCIDR + "\n";
-        s += "Netmask:    " + tab.decNetMask + "\n\n";
+        s += "IP address: " + Data.getDecIPAddress() + "\n"; // tab.decIPAddress + "\n";
+        s += "CIDR:       " + Data.getDecCIDR() + "\n"; // tab.decCIDR + "\n";
+        s += "Netmask:    " + Data.getDecNetMask() + "\n"; // tab.decNetMask + "\n\n";
         s += "Decimal data format:\n";
-        s += "Network:       " + tab.decNetwork + "\n";
-        s += "First Address: " + tab.decFirstAddress + "\n";
-        s += "Last Address:  " + tab.decLastAddress + "\n";
-        s += "Broadcast:     " + tab.decBroadcast + "\n";
-        s += "Number Hosts:  " + tab.decNumberHosts + "\n\n";
+        s += "Network:       " + Data.getDecNetwork() + "\n"; // tab.decNetwork + "\n";
+        s += "First Address: " + Data.getDecFirstAddress() + "\n"; // tab.decFirstAddress + "\n";
+        s += "Last Address:  " + Data.getDecLastAddress() + "\n"; // tab.decLastAddress + "\n";
+        s += "Broadcast:     " + Data.getDecBroadcast() + "\n"; // tab.decBroadcast + "\n";
+        s += "Number Hosts:  " + Data.getDecNumberHosts() + "\n\n"; // tab.decNumberHosts + "\n\n";
         s += "Binary data format:\n";
-        s += "IP address:\n" + tab.sIPAddressBin + "\n";
-        s += "Network:\n" + tab.sNetworkBin + "\n";
-        s += "Netmask:\n" + tab.sNetmaskBin + "\n";
-        s += "First address:\n" + tab.sFirstAddressBin + "\n";
-        s += "Last address:\n" + tab.sLastAddressBin + "\n";
-        s += "Broadcast address:\n" + tab.sBroadcastBin + "\n";
+        s += "IP address:\n" + Data.getStrIpAddressBin() + "\n"; // tab.sIPAddressBin + "\n";
+        s += "Network:\n" + Data.getStrNetworkBin() + "\n"; // tab.sNetworkBin + "\n";
+        s += "Netmask:\n" + Data.getStrNetmaskBin() + "\n"; // tab.sNetmaskBin + "\n";
+        s += "First address:\n" + Data.getStrFirstAddressBin() + "\n"; // tab.sFirstAddressBin + "\n";
+        s += "Last address:\n" + Data.getStrLastAddressBin() + "\n"; // tab.sLastAddressBin + "\n";
+        s += "Broadcast address:\n" + Data.getStrBroadcastBin() + "\n"; // tab.sBroadcastBin + "\n";
         s += "-----------------------------------";
         s += "\n\n";
     }

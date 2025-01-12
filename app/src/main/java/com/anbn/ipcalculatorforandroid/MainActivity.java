@@ -237,7 +237,8 @@ public class MainActivity extends AppCompatActivity {
                             Data.setFullMask(CheckingCorrectnessCIDR.searchForNetmaskByCIDR(input));
                             // заполним значения байт маски для дальнейших вычислений
                             CheckingCorrectnessNetmask.checkingCorrectnessNetmask(Data.getFullMask());
-                            data.cidr = netmask;
+//                            data.cidr = netmask;
+                            Data.setStrCidr(netmask);
                         }
                     } else {
                         // Маска некорректна, устанавливаем красный цвет текста
@@ -390,50 +391,57 @@ public class MainActivity extends AppCompatActivity {
             // введены корректные данные. Рассчитываем все параметры и выводим на экран
 
             // заполним массив boolean[] binIPAddressArray
-            CalculationAddresses.fillingTheBinIPAddressArray(data);
-            binIPAddressText1.setText(data.sIPAddressBin);
+            CalculationAddresses.fillingTheBinIPAddressArray();
+            binIPAddressText1.setText(Data.getStrIpAddressBin()); // data.sIPAddressBin);
 
             // заполним массив boolean[] binNetmaskArray
-            CalculationAddresses.fillingTheBinNetmaskArray(data);
-            binNetmaskText1.setText(data.sNetmaskBin);
+            CalculationAddresses.fillingTheBinNetmaskArray();
+            binNetmaskText1.setText(Data.getStrNetmaskBin()); // data.sNetmaskBin);
 
             // рассчитываем значение binNetwork[32], decNetwork
             // binFirstAddress[32], binLastAddress[32], binBroadcast[32] и выводим на экран
-            CalculationAddresses.fillingTheBinNetworkArray(data);
-            decNetworkIPText1.setText(data.decNetwork);
-            binNetworkText1.setText(data.sNetworkBin);
-            decNetworkIPText1.setText(CalculationAddresses.binToDec(data.binNetworkArray));
-            binFirstAddressText1.setText(data.sFirstAddressBin);
-            decFirstAddressText1.setText(CalculationAddresses.binToDec(data.binFirstAddress));
-            binLastAddressText1.setText(data.sLastAddressBin);
-            decLastAddressText1.setText(CalculationAddresses.binToDec(data.binLastAddress));
-            binBroadcastText1.setText(data.sBroadcastBin);
-            decBroadcastText1.setText(CalculationAddresses.binToDec(data.binBroadcast));
+            CalculationAddresses.fillingTheBinNetworkArray();
+            decNetworkIPText1.setText(Data.getDecNetwork()); // data.decNetwork);
+            binNetworkText1.setText(Data.getStrNetworkBin()); // data.sNetworkBin);
+            decNetworkIPText1.setText(CalculationAddresses.binToDec(Data.getBinNetworkArray())); // data.binNetworkArray));
+            binFirstAddressText1.setText(Data.getStrFirstAddressBin()); // data.sFirstAddressBin);
+            decFirstAddressText1.setText(CalculationAddresses.binToDec(Data.getBinFirstAddress())); // data.binFirstAddress));
+            binLastAddressText1.setText(Data.getStrLastAddressBin()); // data.sLastAddressBin);
+            decLastAddressText1.setText(CalculationAddresses.binToDec(Data.getBinLastAddress())); // data.binLastAddress));
+            binBroadcastText1.setText(Data.getStrBroadcastBin()); // data.sBroadcastBin);
+            decBroadcastText1.setText(CalculationAddresses.binToDec(Data.getBinBroadcast())); // data.binBroadcast));
 
             // выводим параметр netmask на экран
             decNetmaskText1.setText(netmask.getText());
 
             // рассчитываем параметр tab1.decNumberHosts и выводим на экран
-            CalculationAddresses.calculationNumberHosts(data);
-            decNumberHostsText1.setText(data.decNumberHosts);
+            CalculationAddresses.calculationNumberHosts();
+            decNumberHostsText1.setText(Data.getDecNumberHosts()); // data.decNumberHosts);
 
             // сворачиваем клавиатуру при нажатии на кнопку
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(ipAddress.getWindowToken(), 0);
 
             // заполним переменные для дальнейшего использования в layout Results
-            data.decIPAddress = ipAddress.getText().toString();
-            data.decCIDR = cidr.getText().toString();
-            data.decNetMask = netmask.getText().toString();
+//            data.decIPAddress = ipAddress.getText().toString();
+            Data.setDecIPAddress(ipAddress.getText().toString());
+//            data.decCIDR = cidr.getText().toString();
+            Data.setDecCIDR(cidr.getText().toString());
+//            data.decNetMask = netmask.getText().toString();
+            Data.setDecNetMask(netmask.getText().toString());
 
-            data.decNetwork = decNetworkIPText1.getText().toString();
-            data.decFirstAddress = decFirstAddressText1.getText().toString();
-            data.decLastAddress = decLastAddressText1.getText().toString();
-            data.decBroadcast = decBroadcastText1.getText().toString();
+//            data.decNetwork = decNetworkIPText1.getText().toString();
+            Data.setDecNetwork(decNetworkIPText1.getText().toString());
+//            data.decFirstAddress = decFirstAddressText1.getText().toString();
+            Data.setDecFirstAddress(decFirstAddressText1.getText().toString());
+//            data.decLastAddress = decLastAddressText1.getText().toString();
+            Data.setDecLastAddress(decLastAddressText1.getText().toString());
+//            data.decBroadcast = decBroadcastText1.getText().toString();
+            Data.setDecBroadcast(decBroadcastText1.getText().toString());
 
             // выводим результаты в поле Results
             ResultsActivity resultsActivity = new ResultsActivity();
-            resultsActivity.outputResults(data);
+            resultsActivity.outputResults();
         }
     }
 

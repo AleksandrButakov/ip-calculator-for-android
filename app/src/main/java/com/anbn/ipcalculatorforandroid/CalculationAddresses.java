@@ -13,7 +13,7 @@ public class CalculationAddresses {
     String netmaskB1 = "";
     String netmaskB0 = "";
 
-    public static void calculationNumberHosts(CalculationAddresses tab1) {
+    public static void calculationNumberHosts() {
         switch (Data.getStrCidr()) {  // tab1.cidr) {
             case ("31"):
                 Data.setDecNumberHosts("0"); // tab1.decNumberHosts = "0";
@@ -115,41 +115,41 @@ public class CalculationAddresses {
     }
 
     // заполним массив boolean[] binIPAddressArray
-    public static void fillingTheBinIPAddressArray(CalculationAddresses tab) {
-        Data.setsIpAddressBin("");
+    public static void fillingTheBinIPAddressArray() {
+        Data.setStrIpAddressBin("");
         decToBin(Integer.parseInt(Data.getIpByte3()));
         for (int i = 31; i >= 24; i--) {
             Data.setBinIPAddressArray(i, bitOrder[i - 24]); // tab.binIPAddressArray[i] = bitOrder[i - 24];
-            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24])); // tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24])); // tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
         }
-        Data.setsIpAddressBin(Data.getsIpAddressBin() + " "); //        tab.sIPAddressBin += " ";
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " "); //        tab.sIPAddressBin += " ";
 
         decToBin(Integer.parseInt(Data.getIpByte2()));
         for (int i = 23; i >= 16; i--) {
             Data.setBinIPAddressArray(i, bitOrder[i - 16]);
-            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 16]));
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 16]));
 
 //            tab.binIPAddressArray[i] = bitOrder[i - 16];
 //            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 16]);
         }
-        Data.setsIpAddressBin(Data.getsIpAddressBin() + " ");
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " ");
 //        tab.sIPAddressBin += " ";
 
         decToBin(Integer.parseInt(Data.getIpByte1()));
         for (int i = 15; i >= 8; i--) {
             Data.setBinIPAddressArray(i, bitOrder[i - 8]);
-            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 8]));
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 8]));
 
 //            tab.binIPAddressArray[i] = bitOrder[i - 8];
 //            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 8]);
         }
-        Data.setsIpAddressBin(Data.getsIpAddressBin() + " ");
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " ");
 //        tab.sIPAddressBin += " ";
 
         decToBin(Integer.parseInt(Data.getIpByte0()));
         for (int i = 7; i >= 0; i--) {
             Data.setBinIPAddressArray(i, bitOrder[i]);
-            Data.setsIpAddressBin(Data.getsIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i]));
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i]));
 //            tab.binIPAddressArray[i] = bitOrder[i];
 //            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i]);
         }
@@ -164,91 +164,121 @@ public class CalculationAddresses {
     }
 
     // заполним массив boolean[] binNetmaskArray
-    public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
+    public static void fillingTheBinNetmaskArray() {
 //        tab.sNetmaskBin = "";
         Data.setFullMask("");
         for (int i = 31; i >= 0; i--) {
-            if (i >= 32 - Integer.parseInt(tab.cidr)) {
+            if (i >= 32 - Integer.parseInt(Data.getStrCidr())) { // tab.cidr)) {
                 Data.setBinNetmaskArray(i, true);
 //                tab.binNetmaskArray[i] = true;
-                Data.setsNetmaskBin(Data.getsNetmaskBin() + "1");
+                Data.setStrNetmaskBin(Data.getStrNetmaskBin() + "1");
 //                tab.sNetmaskBin += "1";
             } else {
                 Data.setBinNetmaskArray(i, false);
 //                tab.binNetmaskArray[i] = false;
-                Data.setsNetmaskBin(Data.getsNetmaskBin() + "0");
+                Data.setStrNetmaskBin(Data.getStrNetmaskBin() + "0");
 //                tab.sNetmaskBin += "0";
             }
             if (i == 24 || i == 16 || i == 8)
-                Data.setsNetmaskBin(Data.getsNetmaskBin() + " "); // tab.sNetmaskBin += " ";
+                Data.setStrNetmaskBin(Data.getStrNetmaskBin() + " "); // tab.sNetmaskBin += " ";
         }
     }
 
     // рассчитываем значение binNetwork[32] and decNetwork
     public static void fillingTheBinNetworkArray() {
 //        tab.sNetworkBin = "";
-        Data.setsNetworkBin("");
+        Data.setStrNetworkBin("");
 
 //        tab.sFirstAddressBin = "";
-        Data.setsFirstAddressBin("");
+        Data.setStrFirstAddressBin("");
 
 //        tab.sLastAddressBin = "";
-        Data.setsLastAddressBin("");
+        Data.setStrLastAddressBin("");
 
 //        tab.sBroadcastBin = "";
-        Data.setsBroadcastBin("");
+        Data.setStrBroadcastBin("");
 
         for (int i = 31; i >= 0; i--) {
 //            if (tab.binNetmaskArray[i]) {
-                if (Data.getBinNetmaskArray()[i]) {
+            if (Data.getBinNetmaskArray()[i]) {
 
 //                tab.binNetworkArray[i] = tab.binIPAddressArray[i];
                 Data.setBinNetworkArray(i, Data.getBinIPAddressArray()[i]);
 
 //                if (tab.binIPAddressArray[i]) {
-                    if (Data.getBinIPAddressArray()[i]) {
+                if (Data.getBinIPAddressArray()[i]) {
 
-                    tab.sNetworkBin += "1";
-                    tab.binFirstAddress[i] = true;
-                    tab.sFirstAddressBin += "1";
-                    tab.binLastAddress[i] = true;
-                    tab.sLastAddressBin += "1";
-                    tab.binBroadcast[i] = true;
-                    tab.sBroadcastBin += "1";
+//                    tab.sNetworkBin += "1";
+                    Data.setStrNetworkBin(Data.getStrNetworkBin() + "1");
+//                    tab.binFirstAddress[i] = true;
+                    Data.setBinFirstAddress(i, true);
+//                    tab.sFirstAddressBin += "1";
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "1");
+//                    tab.binLastAddress[i] = true;
+                    Data.setBinLastAddress(i, true);
+//                    tab.sLastAddressBin += "1";
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "1");
+//                    tab.binBroadcast[i] = true;
+                    Data.setBinBroadcast(i, true);
+//                    tab.sBroadcastBin += "1";
+                    Data.setStrBroadcastBin(Data.getStrBroadcastBin() + "1");
                 } else {
-                    tab.sNetworkBin += "0";
-                    tab.binFirstAddress[i] = false;
-                    tab.sFirstAddressBin += "0";
-                    tab.binLastAddress[i] = false;
-                    tab.sLastAddressBin += "0";
-                    tab.binBroadcast[i] = false;
-                    tab.sBroadcastBin += "0";
+//                    tab.sNetworkBin += "0";
+                    Data.setStrNetworkBin(Data.getStrNetworkBin() + "0");
+//                    tab.binFirstAddress[i] = false;
+                    Data.setBinFirstAddress(i, false);
+//                    tab.sFirstAddressBin += "0";
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "0");
+//                    tab.binLastAddress[i] = false;
+                    Data.setBinLastAddress(i, false);
+//                    tab.sLastAddressBin += "0";
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "0");
+//                    tab.binBroadcast[i] = false;
+                    Data.setBinBroadcast(i, false);
+//                    tab.sBroadcastBin += "0";
+                    Data.setStrBroadcastBin(Data.getStrBroadcastBin() + "0");
                 }
             } else {
-                tab.binNetworkArray[i] = false;
-                tab.sNetworkBin += "0";
+//                tab.binNetworkArray[i] = false;
+                Data.setBinNetworkArray(i,false);
+//                tab.sNetworkBin += "0";
+                Data.setStrNetworkBin(Data.getStrNetworkBin() + "0");
 
                 // заполним массив tab.binFirstAddress[] and tab.binLastAddress[] данными
                 if (i == 0) {
-                    tab.binFirstAddress[i] = true;
-                    tab.sFirstAddressBin += "1";
-                    tab.binLastAddress[i] = false;
-                    tab.sLastAddressBin += "0";
+//                    tab.binFirstAddress[i] = true;
+                    Data.setBinFirstAddress(i,true);
+//                    tab.sFirstAddressBin += "1";
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "1");
+//                    tab.binLastAddress[i] = false;
+                    Data.setBinLastAddress(i, true);
+//                    tab.sLastAddressBin += "0";
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "0");
                 } else {
-                    tab.binFirstAddress[i] = false;
-                    tab.sFirstAddressBin += "0";
-                    tab.binLastAddress[i] = true;
-                    tab.sLastAddressBin += "1";
+//                    tab.binFirstAddress[i] = false;
+                    Data.setBinFirstAddress(i, true);
+//                    tab.sFirstAddressBin += "0";
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "0");
+//                    tab.binLastAddress[i] = true;
+                    Data.setBinLastAddress(i, true);
+//                    tab.sLastAddressBin += "1";
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "1");
                 }
-                tab.binBroadcast[i] = true;
-                tab.sBroadcastBin += "1";
+//                tab.binBroadcast[i] = true;
+                Data.setBinBroadcast(i, true);
+//                tab.sBroadcastBin += "1";
+                Data.setStrBroadcastBin(Data.getStrBroadcastBin() + "1");
             }
 
             if (i == 24 || i == 16 || i == 8) {
-                tab.sNetworkBin += " ";
-                tab.sFirstAddressBin += " ";
-                tab.sLastAddressBin += " ";
-                tab.sBroadcastBin += " ";
+//                tab.sNetworkBin += " ";
+                Data.setStrNetworkBin(Data.getStrNetworkBin() + " ");
+//                tab.sFirstAddressBin += " ";
+                Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + " ");
+//                tab.sLastAddressBin += " ";
+                Data.setStrLastAddressBin(Data.getStrLastAddressBin() + " ");
+//                tab.sBroadcastBin += " ";
+                Data.setStrBroadcastBin(Data.getStrBroadcastBin() + " ");
             }
         }
     }
