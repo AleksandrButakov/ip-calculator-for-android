@@ -12,7 +12,6 @@ public class Data {
     private static String maskByte0 = "";
     private static String fullMask = "";
 
-
     // переменные назначены и именованы в соответствии с расположением полей в layout
     private static String decIPAddress;
     private static String decCIDR;
@@ -38,7 +37,6 @@ public class Data {
     private static boolean[] binNetmask = new boolean[32]; //
     private static boolean[] binFirstAddress = new boolean[32];
     private static boolean[] binLastAddress = new boolean[32];
-
 
     /**
      * Устанавливает значение определенного бита.
@@ -144,17 +142,6 @@ public class Data {
             throw new IndexOutOfBoundsException("Индекс вне допустимого диапазона: " + index);
         }
     }
-
-//    // Геттер для получения конкретного бита
-//    public static boolean getBinIPAddressArray(int index) {
-//        if (index >= 0 && index < binIPAddressArray.length) {
-//            return binIPAddressArray[index];
-//        } else {
-//            throw new IndexOutOfBoundsException("Индекс вне допустимого диапазона: " + index);
-//        }
-//    }
-
-
 
     public static String getDecIPAddress() {
         return decIPAddress;
@@ -316,8 +303,6 @@ public class Data {
         Data.binFirstAddress = binFirstAddress;
     }
 
-
-
     public static boolean[] getBinLastAddress() {
         return binLastAddress;
     }
@@ -325,9 +310,6 @@ public class Data {
     public static void setBinLastAddress(boolean[] binLastAddress) {
         Data.binLastAddress = binLastAddress;
     }
-
-
-
 
     public static String getFullMask() {
         return fullMask;

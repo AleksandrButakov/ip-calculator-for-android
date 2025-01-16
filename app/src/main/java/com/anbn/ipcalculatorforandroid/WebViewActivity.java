@@ -18,17 +18,14 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
-
         // для стрелки назад в ActionBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         // добавим webView для отображения политики конфиденциальности
         web = findViewById(R.id.webView);
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
         web.setWebViewClient(new Callback());
         web.loadUrl(MainActivity.url);
-
     }
 
     // для стрелки назад в ActionBar
@@ -39,7 +36,6 @@ public class WebViewActivity extends AppCompatActivity {
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

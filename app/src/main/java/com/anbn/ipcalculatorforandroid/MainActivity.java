@@ -20,12 +20,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
-
     public static String url = "";
-
     Intent intentPrivacy;
 
-    // temp new
     private EditText ipAddress;
     private EditText cidr;
     private EditText netmask;
@@ -58,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView binFirstAddressText1;
     private TextView binLastAddressText1;
 
-
     private boolean isUpdating = false; // Флаг для предотвращения зацикливания
 
     @Override
@@ -68,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
         // установим ночную тему в соответствии с настройками системы
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-
-        // temp new
         ipAddress = (EditText) findViewById(R.id.ipAddressEdit);
         cidr = (EditText) findViewById(R.id.cidr);
         netmask = (EditText) findViewById(R.id.netmaskEdit);
@@ -119,24 +113,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 clearingOutputData();
-
-                // temp origin
-//                String sIp = ipAddress.getText().toString();
                 String sIp = s.toString();
-
                 // проверяем что поле IP Address содержит корректное значение
                 if (CheckingCorrectnessIPAddress.checkingCorrectnessIPAddress(sIp)) {
                     // ip address корректен, устанавливаем дефолтный цвет текста
                     ipAddress.setTextColor(AuxiliaryVariables.getTextColorDefault());
-
                     // проверим что все байты адреса заполнены
                     if (!Data.getIpByte3().isEmpty() && !Data.getIpByte2().isEmpty() &&
                             !Data.getIpByte1().isEmpty() && !Data.getIpByte0().isEmpty()) {
-
                     } else {
                         cleanIpAddressData();
                     }
-
                 } else {
                     ipAddress.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
                     // очищаем поля вывода результатов
@@ -156,19 +143,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-
                 if (!isUpdating) {
                     // Блокируем обработку netmask listener
                     isUpdating = true;
-
                     cleanCidrData();
                     cleanNetmaskData();
                     clearingOutputData();
-
-                    // temp origin
-//                    String sCidr = cidr.getText().toString();
                     String sCidr = s.toString();
-
                     // проверяем что поле cidr содержит значение
                     if (isInteger(sCidr)) {
                         if (!"".contentEquals(s)) {
@@ -176,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
                             if (iCidr >= 1 && iCidr <= 30) {
                                 // cidr корректен, устанавливаем дефолтный цвет текста
                                 cidr.setTextColor(AuxiliaryVariables.getTextColorDefault());
-//                                IpAddress.setStrCidr(iCidr);
                                 netmask.setTextColor(AuxiliaryVariables.getTextColorDefault());
                                 netmask.setText(CalculationAddresses.calculationNetMask(iCidr));
                                 // присвоим переменной корректное значение для дальнейших вычислений
@@ -214,15 +194,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 if (!isUpdating) {
                     // Блокируем обработку cidr listener
                     isUpdating = true;
-
                     cidr.setText("");
                     cleanNetmaskData();
                     cleanCidrData();
-
+                    clearingOutputData();
                     String input = s.toString();
                     // Проверка на корректность сетевой маски IPv4
                     if (CheckingCorrectnessNetmask.checkingCorrectnessNetmask(input)) {
@@ -237,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
                             Data.setFullMask(CheckingCorrectnessCIDR.searchForNetmaskByCIDR(input));
                             // заполним значения байт маски для дальнейших вычислений
                             CheckingCorrectnessNetmask.checkingCorrectnessNetmask(Data.getFullMask());
-//                            data.cidr = netmask;
                             Data.setStrCidr(netmask);
                         }
                     } else {
@@ -284,18 +261,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // переменная для определения выбранного пункта меню
         int id = item.getItemId();
-
         // переменная для определения темы системы day/night
         int currentNightMode = getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK;
-
         switch (id) {
             case R.id.results:
                 // делаем активным layout Results
                 Intent intentResult = new Intent(this, ResultsActivity.class);
                 startActivity(intentResult);
                 return true;
-
             case R.id.privacy:
                 // проверим что есть подключение к сети интернет
                 if (isOnline()) {
@@ -322,7 +296,6 @@ public class MainActivity extends AppCompatActivity {
                     displayToast("Нет подключения к Интернету...");
                 }
                 return true;
-
             case R.id.about:
                 // проверим что есть подключение к сети интернет
                 if (isOnline()) {
@@ -384,12 +357,9 @@ public class MainActivity extends AppCompatActivity {
             // введены некорректные данные
             Toast.makeText(this, "Incorrect data entered...",
                     Toast.LENGTH_SHORT).show();
-
             clearingOutputData();
-
         } else {
             // введены корректные данные. Рассчитываем все параметры и выводим на экран
-
             // заполним массив boolean[] binIPAddressArray
             CalculationAddresses.fillingTheBinIPAddressArray();
             binIPAddressText1.setText(Data.getStrIpAddressBin()); // data.sIPAddressBin);
@@ -423,20 +393,12 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(ipAddress.getWindowToken(), 0);
 
             // заполним переменные для дальнейшего использования в layout Results
-//            data.decIPAddress = ipAddress.getText().toString();
             Data.setDecIPAddress(ipAddress.getText().toString());
-//            data.decCIDR = cidr.getText().toString();
             Data.setDecCIDR(cidr.getText().toString());
-//            data.decNetMask = netmask.getText().toString();
             Data.setDecNetMask(netmask.getText().toString());
-
-//            data.decNetwork = decNetworkIPText1.getText().toString();
             Data.setDecNetwork(decNetworkIPText1.getText().toString());
-//            data.decFirstAddress = decFirstAddressText1.getText().toString();
             Data.setDecFirstAddress(decFirstAddressText1.getText().toString());
-//            data.decLastAddress = decLastAddressText1.getText().toString();
             Data.setDecLastAddress(decLastAddressText1.getText().toString());
-//            data.decBroadcast = decBroadcastText1.getText().toString();
             Data.setDecBroadcast(decBroadcastText1.getText().toString());
 
             // выводим результаты в поле Results

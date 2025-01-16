@@ -1,6 +1,5 @@
 package com.anbn.ipcalculatorforandroid;
 
-// TODO: rename
 public class AuxiliaryVariables {
     private static int textColorDefault;
 
@@ -11,6 +10,4 @@ public class AuxiliaryVariables {
     public static void setTextColorDefault(int textColorDefault) {
         AuxiliaryVariables.textColorDefault = textColorDefault;
     }
-
-
 }
