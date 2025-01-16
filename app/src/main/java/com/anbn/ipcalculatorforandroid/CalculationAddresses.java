@@ -1,282 +1,228 @@
 package com.anbn.ipcalculatorforandroid;
 
-import java.util.Arrays;
-
 public class CalculationAddresses {
-
-    // переменные назначины и именованы в соответствии с расположением полей в layout
-    String decIPAddress;
-    String decCIDR;
-    String decNetMask;
-
-    String decNetwork;
-    String decFirstAddress;
-    String decLastAddress;
-    String decBroadcast;
-    String decNumberHosts;
-
-    String sIPAddressBin;
-    String sNetworkBin;
-    String sNetmaskBin;
-    String sFirstAddressBin;
-    String sLastAddressBin;
-    String sBroadcastBin;
-
-    boolean[] binIPAddressArray = new boolean[32];
-    boolean[] binNetmaskArray = new boolean[32];
-    boolean[] binNetworkArray = new boolean[32];
-    boolean[] binBroadcast = new boolean[32];
-    boolean[] binNetmask = new boolean[32];
-    boolean[] binFirstAddress = new boolean[32];
-    boolean[] binLastAddress = new boolean[32];
-
     // вспомогательная переменная для перевода данных Dec to Bin
     public static boolean[] bitOrder = new boolean[8];
 
-    // переменные для хранения байтов IP адреса
-    String ipAddressB3;
-    String ipAddressB2;
-    String ipAddressB1;
-    String ipAddressB0;
-
-    // переменная для хранения количества бит маски подсети
-    String cidr;
-
-    // переменные для хранения байтов маски подсети
-    String netmaskB3;
-    String netmaskB2;
-    String netmaskB1;
-    String netmaskB0;
-
-
-    public static void calculationNumberHosts(CalculationAddresses tab1) {
-        switch (tab1.cidr) {
+    public static void calculationNumberHosts() {
+        switch (Data.getStrCidr()) {  // tab1.cidr) {
             case ("31"):
-                tab1.decNumberHosts = "0";
+                Data.setDecNumberHosts("0");
                 break;
             case ("30"):
-                tab1.decNumberHosts = "2";
+                Data.setDecNumberHosts("2");
                 break;
             case ("29"):
-                tab1.decNumberHosts = "6";
+                Data.setDecNumberHosts("6");
                 break;
             case ("28"):
-                tab1.decNumberHosts = "14";
+                Data.setDecNumberHosts("14");
                 break;
             case ("27"):
-                tab1.decNumberHosts = "30";
+                Data.setDecNumberHosts("30");
                 break;
             case ("26"):
-                tab1.decNumberHosts = "62";
+                Data.setDecNumberHosts("62");
                 break;
             case ("25"):
-                tab1.decNumberHosts = "126";
+                Data.setDecNumberHosts("126");
                 break;
 
             case ("24"):
-                tab1.decNumberHosts = "254";
+                Data.setDecNumberHosts("254");
                 break;
             case ("23"):
-                tab1.decNumberHosts = "510";
+                Data.setDecNumberHosts("510");
                 break;
             case ("22"):
-                tab1.decNumberHosts = "1022";
+                Data.setDecNumberHosts("1022");
                 break;
             case ("21"):
-                tab1.decNumberHosts = "2046";
+                Data.setDecNumberHosts("2046");
                 break;
             case ("20"):
-                tab1.decNumberHosts = "4094";
+                Data.setDecNumberHosts("4094");
                 break;
             case ("19"):
-                tab1.decNumberHosts = "8190";
+                Data.setDecNumberHosts("8190");
                 break;
             case ("18"):
-                tab1.decNumberHosts = "16382";
+                Data.setDecNumberHosts("16382");
                 break;
             case ("17"):
-                tab1.decNumberHosts = "32766";
+                Data.setDecNumberHosts("32766");
                 break;
 
             case ("16"):
-                tab1.decNumberHosts = "65534";
+                Data.setDecNumberHosts("65534");
                 break;
             case ("15"):
-                tab1.decNumberHosts = "131070";
+                Data.setDecNumberHosts("131070");
                 break;
             case ("14"):
-                tab1.decNumberHosts = "262142";
+                Data.setDecNumberHosts("262142");
                 break;
             case ("13"):
-                tab1.decNumberHosts = "524286";
+                Data.setDecNumberHosts("524286");
                 break;
             case ("12"):
-                tab1.decNumberHosts = "1048574";
+                Data.setDecNumberHosts("1048574");
                 break;
             case ("11"):
-                tab1.decNumberHosts = "2097150";
+                Data.setDecNumberHosts("2097150");
                 break;
             case ("10"):
-                tab1.decNumberHosts = "4194302";
+                Data.setDecNumberHosts("4194302");
                 break;
             case ("9"):
-                tab1.decNumberHosts = "8388606";
+                Data.setDecNumberHosts("8388606");
                 break;
 
             case ("8"):
-                tab1.decNumberHosts = "16777214";
+                Data.setDecNumberHosts("16777214");
                 break;
             case ("7"):
-                tab1.decNumberHosts = "33554430";
+                Data.setDecNumberHosts("33554430");
                 break;
             case ("6"):
-                tab1.decNumberHosts = "67108862";
+                Data.setDecNumberHosts("67108862");
                 break;
             case ("5"):
-                tab1.decNumberHosts = "134217726";
+                Data.setDecNumberHosts("134217726");
                 break;
             case ("4"):
-                tab1.decNumberHosts = "268435454";
+                Data.setDecNumberHosts("268435454");
                 break;
             case ("3"):
-                tab1.decNumberHosts = "536870910";
+                Data.setDecNumberHosts("536870910");
                 break;
             case ("2"):
-                tab1.decNumberHosts = "1073741822";
+                Data.setDecNumberHosts("1073741822");
                 break;
             case ("1"):
-                tab1.decNumberHosts = "2147483646";
+                Data.setDecNumberHosts("2147483646");
                 break;
         }
     }
 
-
     // заполним массив boolean[] binIPAddressArray
-    public static void fillingTheBinIPAddressArray(CalculationAddresses tab) {
-        tab.sIPAddressBin = "";
-        decToBin(Integer.parseInt(tab.ipAddressB3));
+    public static void fillingTheBinIPAddressArray() {
+        Data.setStrIpAddressBin("");
+        decToBin(Integer.parseInt(Data.getIpByte3()));
+
         for (int i = 31; i >= 24; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i - 24];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
+            Data.setBinIPAddressArray(i, bitOrder[i - 24]); // tab.binIPAddressArray[i] = bitOrder[i - 24];
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24])); // tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
         }
-        tab.sIPAddressBin += " ";
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " "); //        tab.sIPAddressBin += " ";
+        decToBin(Integer.parseInt(Data.getIpByte2()));
 
-        decToBin(Integer.parseInt(tab.ipAddressB2));
         for (int i = 23; i >= 16; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i - 16];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 16]);
+            Data.setBinIPAddressArray(i, bitOrder[i - 16]);
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 16]));
         }
-        tab.sIPAddressBin += " ";
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " ");
+        decToBin(Integer.parseInt(Data.getIpByte1()));
 
-        decToBin(Integer.parseInt(tab.ipAddressB1));
         for (int i = 15; i >= 8; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i - 8];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 8]);
+            Data.setBinIPAddressArray(i, bitOrder[i - 8]);
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 8]));
         }
-        tab.sIPAddressBin += " ";
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " ");
+        decToBin(Integer.parseInt(Data.getIpByte0()));
 
-        decToBin(Integer.parseInt(tab.ipAddressB0));
         for (int i = 7; i >= 0; i--) {
-            tab.binIPAddressArray[i] = bitOrder[i];
-            tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i]);
+            Data.setBinIPAddressArray(i, bitOrder[i]);
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i]));
         }
     }
 
-
-    public String fillingValuesIPAddressBits(boolean bit) {
-        if (bit == true) {
+    public static String fillingValuesIPAddressBits(boolean bit) {
+        if (bit) {
             return "1";
         } else {
             return "0";
         }
     }
 
-
     // заполним массив boolean[] binNetmaskArray
-    public static void fillingTheBinNetmaskArray(CalculationAddresses tab) {
-        tab.sNetmaskBin = "";
+    public static void fillingTheBinNetmaskArray() {
+        Data.setStrNetmaskBin("");
         for (int i = 31; i >= 0; i--) {
-            if (i >= 32 - Integer.parseInt(tab.cidr)) {
-                tab.binNetmaskArray[i] = true;
-                tab.sNetmaskBin += "1";
+            if (i >= 32 - Integer.parseInt(Data.getStrCidr())) { // tab.cidr)) {
+                Data.setBinNetmaskArray(i, true);
+                Data.setStrNetmaskBin(Data.getStrNetmaskBin() + "1");
             } else {
-                tab.binNetmaskArray[i] = false;
-                tab.sNetmaskBin += "0";
+                Data.setBinNetmaskArray(i, false);
+                Data.setStrNetmaskBin(Data.getStrNetmaskBin() + "0");
             }
-            if (i == 24 || i == 16 || i == 8) tab.sNetmaskBin += " ";
+            if (i == 24 || i == 16 || i == 8)
+                Data.setStrNetmaskBin(Data.getStrNetmaskBin() + " "); // tab.sNetmaskBin += " ";
         }
     }
 
-
     // рассчитываем значение binNetwork[32] and decNetwork
-    public static void fillingTheBinNetworkArray(CalculationAddresses tab) {
-        tab.sNetworkBin = "";
-        tab.sFirstAddressBin = "";
-        tab.sLastAddressBin = "";
-        tab.sBroadcastBin = "";
+    public static void fillingTheBinNetworkArray() {
+        Data.setStrNetworkBin("");
+        Data.setStrFirstAddressBin("");
+        Data.setStrLastAddressBin("");
+        Data.setStrBroadcastBin("");
+
         for (int i = 31; i >= 0; i--) {
-            if (tab.binNetmaskArray[i] == true) {
-                tab.binNetworkArray[i] = tab.binIPAddressArray[i];
-                if (tab.binIPAddressArray[i] == true) {
-                    tab.sNetworkBin += "1";
-                    tab.binFirstAddress[i] = true;
-                    tab.sFirstAddressBin += "1";
-                    tab.binLastAddress[i] = true;
-                    tab.sLastAddressBin += "1";
-                    tab.binBroadcast[i] = true;
-                    tab.sBroadcastBin += "1";
+            if (Data.getBinNetmaskArray()[i]) {
+                Data.setBinNetworkArray(i, Data.getBinIPAddressArray()[i]);
+                if (Data.getBinIPAddressArray()[i]) {
+                    Data.setStrNetworkBin(Data.getStrNetworkBin() + "1");
+                    Data.setBinFirstAddress(i, true);
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "1");
+                    Data.setBinLastAddress(i, true);
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "1");
+                    Data.setBinBroadcast(i, true);
+                    Data.setStrBroadcastBin(Data.getStrBroadcastBin() + "1");
                 } else {
-                    tab.sNetworkBin += "0";
-                    tab.binFirstAddress[i] = false;
-                    tab.sFirstAddressBin += "0";
-                    tab.binLastAddress[i] = false;
-                    tab.sLastAddressBin += "0";
-                    tab.binBroadcast[i] = false;
-                    tab.sBroadcastBin += "0";
+                    Data.setStrNetworkBin(Data.getStrNetworkBin() + "0");
+                    Data.setBinFirstAddress(i, false);
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "0");
+                    Data.setBinLastAddress(i, false);
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "0");
+                    Data.setBinBroadcast(i, false);
+                    Data.setStrBroadcastBin(Data.getStrBroadcastBin() + "0");
                 }
             } else {
-                tab.binNetworkArray[i] = false;
-                tab.sNetworkBin += "0";
-
+                Data.setBinNetworkArray(i, false);
+                Data.setStrNetworkBin(Data.getStrNetworkBin() + "0");
                 // заполним массив tab.binFirstAddress[] and tab.binLastAddress[] данными
                 if (i == 0) {
-                    tab.binFirstAddress[i] = true;
-                    tab.sFirstAddressBin += "1";
-                    tab.binLastAddress[i] = false;
-                    tab.sLastAddressBin += "0";
+                    Data.setBinFirstAddress(i, true);
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "1");
+                    Data.setBinLastAddress(i, true);
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "0");
                 } else {
-                    tab.binFirstAddress[i] = false;
-                    tab.sFirstAddressBin += "0";
-                    tab.binLastAddress[i] = true;
-                    tab.sLastAddressBin += "1";
+                    Data.setBinFirstAddress(i, true);
+                    Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "0");
+                    Data.setBinLastAddress(i, true);
+                    Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "1");
                 }
-
-                tab.binBroadcast[i] = true;
-                tab.sBroadcastBin += "1";
-
+                Data.setBinBroadcast(i, true);
+                Data.setStrBroadcastBin(Data.getStrBroadcastBin() + "1");
             }
 
             if (i == 24 || i == 16 || i == 8) {
-                tab.sNetworkBin += " ";
-                tab.sFirstAddressBin += " ";
-                tab.sLastAddressBin += " ";
-                tab.sBroadcastBin += " ";
+                Data.setStrNetworkBin(Data.getStrNetworkBin() + " ");
+                Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + " ");
+                Data.setStrLastAddressBin(Data.getStrLastAddressBin() + " ");
+                Data.setStrBroadcastBin(Data.getStrBroadcastBin() + " ");
             }
         }
-
     }
-
 
     // получим двоичный массив BitOrder IP адреса
     public static void decToBin(int iByte0) {
-        //
-        //boolean[] BitOrder = new boolean[8];
         int[] Degree = new int[8];
         // заполним массив промежуточными данными для дальнейших вычислений
         for (int i = 7; i >= 0; i--) {
             Degree[i] = (int) Math.pow(2, i);
         }
-
         float Residue;
         for (int i = 7; i >= 0; i--) {
             Residue = (float) (iByte0 / Degree[i]);
@@ -289,43 +235,43 @@ public class CalculationAddresses {
         }
     }
 
-
     // полученный двумерный массив переведем в десятичный вид
     public static String binToDec(boolean[] Arr) {
         int AuxiliaryDecByte0 = 0;
         String sTemp = "";
         int[] Degree = new int[8];
+
         // заполним массив промежуточными данными для дальнейших вычислений
         for (int i = 7; i >= 0; i--) {
             Degree[i] = (int) Math.pow(2, i);
         }
 
         for (int i = 31; i >= 24; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i - 24];
             }
         }
-        sTemp = String.valueOf(AuxiliaryDecByte0) + ".";
+        sTemp = AuxiliaryDecByte0 + ".";
         AuxiliaryDecByte0 = 0;
 
         for (int i = 23; i >= 16; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i - 16];
             }
         }
-        sTemp += String.valueOf(AuxiliaryDecByte0) + ".";
+        sTemp += AuxiliaryDecByte0 + ".";
         AuxiliaryDecByte0 = 0;
 
         for (int i = 15; i >= 8; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i - 8];
             }
         }
-        sTemp += String.valueOf(AuxiliaryDecByte0) + ".";
+        sTemp += AuxiliaryDecByte0 + ".";
         AuxiliaryDecByte0 = 0;
 
         for (int i = 7; i >= 0; i--) {
-            if (Arr[i] == true) {
+            if (Arr[i]) {
                 AuxiliaryDecByte0 += Degree[i];
             }
         }
@@ -334,5 +280,17 @@ public class CalculationAddresses {
         return sTemp;
     }
 
-
+    public static String calculationNetMask(int cidr) {
+        // Преобразуем CIDR в маску сети
+        int netmask = -(1 << (32 - cidr));
+        // Переводим результат в строку вида "255.255.255.0"
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            sb.append(netmask >>> ((3 - i) * 8) & 0xFF);
+            if (i < 3) {
+                sb.append(".");
+            }
+        }
+        return sb.toString();
+    }
 }
