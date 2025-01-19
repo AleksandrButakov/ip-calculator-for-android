@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -231,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
     }
@@ -296,6 +296,20 @@ public class MainActivity extends AppCompatActivity {
                     displayToast("Нет подключения к Интернету...");
                 }
                 return true;
+
+            case R.id.rate:
+                // проверим что есть подключение к сети интернет
+                if (isOnline()) {
+                    // зададим url для перехода на страницу приложения
+                    url = "https://www.rustore.ru/catalog/app/com.anbn.ipcalculatorforandroid";
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.rustore.ru/catalog/app/com.anbn.ipcalculatorforandroid"));
+                    startActivity(intent);
+                } else {
+                    displayToast("Нет подключения к Интернету...");
+                }
+                return true;
+
             case R.id.about:
                 // проверим что есть подключение к сети интернет
                 if (isOnline()) {
@@ -368,16 +382,23 @@ public class MainActivity extends AppCompatActivity {
             CalculationAddresses.fillingTheBinNetmaskArray();
             binNetmaskText1.setText(Data.getStrNetmaskBin()); // data.sNetmaskBin);
 
-            // рассчитываем значение binNetwork[32], decNetwork
-            // binFirstAddress[32], binLastAddress[32], binBroadcast[32] и выводим на экран
+            /* рассчитываем значения:
+               binNetwork[32], decNetwork, binFirstAddress[32], binLastAddress[32], binBroadcast[32]
+               и выводим на экран
+             */
             CalculationAddresses.fillingTheBinNetworkArray();
+
             decNetworkIPText1.setText(Data.getDecNetwork()); // data.decNetwork);
+
             binNetworkText1.setText(Data.getStrNetworkBin()); // data.sNetworkBin);
             decNetworkIPText1.setText(CalculationAddresses.binToDec(Data.getBinNetworkArray())); // data.binNetworkArray));
+
             binFirstAddressText1.setText(Data.getStrFirstAddressBin()); // data.sFirstAddressBin);
-            decFirstAddressText1.setText(CalculationAddresses.binToDec(Data.getBinFirstAddress())); // data.binFirstAddress));
+            decFirstAddressText1.setText(CalculationAddresses.binToDec(Data.getBinFirstAddress())); // temp // data.binFirstAddress));
+
             binLastAddressText1.setText(Data.getStrLastAddressBin()); // data.sLastAddressBin);
             decLastAddressText1.setText(CalculationAddresses.binToDec(Data.getBinLastAddress())); // data.binLastAddress));
+
             binBroadcastText1.setText(Data.getStrBroadcastBin()); // data.sBroadcastBin);
             decBroadcastText1.setText(CalculationAddresses.binToDec(Data.getBinBroadcast())); // data.binBroadcast));
 

@@ -195,10 +195,10 @@ public class CalculationAddresses {
                 if (i == 0) {
                     Data.setBinFirstAddress(i, true);
                     Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "1");
-                    Data.setBinLastAddress(i, true);
+                    Data.setBinLastAddress(i, false);
                     Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "0");
                 } else {
-                    Data.setBinFirstAddress(i, true);
+                    Data.setBinFirstAddress(i, false);
                     Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "0");
                     Data.setBinLastAddress(i, true);
                     Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "1");
@@ -235,6 +235,7 @@ public class CalculationAddresses {
         }
     }
 
+    // temp
     // полученный двумерный массив переведем в десятичный вид
     public static String binToDec(boolean[] Arr) {
         int AuxiliaryDecByte0 = 0;

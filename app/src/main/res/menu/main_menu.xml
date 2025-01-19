@@ -9,7 +9,11 @@
         android:orderInCategory="1"
         android:title="Privacy Policy" />
     <item
-        android:id="@+id/about"
+        android:id="@+id/rate"
         android:orderInCategory="2"
+        android:title="Rate &amp; Review" />
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="3"
         android:title="About" />
 </menu>
