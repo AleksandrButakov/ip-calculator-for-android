@@ -1,9 +1,12 @@
 package com.anbn.ipcalculatorforandroid;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -104,36 +107,98 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // задаем listener для поля ввода IP address
+        // temp original
+//        // задаем listener для поля ввода IP address
+//        ipAddress.addTextChangedListener(new TextWatcher() {
+//            // локальное поле для защиты от рекурсии
+//            private boolean isEditing = false;
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+//                clearingOutputData();
+//                String sIp = s.toString();
+//                // проверяем что поле IP Address содержит корректное значение
+//                if (CheckingCorrectnessIPAddress.checkingCorrectnessIPAddress(sIp)) {
+//                    // ip address корректен, устанавливаем дефолтный цвет текста
+//                    ipAddress.setTextColor(AuxiliaryVariables.getTextColorDefault());
+//                    // проверим что все байты адреса заполнены
+//                    if (!Data.getIpByte3().isEmpty() && !Data.getIpByte2().isEmpty() &&
+//                            !Data.getIpByte1().isEmpty() && !Data.getIpByte0().isEmpty()) {
+//                    } else {
+//                        cleanIpAddressData();
+//                    }
+//                } else {
+//                    ipAddress.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
+//                    // очищаем поля вывода результатов
+//                    cleanIpAddressData();
+//                }
+//            }
+//
+//            public void afterTextChanged(Editable s) {
+//            }
+//        });
+
+
+        // temp new
         ipAddress.addTextChangedListener(new TextWatcher() {
+            private boolean isEditing = false;
+
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-                clearingOutputData();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isEditing) return; // защита от рекурсии
+
                 String sIp = s.toString();
-                // проверяем что поле IP Address содержит корректное значение
+
+                // --- 👇 сначала обработаем запятые, чтобы проверка шла по нормализованному IP ---
+                if (sIp.contains(",")) {
+                    isEditing = true;
+
+                    int cursorPos = ipAddress.getSelectionStart();
+                    String newText = sIp.replace(',', '.');
+                    ipAddress.setText(newText);
+
+                    // восстановим позицию курсора
+                    int newCursorPos = Math.min(cursorPos, newText.length());
+                    ipAddress.setSelection(newCursorPos);
+
+                    sIp = newText; // обновим переменную, чтобы ниже проверять уже нормализованный текст
+                    isEditing = false;
+                }
+
+                // TODO теперь выполняем существующую логику проверки
+                clearingOutputData();
+
                 if (CheckingCorrectnessIPAddress.checkingCorrectnessIPAddress(sIp)) {
-                    // ip address корректен, устанавливаем дефолтный цвет текста
                     ipAddress.setTextColor(AuxiliaryVariables.getTextColorDefault());
-                    // проверим что все байты адреса заполнены
+
                     if (!Data.getIpByte3().isEmpty() && !Data.getIpByte2().isEmpty() &&
                             !Data.getIpByte1().isEmpty() && !Data.getIpByte0().isEmpty()) {
+                        // Все байты присутствуют
                     } else {
                         cleanIpAddressData();
                     }
                 } else {
                     ipAddress.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.red));
-                    // очищаем поля вывода результатов
                     cleanIpAddressData();
                 }
             }
 
+            @Override
             public void afterTextChanged(Editable s) {
+                // теперь пусто — вся логика перенесена в onTextChanged()
             }
         });
+
+
+
 
         // задаем listener для поля ввода CIDR
         cidr.addTextChangedListener(new TextWatcher() {
@@ -187,6 +252,8 @@ public class MainActivity extends AppCompatActivity {
 
         // задаем listener для поля ввода netmask
         netmask.addTextChangedListener(new TextWatcher() {
+            // temp new
+            private boolean isEditing = false;
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 int z = 0;
@@ -194,6 +261,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // temp new
+                if (isEditing) return; // защита от рекурсии
+
                 if (!isUpdating) {
                     // Блокируем обработку cidr listener
                     isUpdating = true;
@@ -201,7 +271,32 @@ public class MainActivity extends AppCompatActivity {
                     cleanNetmaskData();
                     cleanCidrData();
                     clearingOutputData();
+
+
+                    // temp new
                     String input = s.toString();
+
+                    // --- 👇 сначала обработаем запятые, чтобы проверка шла по нормализованному IP ---
+                    if (input.contains(",")) {
+                        isEditing = true;
+
+                        int cursorPos = netmask.getSelectionStart();
+                        String newText = input.replace(',', '.');
+                        netmask.setText(newText);
+
+                        // восстановим позицию курсора
+                        int newCursorPos = Math.min(cursorPos, newText.length());
+                        netmask.setSelection(newCursorPos);
+
+                        input = newText; // обновим переменную, чтобы ниже проверять уже нормализованный текст
+                        isEditing = false;
+                    }
+
+
+
+                    // temp original
+//                    String input = s.toString();
+
                     // Проверка на корректность сетевой маски IPv4
                     if (CheckingCorrectnessNetmask.checkingCorrectnessNetmask(input)) {
                         // Маска корректна, устанавливаем дефолтный цвет текста
@@ -231,7 +326,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
     }
@@ -296,6 +390,20 @@ public class MainActivity extends AppCompatActivity {
                     displayToast("Нет подключения к Интернету...");
                 }
                 return true;
+
+            case R.id.rate:
+                // проверим что есть подключение к сети интернет
+                if (isOnline()) {
+                    // зададим url для перехода на страницу приложения
+                    url = "https://www.rustore.ru/catalog/app/com.anbn.ipcalculatorforandroid";
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.rustore.ru/catalog/app/com.anbn.ipcalculatorforandroid"));
+                    startActivity(intent);
+                } else {
+                    displayToast("Нет подключения к Интернету...");
+                }
+                return true;
+
             case R.id.about:
                 // проверим что есть подключение к сети интернет
                 if (isOnline()) {
@@ -342,14 +450,14 @@ public class MainActivity extends AppCompatActivity {
 
     // нажатие кнопки CALC, проверяем корректность введенных данных и выводим результат
     public void onClickCalcButton(View v) {
-        // проверим что переменные для хранения байтов IP адреса не равны null
+        // проверим что переменные для хранения байтов IP адреса неравны null
         if (Data.getIpByte3().isEmpty() ||
                 Data.getIpByte2().isEmpty() ||
                 Data.getIpByte1().isEmpty() ||
                 Data.getIpByte0().isEmpty() ||
-                // проверим что переменная для хранения количества бит маски подсети не равна null
+                // проверим что переменная для хранения количества бит маски подсети неравна null
                 Data.getStrCidr().isEmpty() ||
-                // проверим что переменные для хранения байтов маски подсети не равны null
+                // проверим что переменные для хранения байтов маски подсети неравны null
                 Data.getMaskByte3().isEmpty() ||
                 Data.getMaskByte2().isEmpty() ||
                 Data.getMaskByte1().isEmpty() ||
@@ -361,32 +469,45 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // введены корректные данные. Рассчитываем все параметры и выводим на экран
             // заполним массив boolean[] binIPAddressArray
+
+            // temp new !!!!
+//            if (checkMaskAndIpAddress()) {
+//                text
+//            }
+
             CalculationAddresses.fillingTheBinIPAddressArray();
-            binIPAddressText1.setText(Data.getStrIpAddressBin()); // data.sIPAddressBin);
+            binIPAddressText1.setText(Data.getStrIpAddressBin());
 
             // заполним массив boolean[] binNetmaskArray
             CalculationAddresses.fillingTheBinNetmaskArray();
-            binNetmaskText1.setText(Data.getStrNetmaskBin()); // data.sNetmaskBin);
+            binNetmaskText1.setText(Data.getStrNetmaskBin());
 
-            // рассчитываем значение binNetwork[32], decNetwork
-            // binFirstAddress[32], binLastAddress[32], binBroadcast[32] и выводим на экран
+            /* рассчитываем значения:
+               binNetwork[32], decNetwork, binFirstAddress[32], binLastAddress[32], binBroadcast[32]
+               и выводим на экран
+             */
             CalculationAddresses.fillingTheBinNetworkArray();
-            decNetworkIPText1.setText(Data.getDecNetwork()); // data.decNetwork);
-            binNetworkText1.setText(Data.getStrNetworkBin()); // data.sNetworkBin);
-            decNetworkIPText1.setText(CalculationAddresses.binToDec(Data.getBinNetworkArray())); // data.binNetworkArray));
-            binFirstAddressText1.setText(Data.getStrFirstAddressBin()); // data.sFirstAddressBin);
-            decFirstAddressText1.setText(CalculationAddresses.binToDec(Data.getBinFirstAddress())); // data.binFirstAddress));
-            binLastAddressText1.setText(Data.getStrLastAddressBin()); // data.sLastAddressBin);
-            decLastAddressText1.setText(CalculationAddresses.binToDec(Data.getBinLastAddress())); // data.binLastAddress));
-            binBroadcastText1.setText(Data.getStrBroadcastBin()); // data.sBroadcastBin);
-            decBroadcastText1.setText(CalculationAddresses.binToDec(Data.getBinBroadcast())); // data.binBroadcast));
+
+            decNetworkIPText1.setText(Data.getDecNetwork());
+
+            binNetworkText1.setText(Data.getStrNetworkBin());
+            decNetworkIPText1.setText(CalculationAddresses.binToDec(Data.getBinNetworkArray()));
+
+            binFirstAddressText1.setText(Data.getStrFirstAddressBin());
+            decFirstAddressText1.setText(CalculationAddresses.binToDec(Data.getBinFirstAddress()));
+
+            binLastAddressText1.setText(Data.getStrLastAddressBin());
+            decLastAddressText1.setText(CalculationAddresses.binToDec(Data.getBinLastAddress()));
+
+            binBroadcastText1.setText(Data.getStrBroadcastBin());
+            decBroadcastText1.setText(CalculationAddresses.binToDec(Data.getBinBroadcast()));
 
             // выводим параметр netmask на экран
             decNetmaskText1.setText(netmask.getText());
 
             // рассчитываем параметр tab1.decNumberHosts и выводим на экран
             CalculationAddresses.calculationNumberHosts();
-            decNumberHostsText1.setText(Data.getDecNumberHosts()); // data.decNumberHosts);
+            decNumberHostsText1.setText(Data.getDecNumberHosts());
 
             // сворачиваем клавиатуру при нажатии на кнопку
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

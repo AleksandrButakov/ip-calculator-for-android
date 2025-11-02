@@ -105,16 +105,24 @@ public class CalculationAddresses {
         }
     }
 
+    // temp new
+    public static boolean checkMaskAndIpAddress() {
+        return Data.getStrNetmaskBin().equals("0.0.0.0");
+    }
+
+
     // заполним массив boolean[] binIPAddressArray
     public static void fillingTheBinIPAddressArray() {
         Data.setStrIpAddressBin("");
         decToBin(Integer.parseInt(Data.getIpByte3()));
 
+        // temp new
+
         for (int i = 31; i >= 24; i--) {
-            Data.setBinIPAddressArray(i, bitOrder[i - 24]); // tab.binIPAddressArray[i] = bitOrder[i - 24];
-            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24])); // tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
+            Data.setBinIPAddressArray(i, bitOrder[i - 24]);
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24]));
         }
-        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " "); //        tab.sIPAddressBin += " ";
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " ");
         decToBin(Integer.parseInt(Data.getIpByte2()));
 
         for (int i = 23; i >= 16; i--) {
@@ -195,10 +203,10 @@ public class CalculationAddresses {
                 if (i == 0) {
                     Data.setBinFirstAddress(i, true);
                     Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "1");
-                    Data.setBinLastAddress(i, true);
+                    Data.setBinLastAddress(i, false);
                     Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "0");
                 } else {
-                    Data.setBinFirstAddress(i, true);
+                    Data.setBinFirstAddress(i, false);
                     Data.setStrFirstAddressBin(Data.getStrFirstAddressBin() + "0");
                     Data.setBinLastAddress(i, true);
                     Data.setStrLastAddressBin(Data.getStrLastAddressBin() + "1");
@@ -235,6 +243,7 @@ public class CalculationAddresses {
         }
     }
 
+    // temp
     // полученный двумерный массив переведем в десятичный вид
     public static String binToDec(boolean[] Arr) {
         int AuxiliaryDecByte0 = 0;
