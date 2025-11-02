@@ -105,16 +105,24 @@ public class CalculationAddresses {
         }
     }
 
+    // temp new
+    public static boolean checkMaskAndIpAddress() {
+        return Data.getStrNetmaskBin().equals("0.0.0.0");
+    }
+
+
     // заполним массив boolean[] binIPAddressArray
     public static void fillingTheBinIPAddressArray() {
         Data.setStrIpAddressBin("");
         decToBin(Integer.parseInt(Data.getIpByte3()));
 
+        // temp new
+
         for (int i = 31; i >= 24; i--) {
-            Data.setBinIPAddressArray(i, bitOrder[i - 24]); // tab.binIPAddressArray[i] = bitOrder[i - 24];
-            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24])); // tab.sIPAddressBin += tab.fillingValuesIPAddressBits(bitOrder[i - 24]);
+            Data.setBinIPAddressArray(i, bitOrder[i - 24]);
+            Data.setStrIpAddressBin(Data.getStrIpAddressBin() + fillingValuesIPAddressBits(bitOrder[i - 24]));
         }
-        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " "); //        tab.sIPAddressBin += " ";
+        Data.setStrIpAddressBin(Data.getStrIpAddressBin() + " ");
         decToBin(Integer.parseInt(Data.getIpByte2()));
 
         for (int i = 23; i >= 16; i--) {
